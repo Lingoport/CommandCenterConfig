@@ -5,10 +5,4 @@ A sample file to illustrate the type of xml file for a project to on-board with 
 ### xmlParser.xml
 This file would be used to parse the sample.en-US.xlf file. 
 
-In Command Center, go to Settings > System Files
-Add the xmlParser.xml to the xmlParser set of files, name it something like 'xlfParser'
-
-When on-boarding a project with files like sample.en-US.xlf:
-* On-board with custom resource files
-* the suffix will be xlf
-* the parser will be 'xlfParser' (or the name given in the System Files)
+See the README.md in the folder above to make use of this parser
