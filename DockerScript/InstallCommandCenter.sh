@@ -124,7 +124,7 @@ sudo echo $cc_mysql_id > cc_mysql_id.txt
 
 echo $docker_account_token | sudo docker login -u $docker_username --password-stdin
 
-cc_container_id=`sudo docker run -dp $serverPort:8080 --restart unless-stopped --network-alias ccservernet --network $database_network -v $home_directory/commandcenter/logs:/usr/local/tomcat/temp -v $home_directory/Lingoport_Data:/usr/local/tomcat/Lingoport_Data -v $home_directory/lingoport:/usr/local/tomcat/lingoport  $docker_image:$command_center_image_version`
+cc_container_id=`sudo docker run -dp $serverPort:8080 --restart unless-stopped --network-alias ccservernet --network $database_network -v /usr/local/share/ca-certificates:/usr/local/share/ca-certificates  -v $home_directory/commandcenter/logs:/usr/local/tomcat/temp -v $home_directory/Lingoport_Data:/usr/local/tomcat/Lingoport_Data -v $home_directory/lingoport:/usr/local/tomcat/lingoport  $docker_image:$command_center_image_version`
 
 echo "Command Center starting, container id is  $cc_container_id "
 sudo echo $cc_container_id > cc_container_id.txt
