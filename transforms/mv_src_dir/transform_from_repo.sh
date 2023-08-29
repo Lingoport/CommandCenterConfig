@@ -16,7 +16,10 @@ if [[ -z "$CLIENT_SOURCE_DIR" ]] ; then
     export CLIENT_SOURCE_DIR="$WORKSPACE"
 fi
 cd "${CLIENT_SOURCE_DIR}"
+# Find the en_US directory locations, but not those under 'translations'
+# as they should not be 'recursively' be copied (after each run)
 find . -name "en_US" -type d > "${PROJECT_TMP_DIR}/input_files.txt"
+sed -i '/translations\/en_US/d' "${PROJECT_TMP_DIR}/input_files.txt"
 
 echo "Directories to move:"
 cat "${PROJECT_TMP_DIR}/input_files.txt"
