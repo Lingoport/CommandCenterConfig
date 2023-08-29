@@ -29,7 +29,7 @@ do
   echo "translated_dir = ${translated_dir}"
   mkdir -p "$translated_dir"
   echo "Copy ${sourceDir} to ${translated_dir}"
-  cp -r "${sourceDir}/"* "${translated_dir}/"
+  cp -r "${sourceDir}" "${translated_dir}/."
   ls "$translated_dir"
 done
 
