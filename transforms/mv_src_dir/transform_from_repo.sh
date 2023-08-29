@@ -9,7 +9,7 @@
 # will be under translated/<locale_code>/
 #
 echo "${0}"
-env
+#env
 echo "TRANSFORM_DIR=${TRANSFORM_DIR}"
 
 if [[ -z "$CLIENT_SOURCE_DIR" ]] ; then
@@ -24,7 +24,7 @@ fi
         set -x
 #        /bin/rsync -a -v  "$base_dir/" "$translated_dir/"
         echo "Copy ${base_dir} to ${translated_dir}"
-        # cp -r "$base_dir/"* "$translated_dir/"
+        cp -r "$base_dir/"* "$translated_dir/"
         set +x
     done <<< "$(find . -path "*/en_US")"
 )
