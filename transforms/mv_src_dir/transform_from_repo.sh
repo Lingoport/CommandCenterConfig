@@ -19,13 +19,13 @@ fi
 (
     cd "$CLIENT_SOURCE_DIR"
     while read -r base_dir ; do
-        translated_dir="$(dirname "$base_dir")/LocalizedResources"
+        translated_dir="$(dirname "$base_dir")/translations"
         mkdir -p "$translated_dir"
         set -x
 #        /bin/rsync -a -v  "$base_dir/" "$translated_dir/"
         echo "Copy ${base_dir} to ${translated_dir}"
-        cp -r "$base_dir/"* "$translated_dir/"
+        # cp -r "$base_dir/"* "$translated_dir/"
         set +x
-    done <<< "$(find . -path "*/UnifiedResources/DefaultResources")"
+    done <<< "$(find . -path "*/en_US")"
 )
 
