@@ -15,17 +15,22 @@ echo "TRANSFORM_DIR=${TRANSFORM_DIR}"
 if [[ -z "$CLIENT_SOURCE_DIR" ]] ; then
     export CLIENT_SOURCE_DIR="$WORKSPACE"
 fi
+cd "${CLIENT_SOURCE_DIR}"
+find . -name "en_US" -type d > "${PROJECT_TMP_DIR}/input_files.txt"
 
-(
-    cd "$CLIENT_SOURCE_DIR"
-    while read -r base_dir ; do
-        translated_dir="$(dirname "$base_dir")/translations"
-        mkdir -p "$translated_dir"
-        set -x
-#        /bin/rsync -a -v  "$base_dir/" "$translated_dir/"
-        echo "Copy ${base_dir} to ${translated_dir}"
-        cp -r "$base_dir/"* "$translated_dir/"
-        set +x
-    done <<< "$(find . -path "*/en_US")"
-)
+echo "Directories to move:"
+cat "${PROJECT_TMP_DIR}/input_files.txt"
+# List the location where en_US appears as a directory
+
+cat "${PROJECT_TMP_DIR}/input_files.txt" | while read -r sourceDir
+do
+  echo "sourceDir = ${sourceDir}"
+  translated_dir="$(dirname "$sourceDir")/translations"
+  echo "translated_dir = ${translated_dir}"
+  mkdir -p "$translated_dir"
+  echo "Copy ${sourceDir} to ${translated_dir}"
+  cp -r "${sourceDir}/"* "${translated_dir}/"
+  ls "$translated_dir"
+done
+
 
