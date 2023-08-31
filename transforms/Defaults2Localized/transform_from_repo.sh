@@ -1,5 +1,7 @@
 #!/bin/bash
-
+# rsync files under DefaultResources to LocalizedResources
+# and makes sure that it does not rsync the entire system
+# starting at /  (i.e. root) !
 
 (
     cd "$CLIENT_SOURCE_DIR"
@@ -12,7 +14,7 @@
           mkdir -p "$translated_dir"
           set -x
           echo "rsync -a -v  ${base_dir} ${translated_dir}"
-          #rsync -a -v  "$base_dir/" "$translated_dir/"
+          rsync -a -v  "$base_dir/" "$translated_dir/"
           set +x
 	fi
     done <<< "$(find . -path "*/UnifiedResources/DefaultResources")"
