@@ -10,6 +10,11 @@
 
 cd "${CLIENT_SOURCE_DIR }"
 
+# First remove any previously transformed file: they are in the form 
+#  strings_*.properties
+find . -name "strings_*.properties" -exec rm {} \;
+
+# Now let's transform from .txt to .properties
 find . -name "string*\.txt" -type f > "${PROJECT_TMP_DIR}/input_files.txt"
 
 cat "${PROJECT_TMP_DIR}/input_files.txt" | while read -r FILEPATH
