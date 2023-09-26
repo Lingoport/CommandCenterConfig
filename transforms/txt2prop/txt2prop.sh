@@ -8,10 +8,14 @@
 #  CLIENT_SOURCE_DIR 
 #
 
+echo " " 
+echo "Current Location" 
 pwd
 # First remove any previously transformed file: they are in the form 
 #  strings_*.properties
-echo "Removing strings_*.properties"
+echo " " 
+echo "Removing strings_*.properties:"
+find . -name "strings_*.properties"
 find . -name "strings_*.properties" -exec rm {} \;
 
 # Now let's transform from .txt to .properties
@@ -47,3 +51,4 @@ do
 IFS=' '
 
 done 
+echo " "
