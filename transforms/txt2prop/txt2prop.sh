@@ -5,14 +5,10 @@
 # Find all the files ending in .csv
 #
 # The following environment variables need to be set:
-#  WORKSPACE
+#  CLIENT_SOURCE_DIR 
 #
-if [[ -z "$WORKSPACE" ]] ; then
-    echo "ERROR: WORKSPACE is not set. Exiting"
-    exit 1
-fi
 
-cd "${WORKSPACE}"
+cd "${CLIENT_SOURCE_DIR }"
 
 find . -name "string*\.txt" -type f > "${PROJECT_TMP_DIR}/input_files.txt"
 
