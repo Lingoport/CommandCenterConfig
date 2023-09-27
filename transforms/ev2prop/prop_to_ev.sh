@@ -11,6 +11,7 @@ pwd
 echo "Files to transform: " 
 cat "${FULL_LIST_PATH}"
 
+export SUFFIX="properties"
 
 cat "${FULL_LIST_PATH}" | while read -r FILEPATH
 do
