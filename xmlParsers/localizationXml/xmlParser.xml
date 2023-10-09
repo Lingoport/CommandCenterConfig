@@ -1,4 +1,4 @@
 <?xml version='1.0' encoding='utf-8'?>
 <localization >
-  <property  name="TOKEN_KEY">TOKEN_VALUE </properties>
+  <property  name="TOKEN_KEY">TOKEN_VALUE </property>
 </localization>
