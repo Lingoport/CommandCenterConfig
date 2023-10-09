@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <localization name="tcx2saas">
     <property name="displayName"> Teamcenter SaaS </properties>
     <property name="description"> This feature configures software as a service (SaaS) Teamcenter installation</property>
