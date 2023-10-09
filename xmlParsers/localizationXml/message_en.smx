@@ -1,0 +1,5 @@
+<localization name="tcx2saas">
+    <property name="displayName"> Teamcenter SaaS </properties>
+    <property name="description"> This feature configures software as a service (SaaS) Teamcenter installation</property>
+    <property name="awcUrlDisplayName">Active Workspace AWS URL</properties>
+</localization>
