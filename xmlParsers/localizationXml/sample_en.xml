@@ -1,0 +1,9 @@
+<localization name="tcx2saas">
+
+    <property name="displayName" value="Center SaaS"/>
+
+    <property name="description" value="This feature configures software as a service (SaaS) Center installation"/>
+
+    <property name="awcUrlDisplayName" value="Active Workspace AWS URL"/>
+
+</localization>
