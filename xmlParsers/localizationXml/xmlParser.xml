@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<localization >
-  <property  name="TOKEN_KEY" value="TOKEN_VALUE" >
-  </property>
-</localization>
+<root>
+  <data name="TOKEN_KEY" >
+    <value>TOKEN_VALUE</value>
+  </data>
+</root>
