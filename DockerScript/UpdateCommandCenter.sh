@@ -110,6 +110,7 @@ then
     fi
 fi
 
+mkdir -p $home_directory/commandcenter/backup || true
 cd $home_directory/commandcenter/config
 
 old_db=`cat cc_mysql_id.txt`
