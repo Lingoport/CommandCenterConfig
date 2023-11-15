@@ -9,8 +9,8 @@ echo "     CLIENT_SOURCE_DIR  = ${CLIENT_SOURCE_DIR}"
 cd "${CLIENT_SOURCE_DIR}"
 
 # set these
-svnUsername="rThan"
-svnPassword="noise?.dawn.ch3st.f0rce"
+svnUsername=""
+svnPassword=""
 
 
 echo "svn update --no-auth-cache --non-interactive --username ${svnUsername} --password xxxxx"
