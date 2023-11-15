@@ -10,8 +10,9 @@ echo "     IMPORT_LIST_PATH  = ${IMPORT_LIST_PATH}"
 cd "${CLIENT_SOURCE_DIR}"
 
 # set these
-svnUsername="svnuser"
-svnPassword="c1sY,^cszi,%Qi"
+svnUsername="rThan"
+svnPassword="noise?.dawn.ch3st.f0rce"
+
 
 # svn add
 IFS=, read -a Array <<< "${IMPORT_LIST_PATH}"
