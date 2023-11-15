@@ -11,12 +11,12 @@ echo "    WORKSPACE_NAME      = ${WORKSPACE_NAME}"
 cd ${WORKSPACES_DIR}
 
 # set these
-svnUsername="rThan"
-svnPassword="noise?.dawn.ch3st.f0rce"
-svnUrl="https://svn.dmba.com/svn/mvc/branches/lingoport_TestConnection_20231107"
+svnUsername=""
+svnPassword=""
+svnUrl=""
 
 echo "before curl"
-curl -v "https://svn.dmba.com/svn/mvc/branches/lingoport_TestConnection_20231107" 2>&1
+curl -v "" 2>&1
 
 # checkout
 echo "svn checkout --no-auth-cache --non-interactive --username ${svnUsername} --password xxxxx ${svnUrl} ${WORKSPACE_NAME}"
