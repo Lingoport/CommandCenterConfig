@@ -16,7 +16,7 @@ svnPassword="noise?.dawn.ch3st.f0rce"
 svnUrl="https://svn.dmba.com/svn/mvc/branches/lingoport_TestConnection_20231107"
 
 echo "before curl"
-curl "https://svn.dmba.com/svn/mvc/branches/lingoport_TestConnection_20231107"
+curl -v "https://svn.dmba.com/svn/mvc/branches/lingoport_TestConnection_20231107" 2>&1
 
 # checkout
 echo "svn checkout --no-auth-cache --non-interactive --username ${svnUsername} --password xxxxx ${svnUrl} ${WORKSPACE_NAME}"
