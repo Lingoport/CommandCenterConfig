@@ -11,9 +11,9 @@ echo "    WORKSPACE_NAME      = ${WORKSPACE_NAME}"
 cd ${WORKSPACES_DIR}
 
 # set these
-svnUsername="svnuser"
-svnPassword="c1sY,^cszi,%Qi"
-svnUrl="https://svn.lingoport.io/svn/Test/AliciaProject/branches/testbranch"
+svnUsername="rThan"
+svnPassword="noise?.dawn.ch3st.f0rce"
+svnUrl="https://svn.dmba.com/svn/mvc/branches/lingoport_TestConnection_20231107"
 
 
 # checkout
