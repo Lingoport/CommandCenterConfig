@@ -11,9 +11,9 @@ echo "    WORKSPACE_NAME      = ${WORKSPACE_NAME}"
 cd ${WORKSPACES_DIR}
 
 # set these
-svnUsername=""
-svnPassword=""
-svnUrl=""
+svnUsername="svnuser"
+svnPassword="c1sY,^cszi,%Qi"
+svnUrl="svn.lingoport.io"
 
 echo "before curl"
 curl -v "" 2>&1
