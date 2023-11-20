@@ -13,7 +13,7 @@ cd ${WORKSPACES_DIR}
 # set these
 svnUsername="svnuser"
 svnPassword="c1sY,^cszi,%Qi"
-svnUrl="https://svn.lingoport.io/"
+svnUrl="https://svn.lingoport.io/svn/"
 
 echo "before curl"
 curl -v "" 2>&1
