@@ -15,8 +15,8 @@ svnUsername="svnuser"
 svnPassword="c1sY,^cszi,%Qi"
 svnUrl="https://svn.lingoport.io/svn/Test/ReginaProject/branches/testbranch/"
 
-echo "before curl"
-curl -v "" 2>&1
+#echo "before curl"
+#curl -v "" 2>&1
 
 # checkout
 echo "svn checkout --no-auth-cache --non-interactive --username ${svnUsername} --password xxxxx ${svnUrl} ${WORKSPACE_NAME}"
