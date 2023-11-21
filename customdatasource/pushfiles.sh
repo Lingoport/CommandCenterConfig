@@ -10,8 +10,8 @@ echo "     IMPORT_LIST_PATH  = ${IMPORT_LIST_PATH}"
 cd "${CLIENT_SOURCE_DIR}"
 
 # set these
-svnUsername=""
-svnPassword=""
+svnUsername="svnuser"
+svnPassword="c1sY,^cszi,%Qi"
 
 
 # svn add
