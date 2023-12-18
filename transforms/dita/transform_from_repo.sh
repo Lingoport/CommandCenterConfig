@@ -13,7 +13,10 @@ echo "fr" >> "${PROJECT_TMP_DIR}/dita_locales.txt"
 echo "de" >> "${PROJECT_TMP_DIR}/dita_locales.txt"
 # end TODO
 
-cd "$CLIENT_SOURCE_DIR"
+# TODO later: GET THE DIRECTORY above en
+DITA_DIR="$CLIENT_SOURCE_DIR/dita/Spectrum"
+
+cd "$DITA_DIR"
 
 # Check if required variable is set
 if [[ -z "${SOURCE_LANG}" ]]; then
@@ -24,13 +27,13 @@ else
 fi
 
 # Destination directory with target language resources
-DEST_DIR="${CLIENT_SOURCE_DIR}/DITA_RESOURCES"
+DEST_DIR="${DITA_DIR}/DITA_RESOURCES"
 
 # Create the destination directory if it doesn't exist
 mkdir -p "$DEST_DIR"
 
 # Copy the entire directory structure recursively
-rsync -avz "${CLIENT_SOURCE_DIR}/${SOURCE_LANG}/" "$DEST_DIR/"
+rsync -avz "${DITA_DIR}/${SOURCE_LANG}/" "$DEST_DIR/"
 
 echo "Successfully duplicated directory structure from '$SOURCE_LANG' to '$DEST_DIR'."
 
@@ -45,9 +48,9 @@ while read locale
 do
 
   # find all the dita/ditamap files for a locale
-  if [ -d  "${CLIENT_SOURCE_DIR}/${locale}" ]
+  if [ -d  "${DITA_DIR}/${locale}" ]
   then
-    cd  "${CLIENT_SOURCE_DIR}/${locale}/"
+    cd  "${DITA_DIR}/${locale}/"
     find  . -name "*.dita" > "${PROJECT_TMP_DIR}/ditaFileList.txt"
     find  . -name "*.ditamap" >> "${PROJECT_TMP_DIR}/ditaFileList.txt"
 
@@ -63,9 +66,9 @@ do
     done < "${PROJECT_TMP_DIR}/ditaFileList.txt"
 
     echo "Successfully duplicated directory structure and copied specific files:"
-    echo "   from '${CLIENT_SOURCE_DIR}/${locale}' "
+    echo "   from '${DITA_DIR}/${locale}' "
     echo "   to   '$DEST_DIR'"
   else
-    echo "${CLIENT_SOURCE_DIR}/${locale} does not exist: not file copy for ${locale}"
+    echo "${DITA_DIR}/${locale} does not exist: not file copy for ${locale}"
   fi
 done < "${PROJECT_TMP_DIR}/dita_locales.txt"
