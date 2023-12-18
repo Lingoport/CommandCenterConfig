@@ -1,0 +1,71 @@
+#!/bin/bash
+
+#
+# Copies files under ...en/path/*.dita to ... DITA_RESOURCES/path/en/*.dita
+#    and files under ...fr/path/*.dita to ... DITA_RESOURCES/path/fr/*.dita
+# etc.
+
+
+# TODO later: GET THE PROJECT's ACTUAL LOCALES FROM lrm -ep
+export SOURCE_LANG=en
+echo "en" > "${PROJECT_TMP_DIR}/dita_locales.txt"
+echo "fr" >> "${PROJECT_TMP_DIR}/dita_locales.txt"
+echo "de" >> "${PROJECT_TMP_DIR}/dita_locales.txt"
+# end TODO
+
+cd "$WORKSPACE"
+
+# Check if required variable is set
+if [[ -z "${SOURCE_LANG}" ]]; then
+  echo "Error: Please set the SOURCE_LANG variable to the source directory path."
+  exit 1
+else
+  echo "SOURCE_LANG = ${SOURCE_LANG}"
+fi
+
+# Destination directory with target language resources
+DEST_DIR="${WORKSPACE}/DITA_RESOURCES"
+
+# Create the destination directory if it doesn't exist
+mkdir -p "$DEST_DIR"
+
+# Copy the entire directory structure recursively
+rsync -avz "${WORKSPACE}/${SOURCE_LANG}/" "$DEST_DIR/"
+
+echo "Successfully duplicated directory structure from '$SOURCE_LANG' to '$DEST_DIR'."
+
+# Remove all .dita and .ditamap from the DITA_RESOURCES directory
+find  "$DEST_DIR/" -name "*.dita" -exec rm {} \;
+find  "$DEST_DIR/" -name "*.ditamap" -exec rm {} \;
+
+#--------------------------------------------------------------
+# For each locale, copy the files to their respective location
+
+while read locale
+do
+
+  # find all the dita/ditamap files for a locale
+  if [ -d  "${WORKSPACE}/${locale}" ]
+  then
+    cd  "${WORKSPACE}/${locale}/"
+    find  . -name "*.dita" > "${PROJECT_TMP_DIR}/ditaFileList.txt"
+    find  . -name "*.ditamap" >> "${PROJECT_TMP_DIR}/ditaFileList.txt"
+
+    while read file
+    do
+      # Copy files with specific extensions within current directory
+      echo "file = ${file}"
+      mkdir -p "$DEST_DIR/$(dirname "$file")/${locale}"
+      new_file="$DEST_DIR/$(dirname "$file")/${locale}/$(basename "$file")"
+      echo "new file = $new_file"
+      cp "$file" "$new_file"
+
+    done < "${PROJECT_TMP_DIR}/ditaFileList.txt"
+
+    echo "Successfully duplicated directory structure and copied specific files:"
+    echo "   from '${WORKSPACE}/${locale}' "
+    echo "   to   '$DEST_DIR'"
+  else
+    echo "${WORKSPACE}/${locale} does not exist: not file copy for ${locale}"
+  fi
+done < "${PROJECT_TMP_DIR}/dita_locales.txt"
