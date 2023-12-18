@@ -6,7 +6,7 @@ echo "To be written. For now, here so that the transform_from_repo can be tested
 cd "${CLIENT_SOURCE_DIR}"
 DITA_TRANSFORMED_DIR=$(find . -name DITA_RESOURCES)
 # Define source and destination directories
-DITA_ORIGIN=$(basename "${CLIENT_SOURCE_DIR}")
+DITA_ORIGIN=$(basename "${DITA_TRANSFORMED_DIR}")
 
 # Find all DITA and DITAMAP files in the source directory
 find "$DITA_TRANSFORMED_DIR" -type f \( -name "*.dita" -o -name "*.ditamap" \) | while IFS= read -r file; do
