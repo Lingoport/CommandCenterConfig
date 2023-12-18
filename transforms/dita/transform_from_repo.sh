@@ -15,8 +15,10 @@ echo "de" >> "${PROJECT_TMP_DIR}/dita_locales.txt"
 
 # TODO later: GET THE DIRECTORY above en
 DITA_DIR="$CLIENT_SOURCE_DIR/dita/Spectrum"
+echo "DITA_DIR=${DITA_DIR}"
 
 cd "$DITA_DIR"
+pwd
 
 # Check if required variable is set
 if [[ -z "${SOURCE_LANG}" ]]; then
