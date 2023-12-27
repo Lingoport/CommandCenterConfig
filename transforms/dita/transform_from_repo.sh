@@ -59,10 +59,10 @@ do
     while read file
     do
       # Copy files with specific extensions within current directory
-      echo "file = ${file}"
       mkdir -p "$DEST_DIR/$(dirname "$file")/${locale}"
       new_file="$DEST_DIR/$(dirname "$file")/${locale}/$(basename "$file")"
-      echo "new file = $new_file"
+      relative_path="./$(dirname "$file")/${locale}/$(basename "$file")"
+      echo " Transform [ ${file} ] -> ${relative_path}"
       cp "$file" "$new_file"
 
     done < "${PROJECT_TMP_DIR}/ditaFileList.txt"
