@@ -46,7 +46,7 @@ do
 
 done < "$1"
 
-mv "$newfile" "$!"
+mv "$newfile" "$1"
 echo " --------------------------------------" 
 echo "After list transform"
 cat "$1"
