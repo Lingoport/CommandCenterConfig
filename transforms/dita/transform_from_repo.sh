@@ -5,6 +5,7 @@
 #    and files under ...fr/path/*.dita to ... DITA_RESOURCES/path/fr/*.dita
 # etc.
 
+env
 
 # TODO later: GET THE PROJECT's ACTUAL LOCALES FROM lrm -ep
 export SOURCE_LANG=en
