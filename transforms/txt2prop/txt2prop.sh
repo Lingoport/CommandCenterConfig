@@ -7,7 +7,10 @@
 # The following environment variables need to be set:
 #  CLIENT_SOURCE_DIR 
 #
-
+echo "DEBUG for Luz:"/usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/LID1138403710_strings_pt_pt.properties
+echo "Content of /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/LID1138403710_strings_pt_pt.properties"
+ls -l /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/LID1138403710_strings_pt_pt.properties
+cat 
 cd "${CLIENT_SOURCE_DIR }"
 
 find . -name "string*\.txt" -type f > "${PROJECT_TMP_DIR}/input_files.txt"
