@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo " ------------------------------------------------------------------------------------"
+echo "$0 does both the transform_files_list.sh job and does the transform_to_repo.sh job"
+echo " by copying the files as found in the list of files to import, transformed here"
+echo " ------------------------------------------------------------------------------------"
 # Check if there is a file parameter
 #
 if [ -z "$1" ]
@@ -39,6 +43,10 @@ do
 
     # add the file name
     dest="${origin_path}/${ditafile}"
+
+    # make the directory if necessary and copy the file
+    mkdir -p "${origin_path}"
+    cp "${line}" "${dest}"
 
     # Print informative message
     echo "$dest" >> "$newfile"
