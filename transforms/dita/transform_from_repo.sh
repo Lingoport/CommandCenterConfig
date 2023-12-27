@@ -5,18 +5,69 @@
 #    and files under ...fr/path/*.dita to ... DITA_RESOURCES/path/fr/*.dita
 # etc.
 
-env
-
-# TODO later: GET THE PROJECT's ACTUAL LOCALES FROM lrm -ep
-export SOURCE_LANG=en
-echo "en" > "${PROJECT_TMP_DIR}/dita_locales.txt"
-echo "fr" >> "${PROJECT_TMP_DIR}/dita_locales.txt"
-echo "de" >> "${PROJECT_TMP_DIR}/dita_locales.txt"
-# end TODO
-
 # TODO later: GET THE DIRECTORY above en
 DITA_DIR="$CLIENT_SOURCE_DIR/dita/Spectrum"
 echo "DITA_DIR=${DITA_DIR}"
+
+#
+# Extract the locales! A bit of work here.
+#
+LRM_HOME=`ls -dtp /usr/local/tomcat/lingoport/lrm-server-*  | head -1`
+echo " LRM_HOME = $LRM_HOME"
+
+#extract the project group and name, only have the PROJECT_TMP_DIR here
+PROJECT_DIR=$(dirname $PROJECT_TMP_DIR)
+GP_NAME=$(basename $PROJECT_DIR)
+GROUP_NAME="${GP_NAME%%.*}"
+PROJECT_NAME="${GP_NAME#*.}"
+echo "GROUP_NAME= $GROUP_NAME"
+echo "PROJECT_NAME= $PROJECT_NAME"
+
+java -jar "${LRM_HOME}/lrm-cli.jar" -gn "${GROUP_NAME}" -pn "${PROJECT_NAME}" -ep
+project_definition="/usr/local/tomcat/Lingoport_Data/LRM/${GROUP_NAME}/reports/${PROJECT_NAME}/ProjectDefinition.xml"
+ls -l $project_definition
+
+       	
+grep "<file-location-pattern>" "$project_definition" > "${PROJECT_TMP_DIR}/file_location_pattern.txt"
+
+# First only the source locale
+grep "</default-locale>" "$project_definition" > "${PROJECT_TMP_DIR}/dita_source_locale.txt"
+sed -i 's/.*<default-locale>//' "${PROJECT_TMP_DIR}/dita_source_locale.txt"
+sed -i 's/<\/default-locale>//' "${PROJECT_TMP_DIR}/dita_source_locale.txt"
+
+# Then the other locales
+grep "</default-locale>" "$project_definition" > "${PROJECT_TMP_DIR}/dita_locales.txt"
+grep "</locale>" "$project_definition" >>  "${PROJECT_TMP_DIR}/dita_locales.txt"
+grep "</pseudo-locale>" "$project_definition" >>  "${PROJECT_TMP_DIR}/dita_locales.txt"
+
+sed -i 's/.*<default-locale>//' "${PROJECT_TMP_DIR}/dita_locales.txt"
+sed -i 's/<\/default-locale>//' "${PROJECT_TMP_DIR}/dita_locales.txt"
+sed -i 's/.*<locale>//' "${PROJECT_TMP_DIR}/dita_locales.txt"
+sed -i 's/.*<pseudo-locale>//' "${PROJECT_TMP_DIR}/dita_locales.txt"
+sed -i 's/<\/locale>//' "${PROJECT_TMP_DIR}/dita_locales.txt"
+sed -i 's/<\/pseudo-locale>//' "${PROJECT_TMP_DIR}/dita_locales.txt"
+
+# If the file-location-pattern with dashes -> replaces any underscores with dashes (and vice versa)
+if  grep  "<file-location-pattern>l-c-v</file-location-pattern>" "${project_definition}" 
+then
+  sed -i 's/_/-/' "${PROJECT_TMP_DIR}/dita_locales.txt"
+  sed -i 's/_/-/' "${PROJECT_TMP_DIR}/dita_source_locale.txt"
+else
+  sed -i 's/-/_/' "${PROJECT_TMP_DIR}/dita_locales.txt"
+  sed -i 's/-/_/' "${PROJECT_TMP_DIR}/dita_source_locale.txt"
+fi
+
+ls -l "${PROJECT_TMP_DIR}/dita_locales.txt"
+cat "${PROJECT_TMP_DIR}/dita_locales.txt"
+
+ls -l "${PROJECT_TMP_DIR}/dita_source_locale.txt"
+cat "${PROJECT_TMP_DIR}/dita_source_locale.txt"
+
+export SOURCE_LANG=`cat "${PROJECT_TMP_DIR}/dita_source_locale.txt"`
+echo "SOURCE_LANG=${SOURCE_LANG}"
+echo " "
+echo "end locale extraction"
+echo " ---------------------------------"
 
 cd "$DITA_DIR"
 pwd
