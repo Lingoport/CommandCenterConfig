@@ -41,4 +41,10 @@ do
   done
 IFS=' '
 
+echo "DEBUG for Luz"
+echo "Transformed File Name: ${TARGET_PATH}"
+echo "Content of File: "
+head "${TARGET_PATH}"
+wc -l "${TARGET_PATH}"
+
 done 
