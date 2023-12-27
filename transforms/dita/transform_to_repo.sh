@@ -2,9 +2,11 @@
 echo "To be written. For now, here so that the transform_from_repo can be tested"
 
 # TODO: define the locales, the top level directory under which the en/fr/.. are located, 
-# and the DITA_RESOURCES
+source_locale="en" 
+# TODO: and the DITA_RESOURCES
 cd "${CLIENT_SOURCE_DIR}"
 DITA_TRANSFORMED_DIR=$(find . -name DITA_RESOURCES)
+
 # Define source and destination directories
 DITA_ORIGIN=$(dirname "${DITA_TRANSFORMED_DIR}")
 
@@ -21,17 +23,22 @@ find "$DITA_TRANSFORMED_DIR" -type f \( -name "*.dita" -o -name "*.ditamap" \) |
   echo "path=$path"
   echo "locale=$locale"
 
-  # Construct destination path
-  dest="$DITA_ORIGIN/$locale/$path"
+  # Only for non 'en' locales.
+  if [ "$locale" != "$source_locale" ] 
+  then
 
-  # Create any missing directories in the destination path
-  #mkdir -p "$(dirname "$DITA_ORIGIN")"
+    # Construct destination path
+    dest="$DITA_ORIGIN/$locale/$path"
 
-  # Copy the file
-  #cp "$fullpath" "$dest"
+    # Create any missing directories in the destination path
+    #mkdir -p "$(dirname "$DITA_ORIGIN")"
 
-  # Print informative message
-  echo "Copied $fullpath to $dest"
+    # Copy the file
+    #cp "$fullpath" "$dest"
+
+    # Print informative message
+    echo "Copied $fullpath to $dest"
+  fi
 done
 
 echo "Dita and Ditamap files copied successfully!"
