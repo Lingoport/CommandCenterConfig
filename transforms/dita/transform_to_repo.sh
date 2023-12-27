@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "transform_to_files.sh does the actual transform back to the repo at the same time, since it's only a copy"
+return
 echo "To be written. For now, here so that the transform_from_repo can be tested"
 
 # TODO: define the locales, the top level directory under which the en/fr/.. are located, 
