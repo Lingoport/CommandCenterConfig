@@ -18,7 +18,7 @@ fi
 echo " --------------------------------------------"
 echo " File / to modify list :  $1"
 
-newfile="new_$1"
+newfile="${PROJECT_TMP_DIR}/tmp_list.txt"
 rm "$newfile"
 touch "$newfile"
 
