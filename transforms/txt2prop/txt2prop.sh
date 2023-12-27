@@ -11,9 +11,9 @@ echo "DEBUG for Luz:"
 ls -l /usr/local/tomcat/Lingoport_Data/L10nStreamlining/AVO/projects/UnityClient_L10N/failedkits/*/*/*
 cat /usr/local/tomcat/Lingoport_Data/L10nStreamlining/AVO/projects/UnityClient_L10N/failedkits/*/*/*
 
-echo "Content of /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/LID1138403710_strings_pt_pt.properties"
-ls -l /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/LID1138403710_strings_pt_pt.properties
-cat /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/LID1138403710_strings_pt_pt.properties
+echo "Content of /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/*"
+ls -l /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/*
+cat /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/*
 cd "${CLIENT_SOURCE_DIR }"
 
 find . -name "string*\.txt" -type f > "${PROJECT_TMP_DIR}/input_files.txt"
