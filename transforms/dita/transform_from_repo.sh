@@ -5,8 +5,9 @@
 #    and files under ...fr/path/*.dita to ... DITA_RESOURCES/path/fr/*.dita
 # etc.
 
-# TODO later: GET THE DIRECTORY above en
-DITA_DIR="$CLIENT_SOURCE_DIR/dita/Spectrum"
+# DITA_DIR must have been configured in dita_properties.sh
+. dita_properties.sh
+DITA_DIR="$CLIENT_SOURCE_DIR/${DITA_DIR}"
 echo "DITA_DIR=${DITA_DIR}"
 
 #
