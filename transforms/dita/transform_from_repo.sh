@@ -6,7 +6,7 @@
 # etc.
 
 # DITA_DIR must have been configured in dita_properties.sh
-. dita_properties.sh
+. "$TRANSFORM_DIR/dita_properties.sh"
 DITA_DIR="$CLIENT_SOURCE_DIR/${DITA_DIR}"
 echo "DITA_DIR=${DITA_DIR}"
 
