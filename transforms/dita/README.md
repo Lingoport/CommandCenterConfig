@@ -2,7 +2,7 @@
 
 ## Overview
 This Bash script is designed to reorganize DITA file paths in a specific directory structure. 
-It reads the original file paths from a file, and then moves the files to their new locations. 
+Configure the DITA_DIR, the location under which the `locale` directories are located, in `dita_properties.sh`
 
 ### transform_from_repo.sh
 Reorganizes file under 
