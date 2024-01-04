@@ -2,7 +2,7 @@
 
 ## Overview
 This Bash script is designed to reorganize DITA file paths in a specific directory structure. 
-Configure the DITA_DIR, the location under which the `locale` directories are located, in `dita_properties.sh`
+Configure the DITA_DIR, the location under which the `locale` directories are located, in `Settings > Advanced Settings > System Environment Variables` in Command Center.
 
 ### transform_from_repo.sh
 Reorganizes file under 
