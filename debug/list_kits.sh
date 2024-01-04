@@ -2,18 +2,18 @@
 echo "Modify this example Debug script to your needs"
 echo " "
 echo "Sample Debug Script, using system variables:
-echo " * DEBUG_GN : the group name of a project"
-echo " * DEBUG_PN : the project name itself"
-echo " * DEBUG_MN : the module name"
+echo "  DEBUG_GN : the group name of a project"
+echo "  DEBUG_PN : the project name itself"
+echo "  DEBUG_MN : the module name"
 echo ""
 echo "This script lists the content of :
-echo " * The files sent to translation"
-echo " * The files received from translation correctly"
-echo " * The failed translations"
+echo "  The files sent to translation"
+echo "  The files received from translation correctly"
+echo "  The failed translations"
 
-echo " * DEBUG_GN=${DEBUG_GN}"
-echo " * DEBUG_PN=${DEBUG_PN}"
-echo " * DEBUG_MN=${DEBUG_MN}"
+echo "  DEBUG_GN=${DEBUG_GN}"
+echo "  DEBUG_PN=${DEBUG_PN}"
+echo "  DEBUG_MN=${DEBUG_MN}"
 
 # Check that at least DEBUG_GN and DEBUG_PN are not empty!
 if [ -z "${DEBUG_GN}" ]
@@ -40,7 +40,7 @@ else
 
 fi
 
-echo " * DEBUG_DIR=${DEBUG_DIR}"
+echo "  DEBUG_DIR=${DEBUG_DIR}"
 
 echo " Listing for kits sent to translation:"
 echo " -------------------------------------"
