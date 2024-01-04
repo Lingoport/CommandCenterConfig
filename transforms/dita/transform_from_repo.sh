@@ -5,9 +5,18 @@
 #    and files under ...fr/path/*.dita to ... DITA_RESOURCES/path/fr/*.dita
 # etc.
 
-# DITA_DIR must have been configured in dita_properties.sh
-. "$TRANSFORM_DIR/dita_properties.sh"
+# DITA_DIR must have been configured Command Center System Environment Variables
+echo "Initial system environment variable: DITA_DIR=${DITA_DIR}"
+if [ -z "${DITA_DIR}" ]
+then
+      echo "\$DITA_DIR is empty"
+      echo "To set system variable like \$DITA_DIR in Command Center , navigate to Settings > Advanced Settings"
+      echo "Exiting"
+      exit -1
+fi
+
 DITA_DIR="$CLIENT_SOURCE_DIR/${DITA_DIR}"
+
 echo "DITA_DIR=${DITA_DIR}"
 
 #
