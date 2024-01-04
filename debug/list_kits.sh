@@ -1,18 +1,18 @@
 #!/bin/bash
-echo "-----------------------------------------------"
+echo "---------------------------------------------------"
 echo "Modify this example Debug script to your needs"
-echo "-----------------------------------------------"
+echo "---------------------------------------------------"
 echo " "
-echo "Sample Debug Script, using system variables:
+echo "Sample Debug Script, using system variables:"
 echo "  DEBUG_GN : the group name of a project"
 echo "  DEBUG_PN : the project name itself"
 echo "  DEBUG_MN : the module name"
 echo ""
-echo "This script lists the content of :
+echo "This script lists the content of :"
 echo "  The files sent to translation"
 echo "  The files received from translation correctly"
 echo "  The failed translations"
-echo "-----------------------------------------------"
+echo "---------------------------------------------------"
 echo " "
 echo "  DEBUG_GN=${DEBUG_GN}"
 echo "  DEBUG_PN=${DEBUG_PN}"
@@ -47,21 +47,21 @@ fi
 echo "  DEBUG_DIR=${DEBUG_DIR}"
 echo " "
 
-echo " Listing for kits ==sent==to translation:"
+echo " Listing for kits sent to translation:"
 echo " -------------------------------------"
 ls -l "${DEBUG_DIR}"/prepkits/PREP_KIT*/*/*.*
 echo " "
 
-echo " Listing for kits ==received== from translation:"
+echo " Listing for kits received from translation:"
 echo " --------------------------------------------"
 ls -l "${DEBUG_DIR}"/importkits/TRANSLATED_KIT*/*/*.*
 echo " "
 
-echo " Listing for ==failing== kits from translation:"
+echo " Listing for failing kits from translation:"
 echo " -------------------------------------"
 ls -l "${DEBUG_DIR}"/failedkits/TRANSLATED_KIT_*/*/*.*
 echo " "
 
-echo " ====================================================="
+echo "---------------------------------------------------"
 
 
