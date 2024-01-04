@@ -18,13 +18,16 @@ echo " * DEBUG_MN=${DEBUG_MN}"
 # Check that at least DEBUG_GN and DEBUG_PN are not empty!
 if [ -z "${DEBUG_GN}" ]
 then
-      echo "\$DEBUG_GN is empty: exiting!"
+      echo "\$DEBUG_GN is empty"
+      echo "To set system variable like \$DEBUG_GN in Command Center , navigate to Settings > Advanced Settings"
+      echo "Exiting"
       exit -1
 fi
 
 if [ -z "${DEBUG_PN}" ]
 then
-      echo "\$DEBUG_PN is empty: exiting!"
+      echo "To set system variable like \$DEBUG_PN in Command Center , navigate to Settings > Advanced Settings"
+      echo "Exiting"
       exit -1
 fi
 
