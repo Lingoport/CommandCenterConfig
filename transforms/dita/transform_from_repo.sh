@@ -6,6 +6,7 @@
 # etc.
 
 # DITA_DIR must have been configured Command Center System Environment Variables
+echo "Initial system environment variable: DITA_DIR=${DITA_DIR}"
 if [ -z "${DITA_DIR}" ]
 then
       echo "\$DITA_DIR is empty"
