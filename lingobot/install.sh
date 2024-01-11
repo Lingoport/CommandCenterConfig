@@ -20,6 +20,13 @@ fi
 
 mkdir -p $home_directory/lingobot || true
 
+if [ ! -f "$home_directory/lingobot/projectlist.txt" ]; then
+    touch "$home_directory/lingobot/projectlist.txt"
+fi
+
+chmod 666 "$home_directory/lingobot/projectlist.txt"
+
+
 echo $docker_account_token | sudo docker login -u $docker_username --password-stdin
 #docker run --name lingobot -p 80:3001 -d lingoport/lingobot_dev:1.0
 
