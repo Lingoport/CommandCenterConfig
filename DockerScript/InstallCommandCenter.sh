@@ -5,6 +5,12 @@
 # Author: Lili Ji
 # Copyright (c) Lingoport 2022
 
+# Check for passwordless sudo access
+if ! sudo -n true 2>/dev/null; then
+    echo "This script requires passwordless sudo access."
+    echo "Please run it as 'sudo ./InstallCommandCenter.sh' or configure passwordless sudo access."
+    exit 1
+fi
 
 echo
 echo "Installing the Command Center Servers ..."
