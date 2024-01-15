@@ -12,7 +12,7 @@ while read hantDir; do
   echo "mkdir -p ${zhDir}"
   echo "cp ${hantDir}/* ${zhDir}"
   echo "git add ${zhDir}/*"
-done < zhHant.txt
+done < "${PROJECT_TMP_DIR}/zhHant.txt"
 
 git status
 echo "git commit -m\"Lingoport Sync with zh-Hant and zh\" . || true"
