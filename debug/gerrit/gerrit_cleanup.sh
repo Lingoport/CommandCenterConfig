@@ -21,7 +21,8 @@ if [ "${exitValue}" != "0" ];then
 fi
 
 echo "$ read -r SHA < unmergedSHAs.txt"
-while read -r SHA; do
+while IFS= read -r SHA; do
+    echo "${SHA}"
     if [ "${SHA}" -ne "${SHA_TO_CLEAN}" ]; then
         echo "$ echo ${SHA} >> unmergedSHAs_copy.txt"
         echo "${SHA}" >> unmergedSHAs_copy.txt
