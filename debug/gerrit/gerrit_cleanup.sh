@@ -20,10 +20,13 @@ if [ "${exitValue}" != "0" ];then
     exit $exitValue
 fi
 
+echo "$ pwd"
+pwd
+
 echo "$ read -r line < unmergedSHAs.txt"
 while read -r line; do
     echo "test"
-done < unmergedSHAs.txt
+done < ./unmergedSHAs.txt
 exitValue=$?
 if [ "${exitValue}" -ne "0" ];then
     echo "Error: read -r line < unmergedSHAs.txt failed with status: ${exitValue}"
