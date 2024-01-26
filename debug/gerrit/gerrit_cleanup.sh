@@ -8,8 +8,8 @@ echo "    PROJECT_ID=${PROJECT_ID}"
 echo "    SHA_TO_CLEAN=${SHA_TO_CLEAN}"
 echo ""
 
-echo "$ cd /usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/project/${PROJECT_ID}"
-cd /usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/project/$PROJECT_ID
+echo "$ cd /usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/projects/${PROJECT_ID}"
+cd "/usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/projects/${PROJECT_ID}"
 
 echo "$ rm -f unmergedSHAs_copy.txt"
 rm -f unmergedSHAs_copy.txt
@@ -22,9 +22,6 @@ fi
 
 echo "$ pwd"
 pwd
-
-echo "$ cat /usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/project/${PROJECT_ID}/unmergedSHAs.txt"
-cat /usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/project/${PROJECT_ID}/unmergedSHAs.txt
 
 echo "$ read -r line < unmergedSHAs.txt"
 while read -r line; do
