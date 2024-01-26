@@ -22,15 +22,13 @@ fi
 
 echo "$ read -r SHA < unmergedSHAs.txt"
 while read -r SHA; do
-    echo "${SHA}"
-    echo "${SHA_TO_CLEAN}"
-    if [ "${SHA}" -ne "${SHA_TO_CLEAN}" ]; then
+    if [ "${SHA}" != "${SHA_TO_CLEAN}" ]; then
         echo "$ echo ${SHA} >> unmergedSHAs_copy.txt"
         echo "${SHA}" >> unmergedSHAs_copy.txt
     fi
 done < ./unmergedSHAs.txt
 exitValue=$?
-if [ "${exitValue}" -ne "0" ];then
+if [ "${exitValue}" != "0" ];then
     echo "Error: read -r SHA < unmergedSHAs.txt failed with status: ${exitValue}"
     echo "Gerrit cleanup FAILED"
     exit $exitValue
@@ -39,7 +37,7 @@ fi
 echo "$ mv unmergedSHAs_copy.txt unmergedSHAs.txt"
 mv unmergedSHAs_copy.txt unmergedSHAs.txt
 exitValue=$?
-if [ "${exitValue}" -ne "0" ];then
+if [ "${exitValue}" != "0" ];then
     echo "Error: mv unmergedSHAs_copy.txt unmergedSHAs.txt failed with status: ${exitValue}"
     echo "Gerrit cleanup FAILED"
     exit $exitValue
