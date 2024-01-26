@@ -20,13 +20,13 @@ if [ "${exitValue}" != "0" ];then
     exit $exitValue
 fi
 
-echo "$ read -r SHA < unmergedSHAs.txt"
-while IFS= read -r SHA; do
+echo "$ read -r line < unmergedSHAs.txt"
+while read -r line; do
     echo "test"
 done < unmergedSHAs.txt
 exitValue=$?
 if [ "${exitValue}" -ne "0" ];then
-    echo "Error: read -r SHA < unmergedSHAs.txt failed with status: ${exitValue}"
+    echo "Error: read -r line < unmergedSHAs.txt failed with status: ${exitValue}"
     echo "Gerrit cleanup FAILED"
     exit $exitValue
 fi
