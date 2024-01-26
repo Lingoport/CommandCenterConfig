@@ -13,6 +13,7 @@ cd "/usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/project/${
 
 echo "$ rm -f unmergedSHAs_copy.txt"
 rm -f unmergedSHAs_copy.txt
+exitValue=$?
 if [ "${exitValue}" != "0" ];then
     echo "Error: rm -f unmergedSHAs_copy.txt failed with status: ${exitValue}"
     echo "Gerrit cleanup FAILED"
@@ -26,7 +27,8 @@ while read -r SHA; do
         echo "${SHA}" >> unmergedSHAs_copy.txt
     fi
 done < unmergedSHAs.txt
-if [ "${exitValue}" != "0" ];then
+exitValue=$?
+if [ "${exitValue}" -ne "0" ];then
     echo "Error: read -r SHA < unmergedSHAs.txt failed with status: ${exitValue}"
     echo "Gerrit cleanup FAILED"
     exit $exitValue
@@ -34,7 +36,8 @@ fi
 
 echo "$ mv unmergedSHAs_copy.txt unmergedSHAs.txt"
 mv unmergedSHAs_copy.txt unmergedSHAs.txt
-if [ "${exitValue}" != "0" ];then
+exitValue=$?
+if [ "${exitValue}" -ne "0" ];then
     echo "Error: mv unmergedSHAs_copy.txt unmergedSHAs.txt failed with status: ${exitValue}"
     echo "Gerrit cleanup FAILED"
     exit $exitValue
