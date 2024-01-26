@@ -20,16 +20,16 @@ if [ "${exitValue}" != "0" ];then
     exit $exitValue
 fi
 
-echo "$ pwd"
-pwd
-
-echo "$ read -r line < unmergedSHAs.txt"
-while read -r line; do
-    echo "test"
+echo "$ read -r SHA < unmergedSHAs.txt"
+while read -r SHA; do
+    if [ "${SHA}" -ne "${SHA_TO_CLEAN}" ]; then
+        echo "$ echo ${SHA} >> unmergedSHAs_copy.txt"
+        echo "${SHA}" >> unmergedSHAs_copy.txt
+    fi
 done < ./unmergedSHAs.txt
 exitValue=$?
 if [ "${exitValue}" -ne "0" ];then
-    echo "Error: read -r line < unmergedSHAs.txt failed with status: ${exitValue}"
+    echo "Error: read -r SHA < unmergedSHAs.txt failed with status: ${exitValue}"
     echo "Gerrit cleanup FAILED"
     exit $exitValue
 fi
