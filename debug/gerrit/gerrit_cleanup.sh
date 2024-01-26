@@ -23,6 +23,9 @@ fi
 echo "$ pwd"
 pwd
 
+echo "$ cat /usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/project/${PROJECT_ID}/unmergedSHAs.txt"
+cat /usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/project/${PROJECT_ID}/unmergedSHAs.txt
+
 echo "$ read -r line < unmergedSHAs.txt"
 while read -r line; do
     echo "test"
