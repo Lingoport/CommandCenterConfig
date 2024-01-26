@@ -9,7 +9,7 @@ echo "    SHA_TO_CLEAN=${SHA_TO_CLEAN}"
 echo ""
 
 echo "$ cd /usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/project/${PROJECT_ID}"
-cd "/usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/project/${PROJECT_ID}"
+cd /usr/local/tomcat/Lingoport_Data/CommandCenter/system/gerritfiles/project/$PROJECT_ID
 
 echo "$ rm -f unmergedSHAs_copy.txt"
 rm -f unmergedSHAs_copy.txt
