@@ -8,3 +8,8 @@ It relies on Command Center system environment variables. System environment var
 * Settings > Advanced Settings
   
 and are passed to .sh scripts.
+
+## gerrit/gerrit_cleanup.sh ##
+The `gerrit/gerrit_cleanup.sh` script is intended for use by customers who use the Gerrit data source credential. If there is an SHA in the unmergedSHAs.txt file that is blocking analysis from running successfully, then it must be cleaned out of the list using this debug script. There are two environment variables that are required by this debug script:
+* **PROJECT_ID** - the ID of the project that needs to be cleaned.
+* **SHA_TO_CLEAN** - the SHA that needs to be cleaned out of the project's unmerged SHAs list.
