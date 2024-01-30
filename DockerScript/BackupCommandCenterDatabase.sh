@@ -5,14 +5,11 @@
 # Author: Lili Ji
 # Copyright (c) Lingoport 2022
 
-
 echo
-echo "Backuping the Command Center Servers Database ..."
+echo "Backing up the Command Center Servers Database ..."
 echo
 
-#
-# read in config file
-#
+# Read in config file
 if [[ -e "install.conf" ]]; then
     source "install.conf"
     echo "Reading configured information from install.conf file."
@@ -42,16 +39,27 @@ then
 fi
 
 
-cd $home_directory/commandcenter/config
+cd $home_directory/commandcenter/config || { echo "Failed to change directory"; exit 1; }
 
-old_db=`cat cc_mysql_id.txt`
+old_db=$(cat cc_mysql_id.txt)
+old=$(cat cc_container_id.txt)
+current_date=$(date -I)
 
-old=`cat cc_container_id.txt`
+mkdir -p $home_directory/commandcenter/backup || { echo "Failed to create backup directory"; exit 1; }
 
-current_date=`date -I`
+# Function to perform backup
+backup_database() {
+    local db_name=$1
+    local backup_file="$home_directory/commandcenter/backup/${db_name}_backup_$current_date.sql"
 
-mkdir -p $home_directory/commandcenter/backup || true
+    docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password "$db_name" > "$backup_file" && {
+        echo "The database $db_name has been successfully backed up to $backup_file"
+    } || {
+        echo "Backup failed for $db_name"
+        return 1
+    }
+}
 
-docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password commandcenter > $home_directory/commandcenter/backup/cc_database_backup_$current_date.sql
-
-docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password LRM > $home_directory/commandcenter/backup/lrm_database_backup_$current_date.sql
+# Perform backups
+backup_database "commandcenter"
+backup_database "LRM"
