@@ -5,17 +5,16 @@
 # Author: Lili Ji
 # Copyright (c) Lingoport 2022
 
-# Check for passwordless sudo access
-if ! sudo -n true 2>/dev/null; then
-    echo "This script requires passwordless sudo access."
-    echo "Please run it as 'sudo ./UpdateCommandCenter.sh' or configure passwordless sudo access."
+# Check if the script is executed with sudo
+if [[ "$(id -u)" != "0" ]]; then
+    echo "This script needs to be run with sudo."
+    echo "Please run it as 'sudo ./UpdateCommandCenter.sh'."
     exit 1
 fi
 
 echo
 echo "Updating the Command Center Servers ..."
 echo
-
 #
 # read in config file
 #
@@ -116,21 +115,36 @@ then
     fi
 fi
 
-mkdir -p $home_directory/commandcenter/backup || true
+cd $home_directory/commandcenter/config
+
+
+# Check if cc_container_id.txt file exists and is readable
+if [[ -r "cc_container_id.txt" ]]; then
+    old=$(cat cc_container_id.txt)
+else
+    echo "Error: Unable to read cc_container_id.txt. Please check file permissions."
+    exit 1
+fi
+
+old_db=`cat cc_mysql_id.txt`
+
+sudo docker stop $old
+
 cd $home_directory/commandcenter/config
 
 old_db=`cat cc_mysql_id.txt`
 
-old=`cat cc_container_id.txt`
-
-sudo docker stop $old
-
 current_date=`date -I`
 
-docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password commandcenter > $home_directory/commandcenter/backup/cc_database_backup_$current_date.sql
+# Perform database backup and report success for commandcenter database
+backup_file_cc="$home_directory/commandcenter/backup/cc_database_backup_$current_date.sql"
+docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password commandcenter > "$backup_file_cc" && \
+echo "The commandcenter database has been successfully backed up to $backup_file_cc"
 
-docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password LRM > $home_directory/commandcenter/backup/lrm_database_backup_$current_date.sql
-
+# Perform database backup and report success for LRM database
+backup_file_lrm="$home_directory/commandcenter/backup/lrm_database_backup_$current_date.sql"
+docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password LRM > "$backup_file_lrm" && \
+echo "The LRM database has been successfully backed up to $backup_file_lrm"
 
 echo $docker_account_token | sudo docker login -u $docker_username --password-stdin
 

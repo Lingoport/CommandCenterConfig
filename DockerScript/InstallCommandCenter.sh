@@ -5,12 +5,14 @@
 # Author: Lili Ji
 # Copyright (c) Lingoport 2022
 
-# Check for passwordless sudo access
-if ! sudo -n true 2>/dev/null; then
-    echo "This script requires passwordless sudo access."
-    echo "Please run it as 'sudo ./InstallCommandCenter.sh' or configure passwordless sudo access."
+# Function to check if the script can run a command with sudo
+
+if [[ "$(id -u)" != "0" ]]; then
+    echo "This script needs to be run with sudo."
     exit 1
 fi
+
+
 
 echo
 echo "Installing the Command Center Servers ..."
@@ -123,7 +125,7 @@ mkdir -p $home_directory/commandcenter/backup || true
 
 cd $home_directory/commandcenter/config
 
-sudo docker network ls|grep $database_network > /dev/null || sudo docker network create $database_network
+sudo docker network ls | grep $database_network > /dev/null || sudo docker network create $database_network
 
 cc_mysql_id=$(sudo docker run --restart unless-stopped -d --network-alias mysqlservercommand --network $database_network -e MYSQL_ROOT_PASSWORD=$database_root_password -e MYSQL_DATABASE=commandcenter -v $home_directory/mysql/conf.d:/etc/mysql/conf.d  mysql:8.0 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci)
 sudo echo $cc_mysql_id > cc_mysql_id.txt

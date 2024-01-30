@@ -1,14 +1,12 @@
 #!/bin/bash
 #
-# Install the Command Center Server.
+# Uninstall the Command Center Server.
 #
 # Author: Lili Ji
 # Copyright (c) Lingoport 2022
 
-# Check for passwordless sudo access
-if ! sudo -n true 2>/dev/null; then
-    echo "This script requires passwordless sudo access."
-    echo "Please run it as 'sudo ./UninstallCommandCenter.sh' or configure passwordless sudo access."
+if [[ "$(id -u)" != "0" ]]; then
+    echo "This script needs to be run with sudo."
     exit 1
 fi
 
@@ -16,23 +14,24 @@ echo
 echo "Uninstalling the Command Center Servers ..."
 echo
 
+# Source the config file if it exists
 if [[ -e "install.conf" ]]; then
     source install.conf
     echo "Reading configured information from install.conf file."
 fi
 
+# Ensure the backup directory exists
 mkdir -p $home_directory/commandcenter/backup || true
 
-cd $home_directory/commandcenter/config
+# Change to the config directory
+cd $home_directory/commandcenter/config || { echo "Failed to change to config directory"; exit 1; }
 
-oldID=`cat cc_container_id.txt`
+# Read the container ID and stop/remove the container
+oldID=$(cat cc_container_id.txt)
+sudo docker stop $oldID && sudo docker rm $oldID || { echo "Failed to stop/remove Docker container $oldID"; exit 1; }
 
-sudo docker stop $oldID
+# Read the database container ID and stop/remove the container
+db=$(cat cc_mysql_id.txt)
+sudo docker stop $db && sudo docker rm $db || { echo "Failed to stop/remove Docker database container $db"; exit 1; }
 
-sudo docker rm $oldID
-
-db=`cat cc_mysql_id.txt`
-
-sudo docker stop $db
-
-sudo docker rm $db
+echo "Command Center has been successfully uninstalled."

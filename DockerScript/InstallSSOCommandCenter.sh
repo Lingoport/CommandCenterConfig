@@ -5,11 +5,11 @@
 # Author: Lili Ji
 # Copyright (c) Lingoport 2022
 
-if ! sudo -n true 2>/dev/null; then
-    echo "This script requires passwordless sudo access."
-    echo "Please run it as 'sudo ./InstallSSOCommandCenter.sh' or configure passwordless sudo access."
+if [[ "$(id -u)" != "0" ]]; then
+    echo "This script needs to be run with sudo."
     exit 1
 fi
+
 
 echo
 echo "Installing the Command Center Servers ..."
