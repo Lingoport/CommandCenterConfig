@@ -34,4 +34,7 @@ sudo docker stop $oldID && sudo docker rm $oldID || { echo "Failed to stop/remov
 db=$(cat cc_mysql_id.txt)
 sudo docker stop $db && sudo docker rm $db || { echo "Failed to stop/remove Docker database container $db"; exit 1; }
 
+rm -rf $home_directory/commandcenter/logs/*
+rm -rf $home_directory/Lingoport_Data/*
+
 echo "Command Center has been successfully uninstalled."
