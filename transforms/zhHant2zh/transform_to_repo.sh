@@ -4,8 +4,12 @@
 # If the zh.lproj directory does not exists, creates it before copying
 #
 
-cd "$CLIENT_SOURCE_DIR"
-
+echo  " ------------------------------------------------"
+echo  " START  $0"
+echo  " Current pwd:"
+pwd
+echo  " ------------------------------------------------"
+echo  " ------------------------------------------------"
 find . -name zh-Hant.lproj > "${PROJECT_TMP_DIR}/zhHant.txt"
 
 while read hantDir; do
@@ -28,4 +32,4 @@ echo " - Copied zh-Hant.lproj content to zh.lproj"
 git push
 git status
 echo " END $0"
-echo " ----------------------------------------------"
+echo  " ------------------------------------------------"
