@@ -1,5 +1,8 @@
 #!/bin/bash
 #
+# Copies the content of zh-Hant.lproj directories into zh.lproj directories
+# If the zh.lproj directory does not exists, creates it before copying
+#
 
 cd "$CLIENT_SOURCE_DIR"
 
@@ -10,14 +13,19 @@ while read hantDir; do
   zhDir="${test}/zh.lproj"
   mkdir -p "${zhDir}"
   cp "${hantDir}"/* "${zhDir}"
+  echo "${hantDir}"
+  ls "${hantDir}"
+  echo "---"
+  echo "${zhDir}"
+  ls "${zhDir}"
+  echo " -----------------------"
   git add "${zhDir}"/*
 done < "${PROJECT_TMP_DIR}/zhHant.txt"
 
 git status
-git commit -m"Lingoport Sync with zh-Hant and zh" . || true"
+git commit -m"Lingoport Sync zh from zh-Hant " . || true
 echo " - Copied zh-Hant.lproj content to zh.lproj"
 git push
 git status
 echo " END $0"
 echo " ----------------------------------------------"
-
