@@ -51,6 +51,6 @@ old=`cat cc_container_id.txt`
 
 mkdir -p $home_directory/commandcenter/backup || true
 
-docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password commandcenter < $home_directory/commandcenter/backup/cc_database_backup_$back_date.sql
+docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password commandcenter < $home_directory/commandcenter/backup/commandcenter_backup_$back_date.sql
 
-docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password LRM < $home_directory/commandcenter/backup/lrm_database_backup_$back_date.sql
+docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password LRM < $home_directory/commandcenter/backup/LRM_backup_$back_date.sql

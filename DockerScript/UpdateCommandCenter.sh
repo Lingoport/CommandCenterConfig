@@ -137,12 +137,12 @@ old_db=`cat cc_mysql_id.txt`
 current_date=`date -I`
 
 # Perform database backup and report success for commandcenter database
-backup_file_cc="$home_directory/commandcenter/backup/cc_database_backup_$current_date.sql"
+backup_file_cc="$home_directory/commandcenter/backup/commandcenter_backup_$current_date.sql"
 docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password commandcenter > "$backup_file_cc" && \
 echo "The commandcenter database has been successfully backed up to $backup_file_cc"
 
 # Perform database backup and report success for LRM database
-backup_file_lrm="$home_directory/commandcenter/backup/lrm_database_backup_$current_date.sql"
+backup_file_lrm="$home_directory/commandcenter/backup/LRM_backup_$current_date.sql"
 docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password LRM > "$backup_file_lrm" && \
 echo "The LRM database has been successfully backed up to $backup_file_lrm"
 
