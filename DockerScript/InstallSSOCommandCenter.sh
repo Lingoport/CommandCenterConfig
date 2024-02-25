@@ -124,7 +124,7 @@ cd $home_directory/commandcenter/config
 
 sudo docker network ls|grep $database_network > /dev/null || sudo docker network create $database_network
 
-cc_mysql_id=$(sudo docker run --restart unless-stopped -d --network-alias mysqlservercommand --network $database_network -e MYSQL_ROOT_PASSWORD=$database_root_password -e MYSQL_DATABASE=commandcenter -v $home_directory/mysql/conf.d:/etc/mysql/conf.d  mysql:8.0 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci)
+cc_mysql_id=$(sudo docker run --restart unless-stopped -d --name ssocommandcenterDatabase --network-alias mysqlservercommand --network $database_network -e MYSQL_ROOT_PASSWORD=$database_root_password -e MYSQL_DATABASE=commandcenter -v $home_directory/mysql/conf.d:/etc/mysql/conf.d  mysql:8.0 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci)
 sudo echo $cc_mysql_id > cc_mysql_id.txt
 
 echo $docker_account_token | sudo docker login -u $docker_username --password-stdin
