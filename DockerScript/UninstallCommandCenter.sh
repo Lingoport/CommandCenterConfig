@@ -29,7 +29,7 @@ sudo docker stop $oldID || { echo "Failed to stop Docker container $oldID"; exit
 
 # Read the database container ID and stop the container
 db=$(cat cc_mysql_id.txt)
-sudo docker stop $db || { echo "Failed to stop Docker database container $db"; exit 1; }
+sudo docker stop $db && sudo docker rm $db || { echo "Failed to stop/remove Docker database container $db"; exit 1; }
 
 rm -rf $home_directory/commandcenter/logs/*
 rm -rf $home_directory/Lingoport_Data/*
