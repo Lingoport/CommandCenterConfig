@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<localization name="tcx2saas">
+    <property name="displayName">Teamcenter SaaS</property>
+    <property name="description">Diese Funktion konfiguriert die Teamcenter-Installation von Software as a Service (SaaS)</property>
+    <property name="awcUrlDisplayName">Aktive Workspace-AWS-URL</property>
+</localization>
