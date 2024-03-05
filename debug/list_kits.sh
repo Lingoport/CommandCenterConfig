@@ -19,6 +19,7 @@ echo "  DEBUG_PN=${DEBUG_PN}"
 echo "  DEBUG_MN=${DEBUG_MN}"
 echo " "
 
+echo " This script has been modified by RMD"
 # Check that at least DEBUG_GN and DEBUG_PN are not empty!
 if [ -z "${DEBUG_GN}" ]
 then
