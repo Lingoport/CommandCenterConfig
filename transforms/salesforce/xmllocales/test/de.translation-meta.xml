@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label>Force.com</label>
+        <name>Force_com</name>
+    </customApplications>
+    <customApplications>
+        <description xsi:nil="true"/>
+        <label>Teamcenter SLM</label>
+        <name>Teamcenter_SLM</name>
+    </customApplications>
+
+    <!-- labels for tcToolbar component -->
+    <customLabels>
+        <label>Generate Asset</label>
+        <name>UI_LABEL_BUTTON_GENERATE_ASSET</name>
+    </customLabels>
+    <customLabels>
+        <label>Generate Assets</label>
+        <name>UI_LABEL_TITLE_GENERATE_ASSET</name>
+    </customLabels>
+    <customLabels>
+        <label>Login To Teamcenter</label>
+        <name>UI_LABEL_TITLE_LOGIN_DESCRIPTION</name>
+    </customLabels>
+    <customLabels>
+        <label>Connect To Teamcenter</label>
+        <name>UI_LABEL_TITLE_LOGIN_CONNECT</name>
+    </customLabels>
+    <customLabels>
+        <label>Error</label>
+        <name>ERROR_ASSET_TITLE_ERROR</name>
+    </customLabels>
+    <customLabels>
+        <label>Success</label>
+        <name>SUCCESS_ASSET_TITLE_SUCCESS</name>
+    </customLabels>
+    <customLabels>
+        <label>Select a BOM for generating an asset.</label>
+        <name>ERROR_ASSET_SELECT_A_BOM</name>
+    </customLabels>
+    <customLabels>
+        <label>You have logged out of Teamcenter. Login again to continue.</label>
+        <name>ERROR_ASSET_LOGOUT_OF_TC</name>
+    </customLabels>
+
+    <!-- labels for tcLoginModal component -->
+    <customLabels>
+        <label>Provide valid Teamcenter login details below :</label>
+        <name>UI_LABEL_TITLE_PROVIDE_VALID_TC_DETAILS</name>
+    </customLabels>
+    <customLabels>
+        <label>Username</label>
+        <name>UI_LABEL_TITLE_USERNAME</name>
+    </customLabels>
+    <customLabels>
+        <label>Teamcenter Password</label>
+        <name>UI_LABEL_TITLE_TC_PASSWORD</name>
+    </customLabels>
+    <customLabels>
+        <label>Please enter value within required fields</label>
+        <name>ERROR_ASSET_ENTER_VALUE_REQUIRED_FIELD</name>
+    </customLabels>
+    <customLabels>
+        <label>Close</label>
+        <name>UI_LABEL_TITLE_CLOSE</name>
+    </customLabels>
+    <customLabels>
+        <label>Connect to Teamcenter</label>
+        <name>UI_LABEL_BUTTON_CONNECT_TO_TC</name>
+    </customLabels>
+    <customLabels>
+        <label>Loading...</label>
+        <name>UI_LABEL_TITLE_LOADING</name>
+    </customLabels>
+    <customLabels>
+        <label>You have logged into Teamcenter.</label>
+        <name>SUCCESS_ASSET_LOGGED_INTO_TC</name>
+    </customLabels>
+    <customLabels>
+        <label>Unable to log into Teamcenter. Contact your system administrator.</label>
+        <name>ERROR_ASSET_LOGIN_TC_CONTACT_ADMIN</name>
+    </customLabels>
+
+    <!-- labels for assetCustomListView component -->
+    <customLabels>
+        <label>Asset List View</label>
+        <name>UI_LABEL_TITLE_ASSET_LIST_VIEW</name>
+    </customLabels>
+    <customLabels>
+        <label>Search Assets</label>
+        <name>UI_LABEL_TITLE_SEARCH_ASSETS</name>
+    </customLabels>
+    <customLabels>
+        <label>Name</label>
+        <name>UI_LABEL_HEADER_ASSET_NAME</name>
+    </customLabels>
+    <customLabels>
+        <label>Part Number</label>
+        <name>UI_LABEL_HEADER_ASSET_PART_NUMBER</name>
+    </customLabels>
+    <customLabels>
+        <label>Serial Number</label>
+        <name>UI_LABEL_HEADER_ASSET_SERIAL_NUMBER</name>
+    </customLabels>
+    <customLabels>
+        <label>Manufacturer's ID</label>
+        <name>UI_LABEL_HEADER_ASSET_MFGID</name>
+    </customLabels>
+    <customLabels>
+        <label>Account</label>
+        <name>UI_LABEL_HEADER_ACCOUNT</name>
+    </customLabels>
+    <customLabels>
+        <label>Install Date Time</label>
+        <name>UI_LABEL_HEADER_INSTALL_DATETIME</name>
+    </customLabels>
+
+    <!-- labels for generateAsset component -->
+    <customLabels>
+        <label>Generate Asset</label>
+        <name>UI_LABEL_TITLE_GENERATE_ASSET_DIALOG</name>
+    </customLabels>
+    <customLabels>
+        <label>Required Information</label>
+        <name>UI_LABEL_TITLE_REQUIRED_INFO</name>
+    </customLabels>
+    <customLabels>
+        <label>Asset Information</label>
+        <name>UI_LABEL_TITLE_ASSET_INFO</name>
+    </customLabels>
+    <customLabels>
+        <label>Item</label>
+        <name>UI_LABEL_TITLE_ITEM_NAME</name>
+    </customLabels>
+    <customLabels>
+        <label>Part Number</label>
+        <name>UI_LABEL_TITLE_ASSET_PART_NUMBER</name>
+    </customLabels>
+    <customLabels>
+        <label>Serial Number</label>
+        <name>UI_LABEL_TITLE_ASSET_SERIAL_NUMBER</name>
+    </customLabels>
+    <customLabels>
+        <label>Manufacturer's ID</label>
+        <name>UI_LABEL_TITLE_ASSET_MFGID</name>
+    </customLabels>
+    <customLabels>
+        <label>Manufacturing Date & Time</label>
+        <name>UI_LABEL_TITLE_ASSET_MFG_DATETIME</name>
+    </customLabels>
+    <customLabels>
+        <label>Installation Date & Time</label>
+        <name>UI_LABEL_TITLE_INSTALL_DATETIME</name>
+    </customLabels>
+    <customLabels>
+        <label>Account</label>
+        <name>UI_LABEL_TITLE_ACCOUNT</name>
+    </customLabels>
+    <customLabels>
+        <label>Search Account...</label>
+        <name>PLACEHOLDER_SEARCH_ACCOUNT</name>
+    </customLabels>
+    <customLabels>
+        <label>Contact</label>
+        <name>UI_LABEL_TITLE_CONTACT</name>
+    </customLabels>
+    <customLabels>
+        <label>Search Contact...</label>
+        <name>PLACEHOLDER_SEARCH_CONTACT</name>
+    </customLabels>
+    <customLabels>
+        <label>Location Name</label>
+        <name>UI_LABEL_TITLE_LOCATION_NAME</name>
+    </customLabels>
+    <customLabels>
+        <label>Search Location...</label>
+        <name>PLACEHOLDER_SEARCH_LOCATION</name>
+    </customLabels>
+    <customLabels>
+        <label>Number of Levels</label>
+        <name>UI_LABEL_TITLE_NO_OF_LEVELS</name>
+    </customLabels>
+    <customLabels>
+        <label>Select an option</label>
+        <name>UI_LABEL_TITLE_SELECT_OPTION</name>
+    </customLabels>
+    <customLabels>
+        <label>All</label>
+        <name>UI_LABEL_TITLE_ALL</name>
+    </customLabels>
+    <customLabels>
+        <label>Purchase Date</label>
+        <name>UI_LABEL_TITLE_PURCHASE_DATE</name>
+    </customLabels>
+    <customLabels>
+        <label>Competitor Asset</label>
+        <name>UI_LABEL_TITLE_COMPETITOR_ASSET</name>
+    </customLabels>
+    <customLabels>
+        <label>Please Enter Value Within Required Fields</label>
+        <name>ERROR_ASSET_ENTER_VALUE_WITHIN_REQUIRED_FIELD</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancel</label>
+        <name>UI_LABEL_BUTTON_CANCEL</name>
+    </customLabels>
+    <customLabels>
+        <label>Generate</label>
+        <name>UI_LABEL_BUTTON_GENERATE</name>
+    </customLabels>
+    <customLabels>
+        <label>Manufacturing date & time cannot be a future date.</label>
+        <name>ERROR_ASSET_MFG_DATETIME_CANNOT_BE_FUTURE_DATE</name>
+    </customLabels>
+    <customLabels>
+        <label>Manufacturing date can not be later than installation date.</label>
+        <name>ERROR_ASSET_MFG_DATETIME_CANNOT_BE_LATER_INSTALL</name>
+    </customLabels>
+    <customLabels>
+        <label>Installation date & time can not be earlier than manufacturing date & time.</label>
+        <name>ERROR_ASSET_INSTALL_DATETIME_CANNOT_BE_EARLIER_MFG</name>
+    </customLabels>
+    <customLabels>
+        <label>Purchase date cannot be a future date.</label>
+        <name>ERROR_ASSET_PURCHASE_DATE_CANNOT_BE_FUTURE</name>
+    </customLabels>
+    <customLabels>
+        <label>Enter valid Serial Number and Manufacturer's ID.</label>
+        <name>ERROR_ASSET_ENTER_VALID_SN_MFGID</name>
+    </customLabels>
+    <customLabels>
+        <label>Asset was not generated because the selected asset could not be found in Teamcenter.</label>
+        <name>ERROR_ASSET_ASSET_NOT_GENERATED_COULD_NOT_FOUND</name>
+    </customLabels>
+    <customLabels>
+        <label>Asset was generated.</label>
+        <name>SUCCESS_ASSET_ASSET_WAS_GENERATED</name>
+    </customLabels>
+    <customLabels>
+        <label>Open Asset</label>
+        <name>UI_LABEL_TITLE_OPEN_ASSET</name>
+    </customLabels>
+    <customLabels>
+        <label>Asset was not generated because of Salesforce server error. Contact your system administrator.</label>
+        <name>ERROR_ASSET_GENERATE_ASSET_ERROR</name>
+    </customLabels>
+    <customLabels>
+        <label>Asset was not generated because of Salesforce server error. Contact your system administrator.</label>
+        <name>ERROR_ASSET_ERROR_FETCHING_DATA_FROM_TC</name>
+    </customLabels>
+    <customLabels>
+        <label>Serial Number, Part Number & Manufacturer's ID combination already exists.</label>
+        <name>ERROR_ASSET_SN_PN_MFGID_ALREADY_EXIST</name>
+    </customLabels>
+
+    <!-- labels for assetInstallationDialog component -->
+    <customLabels>
+        <label>Install Asset</label>
+        <name>UI_LABEL_TITLE_INSTALL_ASSET</name>
+    </customLabels>
+    <customLabels>
+        <label>Select the asset you would like to install.</label>
+        <name>UI_LABEL_TITLE_SELECT_ASSET_TO_INSTALL</name>
+    </customLabels>
+    <customLabels>
+        <label>Install</label>
+        <name>UI_LABEL_BUTTON_INSTALL</name>
+    </customLabels>
+    <customLabels>
+        <label>Select the asset you would like to install.</label>
+        <name>ERROR_ASSET_SELECT_ASSET_TO_INSTALL</name>
+    </customLabels>
+    <customLabels>
+        <label>Install date cannot be a future date.</label>
+        <name>ERROR_ASSET_INSTALL_DATE_CANNOT_BE_FUTURE_DATE</name>
+    </customLabels>
+    <customLabels>
+        <label>Select a date between {dynamicDate} and current date &amp; time.</label>
+        <name>ERROR_ASSET_SEELCT_A_DATE_BETWEEN_CURRENT_DATETIME</name>
+    </customLabels>
+    
+    <!-- labels for assetUninstallationDialog component -->
+    <customLabels>
+        <label>Uninstall Asset {dynamicAssetName}</label>
+        <name>UI_LABEL_TITLE_UNINSTALL_ASSET_WITH_NAME</name>
+    </customLabels>
+    <customLabels>
+        <label>Uninstall selected asset.</label>
+        <name>UI_LABEL_TITLE_UNINSTALL_SELECTED_ASSET</name>
+    </customLabels>
+    <customLabels>
+        <label>Uninstall Date &amp; Time</label>
+        <name>UI_LABEL_TITLE_UNINSTALL_DATETIME</name>
+    </customLabels>
+    <customLabels>
+        <label>Uninstall Date</label>
+        <name>UI_LABEL_TITLE_UNINSTALL_DATE</name>
+    </customLabels>
+    <customLabels>
+        <label>Uninstall Location</label>
+        <name>UI_LABEL_TITLE_UNINSTALL_LOCATION</name>
+    </customLabels>
+    <customLabels>
+        <label>Uninstall</label>
+        <name>UI_LABEL_BUTTON_UNINSTALL</name>
+    </customLabels>
+    <customLabels>
+        <label>Uninstall date cannot be a future date.</label>
+        <name>ERROR_ASSET_UNINSTALL_DATE_CANNOT_BE_FUTURE</name>
+    </customLabels>
+    <customLabels>
+        <label>Select a location.</label>
+        <name>ERROR_ASSET_SELECT_A_LOCATION</name>
+    </customLabels>
+    <customLabels>
+        <label>Location Icon</label>
+        <name>UI_LABEL_TITLE_LOCATION_ICON</name>
+    </customLabels>
+
+    <!-- labels for treeTable component -->
+    <customLabels>
+        <label>Usage</label>
+        <name>UI_LABEL_HEADER_ASSET_USAGE</name>
+    </customLabels>
+    <customLabels>
+        <label>Description</label>
+        <name>UI_LABEL_HEADER_ASSET_DESCRIPTION</name>
+    </customLabels>
+    <customLabels>
+        <label>Installation</label>
+        <name>UI_LABEL_HEADER_ASSET_INSTALLATION</name>
+    </customLabels>
+    <customLabels>
+        <label>Date &amp; Time</label>
+        <name>UI_LABEL_HEADER_ASSET_DATETIME</name>
+    </customLabels>
+    <customLabels>
+        <label>Status</label>
+        <name>UI_LABEL_HEADER_ASSET_STATUS</name>
+    </customLabels>
+    <customLabels>
+        <label>Action</label>
+        <name>UI_LABEL_HEADER_ACTION</name>
+    </customLabels>
+    <customLabels>
+        <label>Usage is not applicable since this row is not an occurrence.</label>
+        <name>UI_LABEL_TITLE_USAGE_TOOLBAR</name>
+    </customLabels>
+    <customLabels>
+        <label>Serial Number cannot be blank.</label>
+        <name>ERROR_ASSET_SERIAL_NO_CANNOT_BE_BLANK</name>
+    </customLabels>
+    <customLabels>
+        <label>Serial Number already exists.</label>
+        <name>ERROR_ASSET_SERIAL_NO_ALREADY_EXISTS</name>
+    </customLabels>
+    <customLabels>
+        <label>Your changes were saved.</label>
+        <name>SUCCESS_ASSET_CHANGES_WERE_SAVED</name>
+    </customLabels>
+    <customLabels>
+        <label>There was an error while saving Serial Number.</label>
+        <name>ERROR_ASSET_ERROR_SAVING_SERIAL_NO</name>
+    </customLabels>
+    <customLabels>
+        <label>There was an error while saving Description.</label>
+        <name>ERROR_ASSET_ERROR_SAVING_DESCRIPTION</name>
+    </customLabels>
+    <customLabels>
+        <label>Preferred</label>
+        <name>UI_LABEL_TITLE_STATUS_PREFERRED</name>
+    </customLabels>
+    <customLabels>
+        <label>Missing</label>
+        <name>UI_LABEL_TITLE_STATUS_MISSING</name>
+    </customLabels>
+    <customLabels>
+        <label>Uninstalled</label>
+        <name>UI_LABEL_TITLE_STATUS_UNINSTALLED</name>
+    </customLabels>
+    <customLabels>
+        <label>Extra</label>
+        <name>UI_LABEL_TITLE_STATUS_EXTRA</name>
+    </customLabels>
+    <customLabels>
+        <label>Alternate</label>
+        <name>UI_LABEL_TITLE_STATUS_ALTERNATE</name>
+    </customLabels>
+    <customLabels>
+        <label>Substitute</label>
+        <name>UI_LABEL_TITLE_STATUS_SUBSTITUTE</name>
+    </customLabels>
+    <customLabels>
+        <label>Unknown</label>
+        <name>UI_LABEL_TITLE_STATUS_UNKNOWN</name>
+    </customLabels>
+    <customLabels>
+        <label>Missing Info</label>
+        <name>UI_LABEL_TITLE_STATUS_MISSING_INFO</name>
+    </customLabels>
+
+    <!-- labels for treeTableItemActions component -->
+    <customLabels>
+        <label>Uninstall Asset</label>
+        <name>UI_LABEL_TITLE_UNINSTALL_ASSET</name>
+    </customLabels>
+    <customLabels>
+        <label>Select Existing Part</label>
+        <name>UI_LABEL_TITLE_SELECT_EXISTING_PART</name>
+    </customLabels>
+
+    <!-- labels for treeTableItemHeader component -->
+    <customLabels>
+        <label>Collapse</label>
+        <name>UI_LABEL_TITLE_COLLAPSE</name>
+    </customLabels>
+    <customLabels>
+        <label>Expand</label>
+        <name>UI_LABEL_TITLE_EXPAND</name>
+    </customLabels>
+
+    <!-- labels for tcLookup component -->
+    <customLabels>
+        <label>Remove selected option</label>
+        <name>UI_LABEL_TITLE_REMOVE_SELECTED_OPTION</name>
+    </customLabels>
+    <customLabels>
+        <label>Close Icon</label>
+        <name>UI_LABEL_TITLE_CLOSE_ICON</name>
+    </customLabels>
+    <customLabels>
+        <label>No Record Found....</label>
+        <name>UI_LABEL_TITLE_NO_RECORD_FOUND</name>
+    </customLabels>
+
+    <!-- label for Tree lwc tab -->
+    <customLabels>
+        <label>Tree</label>
+        <name>Tree</name>
+    </customLabels>
+
+
+    <!-- label for apex classes -->
+    <customLabels>
+        <label>Asset does not have a revision</label>
+        <name>ASSET_DOES_NOT_HAVE_REVISION</name>
+    </customLabels>
+    <customLabels>
+        <label>Failed to install part due to DML exception.</label>
+        <name>ASSET_FAILED_INSTALL_DML_EXCEPTION</name>
+    </customLabels>
+    <customLabels>
+        <label>Failed to install part.</label>
+        <name>ASSET_FAILED_INSTALL_PART</name>
+    </customLabels>
+    <customLabels>
+        <label>Failed to update child asset due to DML exception.</label>
+        <name>ASSET_FAILED_UPDATE_CHILD_ASSET_DML_EXCEPTION</name>
+    </customLabels>
+    <customLabels>
+        <label>Failed to update child asset.</label>
+        <name>ASSET_FAILED_UPDATE_CHILD_ASSET</name>
+    </customLabels>
+    <customLabels>
+        <label>Asset not found for id:</label>
+        <name>ASSET_ASSET_NOT_FOUND_FOR_ID</name>
+    </customLabels>
+    <customLabels>
+        <label>Asset Installation Record not found for asset id:</label>
+        <name>ASSET_ASSET_INSTALLATION_RECORD_NOT_FOUND</name>
+    </customLabels>
+    <customLabels>
+        <label>Failed to update Asset Installation Record.</label>
+        <name>ASSET_FAILED_UPDATE_INSTALLATION_RECORD</name>
+    </customLabels>
+    <customLabels>
+        <label>DML Exception caught during update of Asset:</label>
+        <name>ASSET_DML_EXCEPTION_DURING_UPDATE_ASSET</name>
+    </customLabels>
+    <customLabels>
+        <label>Failed to update Asset.</label>
+        <name>ASSET_FAILED_UPDATE_ASSET</name>
+    </customLabels>
+    <customLabels>
+        <label>Exception caught in uninstallPart method:</label>
+        <name>ASSET_EXCEPTION_UNINSTALLPART_METHOD</name>
+    </customLabels>
+    <customLabels>
+        <label>Failed to uninstall part.</label>
+        <name>ASSET_FAILED_UNINSTALL_PART</name>
+    </customLabels>
+    <customLabels>
+        <label>Please provide username and password</label>
+        <name>ASSET_PROVIDE_USERNAME_PASSWORD</name>
+    </customLabels>
+    <customLabels>
+        <label>Error logging into teamcenter application</label>
+        <name>ASSET_ERROR_LOGIN_INTO_TC</name>
+    </customLabels>
+    <customLabels>
+        <label>Invalid response received while calling TC Login API</label>
+        <name>ASSET_INVALID_RESPONSE_RECIEVE_TCLOGIN</name>
+    </customLabels>
+    <customLabels>
+        <label>Not received cookies within response</label>
+        <name>ASSET_NOT_RECEIVED_COOKIES_WITHIN_RESPONSE</name>
+    </customLabels>
+    <customLabels>
+        <label>Please provide valid session information</label>
+        <name>ASSET_PROVIDE_VALID_SESSION_INFO</name>
+    </customLabels>
+    <customLabels>
+        <label>Error fetching teamcenter session information</label>
+        <name>ASSET_ERROR_FETCHING_TC_SESSION_INFO</name>
+    </customLabels>
+    <customLabels>
+        <label>Teamcenter endpoints are not configured correctly within TC Custom Setting. Please provide valid values.</label>
+        <name>ASSET_ENDPOINTS_NOT_CORRECTLY_CONFIGURED</name>
+    </customLabels>
+
+    <!-- label for Asset tab -->
+    <customTabs>
+        <label>Assets</label>
+        <name>Assets</name>
+    </customTabs>
+
+
+
+    <flowDefinitions>
+        <flows/>
+        <fullName>Auto_Generate_Asset_Revision</fullName>
+    </flowDefinitions>
+    <quickActions>
+        <label>LogACall</label>
+        <name>LogACall</name>
+    </quickActions>
+    <quickActions>
+        <label>NewAccount</label>
+        <name>NewAccount</name>
+    </quickActions>
+    <quickActions>
+        <label>NewCase</label>
+        <name>NewCase</name>
+    </quickActions>
+    <quickActions>
+        <label>NewContact</label>
+        <name>NewContact</name>
+    </quickActions>
+    <quickActions>
+        <label>NewEvent</label>
+        <name>NewEvent</name>
+    </quickActions>
+    <quickActions>
+        <label>NewGroup</label>
+        <name>NewGroup</name>
+    </quickActions>
+    <quickActions>
+        <label>NewLead</label>
+        <name>NewLead</name>
+    </quickActions>
+    <quickActions>
+        <label>NewNote</label>
+        <name>NewNote</name>
+    </quickActions>
+    <quickActions>
+        <label>NewOpportunity</label>
+        <name>NewOpportunity</name>
+    </quickActions>
+    <quickActions>
+        <label>NewTask</label>
+        <name>NewTask</name>
+    </quickActions>
+    <quickActions>
+        <label>SendEmail</label>
+        <name>SendEmail</name>
+    </quickActions>
+    <reportTypes>
+        <description><!-- Screen Flows --></description>
+        <label>Screen Flows</label>
+        <name>screen_flows_prebuilt_crt</name>
+        <sections>
+            <label>Flow Interview Log Entries</label>
+            <name>Flow Interview Log Entries</name>
+        </sections>
+        <sections>
+            <label>Flow Interview Logs</label>
+            <name>Flow Interview Logs</name>
+        </sections>
+    </reportTypes>
+</Translations>
