@@ -42,7 +42,6 @@ then
     fi
 fi
 
-
 cd $home_directory/commandcenter/config
 
 old_db=`cat cc_mysql_id.txt`
@@ -51,7 +50,20 @@ old=`cat cc_container_id.txt`
 
 mkdir -p $home_directory/commandcenter/backup || true
 
-
 docker exec -i $old_db mysql -u root --password=$database_root_password commandcenter < $home_directory/commandcenter/backup/commandcenter_backup_$back_date.sql 2>/dev/null
 
 docker exec -i $old_db mysql -u root --password=$database_root_password LRM < $home_directory/commandcenter/backup/LRM_backup_$back_date.sql 2>/dev/null
+
+filePath="$HOME/commandcenter/config/cc_container_id.txt"
+
+# Find the running container ID(s) for images containing "command-center"
+containerIDs=$(docker ps --filter "status=running" --format '{{.ID}}\t{{.Image}}' | grep 'command-center' | cut -f1)
+
+if [ -z "$containerIDs" ]; then
+    echo "No running containers found with an image containing 'command-center'."
+else
+    echo "Running container IDs with images containing 'command-center':"
+    echo "$containerIDs"
+    # Save the container IDs to the file, overwriting previous content
+    echo "$containerIDs" > "$filePath"
+fi
