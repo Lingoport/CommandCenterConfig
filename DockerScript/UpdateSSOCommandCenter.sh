@@ -131,7 +131,7 @@ docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_passwor
 
 echo $docker_account_token | sudo docker login -u $docker_username --password-stdin
 
-cc_container_id=`sudo docker run -dp $serverPort:8080 --restart unless-stopped --network-alias ccservernetsso --network $database_network  -v /usr/local/share/ca-certificates:/usr/local/share/ca-certificates -v $samlpath:/usr/local/tomcat/saml -v $home_directory/commandcentersso/logs:/usr/local/tomcat/temp -v $home_directory/Lingoport_Data:/usr/local/tomcat/Lingoport_Data -v $home_directory/lingoport:/usr/local/tomcat/lingoport  $docker_image:$command_center_image_version`
+cc_container_id=`sudo docker run -dp $serverPort:8080 --restart unless-stopped --network-alias ccservernetsso --network $database_network  -v /var/run/docker.sock:/var/run/docker.sock -v /usr/local/share/ca-certificates:/usr/local/share/ca-certificates -v $samlpath:/usr/local/tomcat/saml -v $home_directory/commandcentersso/logs:/usr/local/tomcat/temp -v $home_directory/Lingoport_Data:/usr/local/tomcat/Lingoport_Data -v $home_directory/lingoport:/usr/local/tomcat/lingoport  $docker_image:$command_center_image_version`
 
 
 echo "Command Center starting, container id is  $cc_container_id "
