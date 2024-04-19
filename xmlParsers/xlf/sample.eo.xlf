@@ -1,14 +1,14 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xliff xmlns:htm="urn:myHtm" xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="misc" source-language="en-US" target-language="en-US" datatype="plaintext">
+  <file original="misc" datatype="plaintext" source-language="en-US" target-language="en-US">
     <body>
       <trans-unit id="ACM_001_ActivityFeed">
-        <source xml:lang="en-US" xml:space="preserve">Account created</source>
-        <target xml:lang="en-US" state="translated" xml:space="preserve">[Åççöûñţ çŕéåţéð-------- П國カ내]</target>
+        <source xml:space="preserve" xml:lang="en-US">Account created</source>
+        <target xml:space="preserve" xml:lang="en-US" state="translated">[Åççöûñţ çŕéåţéð-------- П國カ내]</target>
       </trans-unit>
       <trans-unit id="ACM_002_ActivityFeed">
-        <source xml:lang="en-US" xml:space="preserve">Account was verified</source>
-        <target xml:lang="en-US" state="translated" xml:space="preserve">[Åççöûñţ ŵåš ṽéŕîƒîéð------------- П國カ내]</target>
+        <source xml:space="preserve" xml:lang="en-US">Account was verified</source>
+        <target xml:space="preserve" xml:lang="en-US" state="translated">[Åççöûñţ ŵåš ṽéŕîƒîéð------------- П國カ내]</target>
       </trans-unit> 
     </body>
   </file>
