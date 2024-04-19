@@ -1,0 +1,15 @@
+key1, Attendez, oh oui, attendez une minute, monsieur le facteur.
+key2, Attendez, monsieur le facteur.
+key3, Attendez, monsieur le facteur.
+key4, Monsieur le facteur, regardez et voyez
+key5, Y a-t-il une lettre pour moi dans ton sac ?
+key6, J'attends depuis longtemps
+key7, Depuis que j'ai eu des nouvelles de ma fille
+key8, Il doit y avoir un mot aujourd'hui
+key9, De ma copine si loin
+key10, S'il vous plaît, Monsieur le facteur, regardez et voyez.
+key11, S'il y a une lettre, une lettre pour moi
+key12, Je suis resté là à attendre, Monsieur le facteur.
+key13, Si patiemment
+key14, Pour une simple carte ou juste une lettre
+key15, Elle dit qu'elle rentre chez moi

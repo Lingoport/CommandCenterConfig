@@ -1,0 +1,15 @@
+key1, Espere, oh, sí, espere un momento, señor cartero.
+key2, Espere, espere, señor cartero.
+key3, Espere, espere, señor cartero.
+key4, Señor cartero, mire y vea
+key5, ¿Hay una carta para mí en tu bolsa?
+key6, He estado esperando mucho, mucho tiempo
+key7, Desde que escuché de esa chica mía
+key8, Debe haber alguna noticia hoy
+key9, De mi novia tan lejos
+key10, Por favor, señor cartero, mire y vea
+key11, Si hay una carta, una carta para mí
+key12, He estado aquí esperando, señor cartero.
+key13, Tan pacientemente
+key14, Solo para una tarjeta o una carta
+key15, Dice que va a volver a casa conmigo
