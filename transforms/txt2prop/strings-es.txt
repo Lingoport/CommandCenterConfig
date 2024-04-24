@@ -1,0 +1,15 @@
+key1, Wait oh yes wait a minute mister postman
+key2, Wait wait mister postman
+key3, Wait wait mister postman
+key4, Mister postman look and see
+key5, Is there a letter in your bag for me
+key6, I been waiting a long long time
+key7, Since I heard from that girl of mine
+key8, There must be some word today
+key9, From my girlfriend so far away
+key10, Please Mister postman look and see
+key11, If there's a letter a letter for me
+key12, I been standing here waiting Mister postman
+key13, So patiently
+key14, For just a card or just a letter
+key15, Saying she's returning home to me
