@@ -137,7 +137,7 @@ cc_container_id=`sudo docker run -dp $serverPort:8080 --restart unless-stopped -
 echo "Command Center starting, container id is  $cc_container_id "
 sudo echo $cc_container_id > cc_container_id.txt
 
-sleep 20s
+sleep 30s
 sudo docker exec  $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/auto-install.xml"
 sudo docker exec  $cc_container_id java -jar /usr/local/tomcat/lib/Lingoport_Resource_Manager_Server-10.1-Installer.jar /usr/local/tomcat/auto-install.xml
 sudo docker exec  $cc_container_id git config --global user.email "lpdev@lingoport.com"
