@@ -1,15 +1,15 @@
-key1,4.63  Wait oh yes wait a minute mister postman
-key2,4.64  Wait wait mister postman
-key3,4.65  Wait wait mister postman
-key4,4.66  Mister postman look and see
-key5,4.67  Is there a letter in your bag for me
-key6,4.68  I been waiting a long long time
-key7,4.69  Since I heard from that girl of mine
-key8,4.70  There must be some word today
-key9,4.71  From my girlfriend so far away
-key10,4.72  Please Mister postman look and see
-key11,4.73  If there's a letter a letter for me
-key12,4.74  I been standing here waiting Mister postman
-key13,4.75  So patiently
-key14,4.76  For just a card or just a letter
-key15,4.77  Saying she's returning home to me
+key1,59.9857  Wait oh yes wait a minute mister postman
+key2,59.9858  Wait wait mister postman
+key3,59.9859  Wait wait mister postman
+key4,59.9860  Mister postman look and see
+key5,59.9861  Is there a letter in your bag for me
+key6,59.9862  I been waiting a long long time
+key7,59.9863  Since I heard from that girl of mine
+key8,59.9864  There must be some word today
+key9,59.9865  From my girlfriend so far away
+key10,59.9866  Please Mister postman look and see
+key11,59.9867  If there's a letter a letter for me
+key12,59.9868  I been standing here waiting Mister postman
+key13,59.9869  So patiently
+key14,59.9870  For just a card or just a letter
+key15,59.9871  Saying she's returning home to me
