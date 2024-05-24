@@ -4,11 +4,11 @@
     <body>
       <trans-unit id="ACM_001_ActivityFeed">
         <source xml:space="preserve" xml:lang="en-US">Account created</source>
-        <target xml:space="preserve" xml:lang="en-US" state="translated">22.7851 Account created</target>
+        <target xml:space="preserve" xml:lang="en-US" state="translated">21.7853 Account created</target>
       </trans-unit>
       <trans-unit id="ACM_002_ActivityFeed">
         <source xml:space="preserve" xml:lang="en-US">Account was verified</source>
-        <target xml:space="preserve" xml:lang="en-US" state="translated">22.7852 Account was verified</target>
+        <target xml:space="preserve" xml:lang="en-US" state="translated">21.7854 Account was verified</target>
       </trans-unit> 
     </body>
   </file>
