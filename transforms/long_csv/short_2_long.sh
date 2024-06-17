@@ -27,6 +27,6 @@ find . -name "*.csv" | while read -r target_csv; do
       source_csv="$(dirname "$target_csv")/${key}.csv"
       move_csv "$target_csv" "$source_csv"
     fi
-  done < "$TRANSFORM_diR/csv_locale_map.properties"
+  done < "$TRANSFORM_DIR/csv_locale_map.properties"
 done
 

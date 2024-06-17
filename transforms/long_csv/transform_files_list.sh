@@ -50,7 +50,7 @@ replace_in_text_file() {
       sed -i "s/${value}.csv/${key}.csv/g" "$text_file"
       echo "Replaced ${value}.csv with ${key}.csv in $text_file"
     fi
-  done < "$TRANSFORM_diR/csv_locale_map.properties"
+  done < "$TRANSFORM_DIR/csv_locale_map.properties"
 }
 
 # Path to the text file to be updated
