@@ -2,12 +2,12 @@
 This transform is to get around long locale names.  The Localyzer database for locales as of June 2024 is 10 character wide, so a locale like French will fit in, but a locale like PortugueseBR will not. 
 
 Typically, repositories will use a 5 character locale code, for instance fr-FR, de-DE, pt-BR, as in 
-* locales/en-US/messages.json
-* locales/pt-BR/messages.json
+* locales/en-US/messages.csv
+* locales/pt-BR/messages.csv
 
 or
-* locales/messages_en_US.properties
-* locales/messages_pt_BR.properties
+* locales/messages_en_US.csv
+* locales/messages_pt_BR.csv
 
 However, when the files in the repositories use long locale codes, this transform will help. For instance, a repository with
 * locales/English.csv
