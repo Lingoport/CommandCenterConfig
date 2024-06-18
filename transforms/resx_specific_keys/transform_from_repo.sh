@@ -21,10 +21,10 @@ do
   xmlstarlet ed -d '//data[(starts-with(@name, ">>")) or (@type) or (@mimetype)] | //metadata' "$resxfile" > "${resxfile}textonly"
 
   # Remove 16 lines from "Example:" in the textonly file, as they include <data> and </data> as examples
-  sed -i '/Example:/,+15d' "${resxfile}textonly"
+  sed -i '/Example:/,+16d' "${resxfile}textonly"
 
   # Finally, remove that file if there are not key/value pairs, hopefully identified by no </data>
-  grep "<\data>" "${resxfile}textonly"
+  grep "</data>" "${resxfile}textonly" > /dev/null
   if [[ $? -ne 0 ]]; then
     echo "No key/value in ${resxfile}textonly, removing it"
     rm "${resxfile}textonly"
