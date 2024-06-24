@@ -42,7 +42,12 @@ cd $home_directory/incontext/config
 old_db=`cat in_mysql_id.txt`
 
 current_date=`date -I`
+mkdir -p $home_directory/incontext/backup || true
 
+# Perform database backup and report success for commandcenter database
+backup_file_in="$home_directory/incontext/backup/incontext_backup_$current_date.sql"
+docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password INCONTEXT > "$backup_file_in" && \
+echo "The incontext database has been successfully backed up to $backup_file_in"
 
 echo $docker_account_token | sudo docker login -u $docker_username --password-stdin
 

@@ -61,7 +61,7 @@ docker exec -i $old_db mysql -u root --password=$database_root_password commandc
 
 docker exec -i $old_db mysql -u root --password=$database_root_password LRM < $home_directory/commandcenter/backup/LRM_backup_$back_date.sql 2>/dev/null
 
-filePath="$HOME/commandcenter/config/cc_container_id.txt"
+filePath="$home_directory/commandcenter/config/cc_container_id.txt"
 
 # Find the running container ID(s) for images containing "command-center"
 containerIDs=$(docker ps --filter "status=running" --format '{{.ID}}\t{{.Image}}' | grep 'command-center' | cut -f1)

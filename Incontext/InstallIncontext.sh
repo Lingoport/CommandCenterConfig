@@ -98,6 +98,7 @@ fi
 
 mkdir -p $home_directory/lingoport || true
 mkdir -p $home_directory/incontext/config || true
+mkdir -p $home_directory/incontext/backup || true
 
 cd $home_directory/incontext/config
 
