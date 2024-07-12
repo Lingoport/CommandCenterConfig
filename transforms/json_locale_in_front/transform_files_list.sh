@@ -35,8 +35,8 @@ while IFS= read -r file_path; do
         
         # Output the new file path
         echo "$new_file_path"
-    else
-        echo "File not found: $file_path" >&2
+    #else
+    #    echo "File not found: $file_path" >&2
     # fi
 done < "$input_file" > "$output_file"
 
