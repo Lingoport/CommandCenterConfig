@@ -41,3 +41,7 @@ done < "$input_file" > "$output_file"
 echo "Renamed file paths saved to $output_file"
 
 mv -f "$output_file" "$input_file"
+
+ls -l "$input_file"
+cat "$input_file"
+
