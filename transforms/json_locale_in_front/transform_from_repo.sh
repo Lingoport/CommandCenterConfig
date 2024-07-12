@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Specify the directory to search for files
-directory="bell"
+directory="src/locales/cspSpecific/bell"
 
 # Change to the specified directory
 cd "$directory" || exit
