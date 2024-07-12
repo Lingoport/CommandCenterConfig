@@ -6,8 +6,8 @@ directory="src/locales/cspSpecific/bell"
 # Change to the specified directory
 cd "$directory" || exit
 
-# Find all .json files that match the pattern *_*.json
-for old_filename in *_*.json; do
+# Find all .json files that match the pattern *_bell.json
+for old_filename in *_bell.json; do
     # Check if the file exists
     if [[ -e "$old_filename" ]]; then
         # Extract the part before the last underscore and the part after the last underscore
@@ -19,6 +19,6 @@ for old_filename in *_*.json; do
         
         # Rename the file
         cp "$old_filename" "$new_filename"
-        echo "Moved: $old_filename to $new_filename"
+        echo "Copied: $old_filename to $new_filename"
     fi
 done
