@@ -21,8 +21,8 @@ for old_filename in bell_*.json; do
         # Form the new filename
         new_filename="${base_name}_${before_underscore}.json" 
         # Rename the file
-        mv -f "$old_filename" "$new_filename"
-        echo "Renamed: $old_filename to $new_filename"
+        cp -f "$old_filename" "$new_filename"
+        echo "Copied: $old_filename to $new_filename"
     fi
 done
 
