@@ -6,8 +6,8 @@ directory="src/locales/cspSpecific/bell"
 # Change to the specified directory
 cd "$directory" || exit
 
-# Find all .json files that match the pattern *_*.json
-for old_filename in *_*.json; do
+# Find all .json files that match the pattern bell_*.json
+for old_filename in bell_*.json; do
     # Check if the file exists
     if [[ -e "$old_filename" ]]; then
 
