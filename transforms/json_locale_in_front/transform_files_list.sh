@@ -12,8 +12,10 @@ output_file="${input_file}_renamed"
 # Process each line in the input file
 while IFS= read -r file_path; do
 
-    # Check if the file exists
-    if [[ -e "$file_path" ]]; then
+    #
+    # Check if the file exists: that won't work if the file
+    # has already been transformed. Let's not do this check.
+   #  if [[ -e "$file_path" ]]; then
         # Extract the directory and filename
         directory=$(dirname "$file_path")
         filename=$(basename "$file_path")
@@ -35,7 +37,7 @@ while IFS= read -r file_path; do
         echo "$new_file_path"
     else
         echo "File not found: $file_path" >&2
-    fi
+    # fi
 done < "$input_file" > "$output_file"
 
 ls -l "$output_file"
