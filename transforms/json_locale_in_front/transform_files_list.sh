@@ -7,7 +7,7 @@ if [[ -z "$1" ]]; then
 fi
 
 input_file="$1"
-output_file="renamed_${input_file}"
+output_file="${input_file}_renamed"
 
 # Process each line in the input file
 while IFS= read -r file_path; do
