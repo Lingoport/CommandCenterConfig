@@ -38,7 +38,12 @@ while IFS= read -r file_path; do
     fi
 done < "$input_file" > "$output_file"
 
+ls -l "$output_file"
+cat "$output_file"
+
+
 echo "Renamed file paths saved to $output_file"
+echo "Move to ${input_file}"
 
 mv -f "$output_file" "$input_file"
 
