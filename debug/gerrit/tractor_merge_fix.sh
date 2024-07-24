@@ -10,16 +10,8 @@ echo "$ git status"
 git status
 
 echo ""
-echo "$ git cherry-pick a990ebc33cad9e740e89fff9d9b227880ef10e29 --strategy-option=ours"
-git cherry-pick a990ebc33cad9e740e89fff9d9b227880ef10e29 --strategy-option=ours
-
-echo ""
-echo "$ git cherry-pick --continue"
-git cherry-pick --continue
-
-echo ""
-echo "$ git commit --allow-empty"
-git commit --allow-empty
+echo "$ git cherry-pick a990ebc33cad9e740e89fff9d9b227880ef10e29 --strategy-option=theirs"
+git cherry-pick a990ebc33cad9e740e89fff9d9b227880ef10e29 --strategy-option=theirs
 
 echo ""
 echo "$ git status"
