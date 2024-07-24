@@ -18,8 +18,8 @@ echo "$ git cherry-pick --continue"
 git cherry-pick --continue
 
 echo ""
-echo "$ git commit"
-git commit
+echo "$ git commit -m \"ohea\""
+git commit -m "ohea"
 
 echo ""
 echo "$ git status"
