@@ -10,8 +10,8 @@ echo "$ git status"
 git status
 
 echo ""
-echo "$ git cherry-pick a990ebc33cad9e740e89fff9d9b227880ef10e29 --strategy=theirs"
-git cherry-pick a990ebc33cad9e740e89fff9d9b227880ef10e29 --strategy=theirs
+echo "$ git cherry-pick a990ebc33cad9e740e89fff9d9b227880ef10e29 --strategy=ours"
+git cherry-pick a990ebc33cad9e740e89fff9d9b227880ef10e29 --strategy=ours
 
 echo ""
 echo "$ git cherry-pick --continue"
