@@ -18,8 +18,8 @@ echo "$ git cherry-pick --continue"
 git cherry-pick --continue
 
 echo ""
-echo "$ git cherry-pick --skip"
-git cherry-pick --skip
+echo "$ git commit"
+git commit
 
 echo ""
 echo "$ git status"
