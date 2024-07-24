@@ -16,3 +16,6 @@ git cherry-pick a990ebc33cad9e740e89fff9d9b227880ef10e29 --strategy-option=their
 echo ""
 echo "$ git status"
 git status
+
+echo ""
+echo "$ cat tractorapp/src/main/res/values-xx/strings.xml"
