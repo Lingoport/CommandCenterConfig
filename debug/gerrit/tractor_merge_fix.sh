@@ -19,3 +19,4 @@ git status
 
 echo ""
 echo "$ cat tractorapp/src/main/res/values-xx/strings.xml"
+cat tractorapp/src/main/res/values-xx/strings.xml
