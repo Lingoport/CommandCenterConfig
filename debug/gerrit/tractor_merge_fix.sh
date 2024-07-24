@@ -19,7 +19,7 @@ git cherry-pick --continue
 
 echo ""
 echo "$ git cherry-pick --continue"
-git cherry-pick --continue
+git cherry-pick --continue --allow-empty
 
 echo ""
 echo "$ git status"
