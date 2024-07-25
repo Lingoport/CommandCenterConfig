@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "$FULL_LIST_PATH"
+cat "$FULL_LIST_PATH"
+
 # Loop through all directories that do not end with .lproj and are not named "en"
 find .  -name '*.stringsdict' | while read -r stringsdictFile; do
 
