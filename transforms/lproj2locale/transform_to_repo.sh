@@ -5,8 +5,9 @@ echo "$FULL_LIST_PATH"
 cat "$FULL_LIST_PATH"
 echo "==========================="
 
-# Loop through all directories that do not end with .lproj and are not named "en"
-find .  -name '*.stringsdict' | while read -r stringsdictFile; do
+# Loop through the list of files from the $FULL_LIST_PATH as those are 
+# the only files to move to the directory
+while read stringsdictFile; do
 
     # Find the directory name
     candidatePath=$(dirname $stringsdictFile)
@@ -40,4 +41,4 @@ find .  -name '*.stringsdict' | while read -r stringsdictFile; do
         cp "$file" "$lprojPath"
         echo "Copied $file to $lprojPath"
     done
-done
+done < "$FULL_LIST_PATH"
