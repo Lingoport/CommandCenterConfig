@@ -12,7 +12,7 @@ find . -type d -name '*.lproj' | while read -r lproj_dir; do
     fi
 
     # make sure that directory is clean, no stragglers from previous runs
-    rm "${localeDir}"/*
+    rm "${localeDir}"/* 2> /dev/null
 
     # Loop through all files ending in .stringsdict within the .lproj directory
     find "$lproj_dir" -type f -name '*.stringsdict' | while read -r file; do
