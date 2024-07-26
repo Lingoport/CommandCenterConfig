@@ -1,7 +1,9 @@
 #!/bin/bash
 
+echo "==========================="
 echo "$FULL_LIST_PATH"
 cat "$FULL_LIST_PATH"
+echo "==========================="
 
 # Loop through all directories that do not end with .lproj and are not named "en"
 find .  -name '*.stringsdict' | while read -r stringsdictFile; do
@@ -27,10 +29,9 @@ find .  -name '*.stringsdict' | while read -r stringsdictFile; do
     # Define the corresponding .lproj directory
     lprojPath="${candidatePath}.lproj"
 
-    # Check if the .lproj directory exists, if not skip to the next locale directory
+    # Check if the .lproj directory exists, if not make it
     if [ ! -d "$lprojPath" ]; then
-        echo "Directory $lprojPath does not exist, skipping $candidatePath"
-        continue
+	mkdir "$lprojPath" 
     fi
 
     # Loop through all .stringsdict files in the locale directory
