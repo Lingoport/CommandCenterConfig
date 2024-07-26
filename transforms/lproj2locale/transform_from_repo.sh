@@ -8,7 +8,6 @@ find . -type d -name '*.lproj' | while read -r lproj_dir; do
     # Check if the locale directory exists, if not create it
     if [ ! -d "$localeDir" ]; then
         mkdir "$localeDir"
-        echo "Created directory: $localeDir"
     fi
 
     # make sure that directory is clean, no stragglers from previous runs
