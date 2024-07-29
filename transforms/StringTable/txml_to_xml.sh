@@ -4,7 +4,7 @@
 #
 # Find all the files ending in .xml and move them to .txml
 # The following environment variables need to be set:
-#   CLIENT_SOURCE_DIR
+#   FULL_FILE_LIST
 #
 
 echo  " ------------------------------------------------"
@@ -12,14 +12,10 @@ echo  " Find *.txml files "
 echo  " ---------------------------"
 
 # Find all the files ending in the 'xml'
-TXMLFILES="/var/lib/jenkins/tmp/input_files.txt"
+TXMLFILES="$FULL_LIST_PATH"
 
 find . -name "*\.txml" -type f > "$TXMLFILES"
-#find . -name "*_ja\.xml" -type f >> "$XMLFILES"
-#find . -name "*_zh\.xml" -type f >> "$XMLFILES"
 sed '/Portal_messages_..\.xml/d' "$TXMLFILES"
-#grep comp "$XMLFILES" > ~/a.tmp
-#mv ~/a.tmp "$XMLFILES"
 
 echo "Files to transform: "
 cat "$TXMLFILES"
