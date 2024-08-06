@@ -2,14 +2,8 @@ echo "$ cd /usr/local/tomcat/Lingoport_Data/CommandCenter/workspaces/a.powermana
 cd /usr/local/tomcat/Lingoport_Data/CommandCenter/workspaces/a.powermanager.dev
 
 echo ""
-echo "$ git checkout develop"
-git checkout develop
+echo "$ ref=\$(git ls remote | grep 367689d452a90ca355666a2e20b79ea95fd84372 | awk '{print \$2}')"
+ref=$(git ls-remote | grep 367689d452a90ca355666a2e20b79ea95fd84372 | awk '{print $2}')
 
-echo "$ git fetch origin"
-git fetch origin
-
-echo "$ git pull"
-git pull
-
-echo "$ git status"
-git status
+echo "$ echo \$ref"
+echo $ref
