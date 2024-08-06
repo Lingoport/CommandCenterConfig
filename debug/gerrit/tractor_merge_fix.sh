@@ -16,3 +16,9 @@ echo $metaref
 
 echo "$ git fetch origin $metaref"
 git fetch origin $metaref
+
+echo "$ git checkout FETCH_HEAD"
+git checkout FETCH_HEAD
+
+echo "$ git log"
+git log
