@@ -22,3 +22,15 @@ git checkout FETCH_HEAD
 
 echo "$ git log"
 git log
+
+echo "$ merged=\$(git log | grep -b -o -m 1 merged | head -1 | awk 'BEGIN {FS=\":\"} ; {print \$1}')"
+merged=$(git log | grep -b -o -m 1 merged | head -1 | awk 'BEGIN {FS=":"} ; {print $1}')
+
+echo "$ echo \$merged"
+echo $merged
+
+echo "$ ohea=\$(git log | grep -b -o -m 1 ohea | head -1 | awk 'BEGIN {FS=\":\"} ; {print \$1}')"
+ohea=$(git log | grep -b -o -m 1 ohea | head -1 | awk 'BEGIN {FS=":"} ; {print $1}')
+
+echo "$ echo \$ohea"
+echo $ohea
