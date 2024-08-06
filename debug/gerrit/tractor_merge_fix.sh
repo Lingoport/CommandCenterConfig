@@ -8,8 +8,11 @@ ref=$(git ls-remote | grep 367689d452a90ca355666a2e20b79ea95fd84372 | awk '{prin
 echo "$ echo \$ref"
 echo $ref
 
-echo "$ metaref=\$(echo \$ref | awk 'BEGIN {FS=\"/\" ; OFS=\"/\"} ; {print $1,$2,$3,$4,\"meta\"}')"
+echo "$ metaref=\$(echo \$ref | awk 'BEGIN {FS=\"/\" ; OFS=\"/\"} ; {print \$1,\$2,\$3,\$4,\"meta\"}')"
 metaref=$(echo $ref | awk 'BEGIN {FS="/" ; OFS="/"} ; {print $1,$2,$3,$4,"meta"}')
 
 echo "$ echo \$metaref"
 echo $metaref
+
+echo "$ git fetch origin $metaref"
+git fetch origin $metaref
