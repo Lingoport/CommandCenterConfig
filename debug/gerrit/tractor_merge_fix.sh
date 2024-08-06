@@ -1,8 +1,6 @@
-echo "$ cd /usr/local/tomcat/Lingoport_Data/CommandCenter/workspaces/"
-cd /usr/local/tomcat/Lingoport_Data/CommandCenter/workspaces/
+echo "$ cd /usr/local/tomcat/Lingoport_Data/CommandCenter/workspaces/a.powermanager.dev"
+cd /usr/local/tomcat/Lingoport_Data/CommandCenter/workspaces/a.powermanager.dev
 
-echo "$ pwd"
-pwd
-
-echo "$ ls -la"
-ls -la
+echo ""
+echo "$ git status"
+git status
