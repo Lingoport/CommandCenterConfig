@@ -1,5 +1,8 @@
-echo "$ cd /usr/local/tomcat/Lingoport_Data/CommandCenter/system/workspaces"
-cd /usr/local/tomcat/Lingoport_Data/CommandCenter/system/workspaces
+echo "$ echo \$PROSENTHAL_PAT"
+echo $PROSENTHAL_PAT
+
+echo "$ cd /usr/local/tomcat/"
+cd /usr/local/tomcat/
 
 echo "$ ls -la"
 ls -la
