@@ -15,3 +15,6 @@ cp temp/gerritpull.sh .
 
 echo "$ ls -la"
 ls -la
+
+echo "$ rm -rf temp"
+rm -rf temp
