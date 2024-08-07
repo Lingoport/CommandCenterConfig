@@ -7,6 +7,9 @@ cd /usr/local/tomcat/scripts
 echo "$ git clone https://prosenthalLingoport:$PROSENTHAL_PAT@github.com/Lingoport/Command-Center.git temp"
 git clone https://prosenthalLingoport:$PROSENTHAL_PAT@github.com/Lingoport/Command-Center.git temp
 
+echo "$ git checkout freshdesk-4054-fix"
+git checkout freshdesk-4054-fix
+
 echo "$ cp temp/gerritclone.sh ."
 cp temp/gerritclone.sh .
 
