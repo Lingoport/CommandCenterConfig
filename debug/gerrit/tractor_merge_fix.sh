@@ -18,3 +18,6 @@ ls -la
 
 echo "$ rm -rf temp"
 rm -rf temp
+
+echo "$ cat gerritclone.sh"
+cat gerritclone.sh
