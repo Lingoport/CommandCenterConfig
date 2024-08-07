@@ -7,14 +7,23 @@ cd /usr/local/tomcat/scripts
 echo "$ git clone https://prosenthalLingoport:$PROSENTHAL_PAT@github.com/Lingoport/Command-Center.git temp"
 git clone https://prosenthalLingoport:$PROSENTHAL_PAT@github.com/Lingoport/Command-Center.git temp
 
+echo "$ cd temp"
+cd temp
+
 echo "$ git checkout freshdesk-4054-fix"
 git checkout freshdesk-4054-fix
 
-echo "$ cp temp/gerritclone.sh ."
-cp temp/gerritclone.sh .
+echo "$ git status"
+git status
 
-echo "$ cp temp gerritpull.sh ."
-cp temp/gerritpull.sh .
+echo "$ cp gerritclone.sh .."
+cp gerritclone.sh ..
+
+echo "$ cp gerritpull.sh .."
+cp gerritpull.sh ..
+
+echo "$ cd .."
+cd ..
 
 echo "$ ls -la"
 ls -la
