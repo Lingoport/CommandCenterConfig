@@ -16,11 +16,11 @@ git checkout freshdesk-4054-fix
 echo "$ git status"
 git status
 
-echo "$ cp gerritclone.sh .."
-cp gerritclone.sh ..
+echo "$ cp command-center/scripts/gerritclone.sh .."
+cp command-center/scripts/gerritclone.sh ..
 
-echo "$ cp gerritpull.sh .."
-cp gerritpull.sh ..
+echo "$ cp command-center/scripts/gerritpull.sh .."
+cp command-center/scripts/gerritpull.sh ..
 
 echo "$ cd .."
 cd ..
