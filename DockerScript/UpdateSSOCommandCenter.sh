@@ -139,7 +139,7 @@ echo $cc_container_id > cc_container_id.txt
 
 sleep 20s
 sudo docker exec  $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/auto-update.xml"
-sudo docker exec  $cc_container_id java -jar /usr/local/tomcat/lib/Lingoport_Resource_Manager_Server-10.1-Installer.jar /usr/local/tomcat/auto-update.xml
+sudo docker exec  $cc_container_id java -jar /usr/local/tomcat/lib/Lingoport_Resource_Manager_Server-11.0-Installer.jar /usr/local/tomcat/auto-update.xml
 sudo docker exec  $cc_container_id git config --global user.email "lpdev@lingoport.com"
 sudo docker exec  $cc_container_id git config --global user.name "lpdev"
 sudo docker exec  $cc_container_id bash -c "echo 'grails.serverURL = $serverURL' >> /usr/local/tomcat/CommandCenterConfig.groovy"
@@ -157,5 +157,5 @@ done < "$ssoconf"
 
 sleep 20s
 sudo docker exec  $cc_container_id cp /usr/local/tomcat/webapps/application.properties /usr/local/tomcat/webapps/command-center/WEB-INF/classes
-sudo docker exec  $cc_container_id cp /usr/local/tomcat/webapps/command-center/WEB-INF/lib/aws-java-sdk-1.12.496.jar /usr/local/tomcat/lingoport/lrm-server-10.1/lib
+sudo docker exec $cc_container_id rsync -av --ignore-existing /usr/local/tomcat/webapps/command-center/WEB-INF/lib/*.jar /usr/local/tomcat/lingoport/lrm-server-11.0/lib/
 sudo docker restart  $cc_container_id
