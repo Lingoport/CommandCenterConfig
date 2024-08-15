@@ -151,7 +151,7 @@ do
    fi
 done < "$ssoconf"
 
-sleep 20s
+sleep 220s
 sudo docker exec  $cc_container_id cp /usr/local/tomcat/webapps/application.properties /usr/local/tomcat/webapps/command-center/WEB-INF/classes
 #sudo docker exec  $cc_container_id cp /usr/local/tomcat/webapps/command-center/WEB-INF/lib/aws-java-sdk-1.12.496.jar /usr/local/tomcat/lingoport/lrm-server-11.0/lib
 sudo docker exec $cc_container_id bash -c 'find /usr/local/tomcat/webapps/command-center/WEB-INF/lib/ -name "*.jar" -exec rsync -av --ignore-existing {} /usr/local/tomcat/lingoport/lrm-server-11.0/lib/ \;' > /dev/null 2>&1

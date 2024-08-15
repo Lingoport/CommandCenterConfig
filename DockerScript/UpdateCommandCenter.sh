@@ -163,7 +163,7 @@ sudo docker exec  $cc_container_id bash -c "echo 'grails.serverURL = $serverURL'
 sudo docker exec  $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/CommandCenterConfig.groovy"
 sudo docker exec  $cc_container_id bash -c "sed -i 's/yourcompany/$company_name/g' /usr/local/tomcat/CommandCenterConfig.groovy"
 
-sleep 20s
+sleep 220s
 sudo docker exec  $cc_container_id cp /usr/local/tomcat/webapps/application.properties /usr/local/tomcat/webapps/command-center/WEB-INF/classes
 sudo docker exec $cc_container_id bash -c 'find /usr/local/tomcat/webapps/command-center/WEB-INF/lib/ -name "*.jar" -exec rsync -av --ignore-existing {} /usr/local/tomcat/lingoport/lrm-server-11.0/lib/ \;' > /dev/null 2>&1
 sudo docker restart  $cc_container_id
