@@ -8,12 +8,6 @@ pwd
 echo "Files to transform: " 
 cat "${FULL_LIST_PATH}"
 
-echo "DEBUG for Luz:"
-echo "Content of /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/*"
-ls -l /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/*
-cat /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/*
-
-
 cat "${FULL_LIST_PATH}" | while read -r FILEPATH
 do
   FILENAME=`basename $FILEPATH`

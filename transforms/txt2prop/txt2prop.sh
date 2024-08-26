@@ -1,21 +1,9 @@
 #!/bin/bash
 #
-# Special handling for .csv files
+# Special handling for .txt files. They are formatted like a csv.
 #
-# Find all the files ending in .csv
+# Find all the files ending in .txt
 #
-# The following environment variables need to be set:
-#  CLIENT_SOURCE_DIR 
-#
-echo "DEBUG for Luz:"
-ls -l /usr/local/tomcat/Lingoport_Data/L10nStreamlining/AVO/projects/UnityClient_L10N/failedkits/*/*/*
-cat /usr/local/tomcat/Lingoport_Data/L10nStreamlining/AVO/projects/UnityClient_L10N/failedkits/*/*/*
-
-echo "Content of /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/*"
-ls -l /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/*
-cat /usr/local/tomcat/Lingoport_Data/LRM/staging/importkits/xtm/AVO/UnityClient_L10N/TRANSLATED_KIT_8_pt_pt/*
-cd "${CLIENT_SOURCE_DIR }"
-
 find . -name "string*\.txt" -type f > "${PROJECT_TMP_DIR}/input_files.txt"
 
 cat "${PROJECT_TMP_DIR}/input_files.txt" | while read -r FILEPATH
@@ -46,11 +34,5 @@ do
       fi
   done
 IFS=' '
-
-echo "DEBUG for Luz"
-echo "Transformed File Name: ${TARGET_PATH}"
-echo "Content of File: "
-head "${TARGET_PATH}"
-wc -l "${TARGET_PATH}"
 
 done 
