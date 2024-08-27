@@ -1,35 +1,14 @@
-echo "$ echo \$PROSENTHAL_PAT"
-echo $PROSENTHAL_PAT
-
-echo "$ cd /usr/local/tomcat/scripts"
-cd /usr/local/tomcat/scripts
-
-echo "$ git clone https://prosenthalLingoport:$PROSENTHAL_PAT@github.com/Lingoport/Command-Center.git temp"
-git clone https://prosenthalLingoport:$PROSENTHAL_PAT@github.com/Lingoport/Command-Center.git temp
-
-echo "$ cd temp"
-cd temp
-
-echo "$ git checkout freshdesk-4054-fix"
-git checkout freshdesk-4054-fix
+echo "$ cd /usr/local/tomcat/Lingoport_Data/CommandCenter/workspaces/a.tractor.dev"
+cd /usr/local/tomcat/Lingoport_Data/CommandCenter/workspaces/a.tractor.dev
 
 echo "$ git status"
 git status
 
-echo "$ cp command-center/scripts/gerritclone.sh .."
-cp command-center/scripts/gerritclone.sh ..
+echo "$ cat tractorapp/src/main/assets/extstring/strings-da.xml"
+cat tractorapp/src/main/assets/extstring/strings-da.xml
 
-echo "$ cp command-center/scripts/gerritpull.sh .."
-cp command-center/scripts/gerritpull.sh ..
+echo "$ cat tractorapp/src/main/assets/extstring/strings-pt-rBR.xml"
+cat tractorapp/src/main/assets/extstring/strings-pt-rBR.xml
 
-echo "$ cd .."
-cd ..
-
-echo "$ ls -la"
-ls -la
-
-echo "$ rm -rf temp"
-rm -rf temp
-
-echo "$ cat gerritclone.sh"
-cat gerritclone.sh
+echo "$ cat tractorapp/src/main/assets/extstring/strings-pt.xml"
+cat tractorapp/src/main/assets/extstring/strings-pt.xml
