@@ -12,6 +12,9 @@ output_file="${input_file}_renamed"
 # Create or clear the output file
 > "$output_file"
 
+# For stringsdict files, change the location as per the transform
+# back to the lproj type directories. 
+# For any other file, keep it as is. 
 while IFS= read -r line; do
     if [[ "$line" == *"stringsdict" ]]; then
         # Extract the directory path and the file name
@@ -25,6 +28,8 @@ while IFS= read -r line; do
 
         # Write the new path to the output file
         echo "$new_line" >> "$output_file"
+    else
+        echo "$line" >> "$output_file"     
     fi
 done < "$input_file"
 
