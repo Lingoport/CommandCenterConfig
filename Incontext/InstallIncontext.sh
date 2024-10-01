@@ -99,6 +99,8 @@ fi
 mkdir -p $home_directory/lingoport || true
 mkdir -p $home_directory/incontext/config || true
 mkdir -p $home_directory/incontext/backup || true
+mkdir -p $home_directory/incontext/files || true
+
 
 cd $home_directory/incontext/config
 
@@ -109,7 +111,7 @@ sudo echo $in_mysql_id > in_mysql_id.txt
 
 echo $docker_account_token | sudo docker login -u $docker_username --password-stdin
 
-in_container_id=`sudo docker run -dp $serverPort:8080 --restart unless-stopped --network-alias inservernet --network $database_network  $docker_image:$incontext_image_version`
+in_container_id=`sudo docker run -dp $serverPort:8080 --restart unless-stopped --network-alias inservernet --network $database_network -v $home_directory/incontext/files:/root/.incontextserver/export  $docker_image:$incontext_image_version`
 
 echo "Incontext starting, container id is  $in_container_id "
 sudo echo $in_container_id > in_container_id.txt

@@ -43,6 +43,8 @@ old_db=`cat in_mysql_id.txt`
 
 current_date=`date -I`
 mkdir -p $home_directory/incontext/backup || true
+mkdir -p $home_directory/incontext/files || true
+
 
 # Perform database backup and report success for commandcenter database
 backup_file_in="$home_directory/incontext/backup/incontext_backup_$current_date.sql"
@@ -51,7 +53,7 @@ echo "The incontext database has been successfully backed up to $backup_file_in"
 
 echo $docker_account_token | sudo docker login -u $docker_username --password-stdin
 
-in_container_id=`sudo docker run -dp $serverPort:8080 --restart unless-stopped --network-alias inservernet --network $database_network  $docker_image:$incontext_image_version`
+in_container_id=`sudo docker run -dp $serverPort:8080 --restart unless-stopped --network-alias inservernet --network $database_network -v $home_directory/incontext/files:/root/.incontextserver/export $docker_image:$incontext_image_version`
 
 
 echo "Incontext starting, container id is  $in_container_id "
