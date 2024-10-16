@@ -21,6 +21,8 @@ fi
 # Base path to match
 base_path="/usr/local/tomcat/Lingoport_Data/L10nStreamlining/"
 
+echo "PROJECT NAME, KIT NUMBER, SENT DATE, LOCALE, # FILES, # KEYS, # WORDS"
+
 # Process each line of the input file
 while IFS= read -r line; do
     # Check if the line is a valid file path (i.e., does not contain invalid characters)
@@ -38,7 +40,6 @@ while IFS= read -r line; do
             exit 1
         fi
 
-        echo "PROJECT NAME, KIT NUMBER, SENT DATE, LOCALE, # FILES, # KEYS, # WORDS"
         # Extract project name
         company_name=$(grep -oP '(?<=companyName=").*?(?=")' "$line")
         project_name=$(grep -oP '(?<=projectName=").*?(?=")' "$line")
