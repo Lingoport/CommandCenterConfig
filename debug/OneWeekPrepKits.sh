@@ -38,6 +38,7 @@ while IFS= read -r line; do
             exit 1
         fi
 
+        echo "PROJECT NAME, KIT NUMBER, SENT DATE, LOCALE, # FILES, # KEYS, # WORDS"
         # Extract project name
         company_name=$(grep -oP '(?<=companyName=").*?(?=")' "$line")
         project_name=$(grep -oP '(?<=projectName=").*?(?=")' "$line")
@@ -62,7 +63,7 @@ while IFS= read -r line; do
         #   echo "    Keys to Translate: $nb_keys"
         #   echo "    Words to Translate: $nb_words"
 
-           echo "${company_name}.${project_name}, ${prep_kit}, ${kit_date}, ${prep_kit}, ${locale}, $nb_filesm, $nb_keys, $nb_words"
+           echo "${company_name}.${project_name}, ${prep_kit}, ${kit_date}, ${locale}, $nb_files, $nb_keys, $nb_words"
         done
 
         # Extract file paths
@@ -77,5 +78,4 @@ while IFS= read -r line; do
     fi
 done < "$input_file"
 
-echo "Processing complete!"
 
