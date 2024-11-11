@@ -138,6 +138,9 @@ echo "Command Center starting, container id is  $cc_container_id "
 echo $cc_container_id > cc_container_id.txt
 
 sleep 20s
+sudo docker exec --user root $cc_container_id mkdir -p /usr/local/tomcat/logs/globalyzer
+sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/logs/globalyzer
+sudo docker exec --user root $cc_container_id ln -s /usr/local/tomcat/logs/globalyzer /root/.globalyzer/log
 
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/lingoport
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/Lingoport_Data
