@@ -154,6 +154,8 @@ sudo docker exec  $cc_container_id git config --global user.name "lpdev"
 sudo docker exec  $cc_container_id bash -c "echo 'grails.serverURL = $serverURL' >> /usr/local/tomcat/CommandCenterConfig.groovy"
 sudo docker exec  $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/CommandCenterConfig.groovy"
 sudo docker exec  $cc_container_id bash -c "sed -i 's/yourcompany/$company_name/g' /usr/local/tomcat/CommandCenterConfig.groovy"
+sudo docker exec --user root $cc_container_id /usr/local/tomcat/scripts/updatelite.sh
+
 ssoconf="$samlpath/saml_configuration.conf"
 while IFS= read -r line
 do
