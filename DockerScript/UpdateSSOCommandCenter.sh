@@ -138,6 +138,7 @@ echo "Command Center starting, container id is  $cc_container_id "
 echo $cc_container_id > cc_container_id.txt
 
 sleep 20s
+sudo docker exec --user root $cc_container_id mkdir -p /root/.globalyzer/
 sudo docker exec --user root $cc_container_id mkdir -p /usr/local/tomcat/logs/globalyzer
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/logs/globalyzer
 sudo docker exec --user root $cc_container_id ln -s /usr/local/tomcat/logs/globalyzer /root/.globalyzer/log
@@ -146,8 +147,11 @@ sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /u
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/Lingoport_Data
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/temp
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/logs
+sudo docker exec --user root $cc_container_id mkdir -p /usr/local/tomcat/lingoport/lrm-server-11.1
+sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/lingoport/lrm-server-11.1
 
-sudo docker exec  $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/auto-update.xml"
+
+sudo docker exec --user root $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/auto-update.xml"
 sudo docker exec --user root $cc_container_id java -jar /usr/local/tomcat/lib/Lingoport_Resource_Manager_Server-11.1-Installer.jar /usr/local/tomcat/auto-update.xml
 sudo docker exec  $cc_container_id git config --global user.email "lpdev@lingoport.com"
 sudo docker exec  $cc_container_id git config --global user.name "lpdev"
