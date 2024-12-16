@@ -166,4 +166,5 @@ sudo docker exec $cc_container_id bash -c '[ -f /usr/local/tomcat/lingoport/lrm-
 
 #sudo docker exec  $cc_container_id cp /usr/local/tomcat/webapps/command-center/WEB-INF/lib/aws-java-sdk-1.12.496.jar /usr/local/tomcat/lingoport/lrm-server-11.1/lib
 sudo docker exec $cc_container_id bash -c 'find /usr/local/tomcat/webapps/command-center/WEB-INF/lib/ -name "*.jar" -exec rsync -av --ignore-existing {} /usr/local/tomcat/lingoport/lrm-server-11.1/lib/ \;' > /dev/null 2>&1
+sudo docker exec --user root $cc_container_id rm -f /usr/local/tomcat/lingoport/lrm-server-11.1/lib/aws-java-sdk-1.12.496.jar
 sudo docker restart  $cc_container_id
