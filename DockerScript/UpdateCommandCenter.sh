@@ -175,6 +175,8 @@ sudo docker exec --user root $cc_container_id /usr/local/tomcat/scripts/updateli
 
 sleep 120s
 sudo docker exec  $cc_container_id cp /usr/local/tomcat/webapps/application.properties /usr/local/tomcat/webapps/command-center/WEB-INF/classes
-sudo docker exec $cc_container_id bash -c '[ -f /usr/local/tomcat/lingoport/lrm-server-11.1/lib/lc-public-api-sdk-23.2.0.jar ] && cp /usr/local/tomcat/lingoport/lrm-server-11.1/lib/lc-public-api-sdk-23.2.0.jar /usr/local/tomcat/webapps/command-center/WEB-INF/lib'
+sudo docker exec $cc_container_id bash -c '[ -f /usr/local/tomcat/lingoport/lrm-server-11.1/lib/lc-public-api-sdk-24.0.5Lingoport.jar ] && cp /usr/local/tomcat/lingoport/lrm-server-11.1/lib/lc-public-api-sdk-24.0.5Lingoport.jar /usr/local/tomcat/webapps/command-center/WEB-INF/lib'
 sudo docker exec $cc_container_id bash -c 'find /usr/local/tomcat/webapps/command-center/WEB-INF/lib/ -name "*.jar" -exec rsync -av --ignore-existing {} /usr/local/tomcat/lingoport/lrm-server-11.1/lib/ \;' > /dev/null 2>&1
+sudo docker exec --user root $cc_container_id rm -f /usr/local/tomcat/lingoport/lrm-server-11.1/lib/aws-java-sdk-1.12.496.jar
+
 sudo docker restart  $cc_container_id
