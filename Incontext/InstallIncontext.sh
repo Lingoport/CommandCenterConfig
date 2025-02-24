@@ -106,7 +106,7 @@ cd $home_directory/incontext/config
 
 sudo docker network ls | grep $database_network > /dev/null || sudo docker network create $database_network
 
-in_mysql_id=$(sudo docker run --restart unless-stopped -d  --name incontextDatabase --network-alias mysqlserverincontext --network $database_network -e MYSQL_ROOT_PASSWORD=$database_root_password -e MYSQL_DATABASE=INCONTEXT -v $home_directory/mysql/conf.d:/etc/mysql/conf.d  mysql:8.0 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci)
+in_mysql_id=$(sudo docker run --restart unless-stopped -d  --name incontextDatabase --network-alias mysqlserverincontext --network $database_network -e MYSQL_ROOT_PASSWORD=$database_root_password -e MYSQL_DATABASE=INCONTEXT -v $home_directory/mysql/conf.d:/etc/mysql/conf.d  mysql:8.0 --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci)
 sudo echo $in_mysql_id > in_mysql_id.txt
 
 echo $docker_account_token | sudo docker login -u $docker_username --password-stdin
