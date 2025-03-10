@@ -127,6 +127,27 @@ sudo docker network ls|grep $database_network > /dev/null || sudo docker network
 cc_mysql_id=$(sudo docker run --restart unless-stopped -d --name ssocommandcenterDatabase --network-alias mysqlservercommand --network $database_network -e MYSQL_ROOT_PASSWORD=$database_root_password -e MYSQL_DATABASE=commandcenter -v $home_directory/mysql/conf.d:/etc/mysql/conf.d  mysql:8.0 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci)
 sudo echo $cc_mysql_id > cc_mysql_id.txt
 
+if [ -z "$cc_mysql_id" ]; then
+    echo "Error: MySQL container failed to start."
+    exit 1
+fi
+
+echo "Waiting for MySQL to be ready..."
+max_retries=30
+retry_count=0
+while true; do
+    if sudo docker exec -i $cc_mysql_id mysqladmin ping -h"localhost" -p"$database_root_password" --silent; then
+      echo "MYSQL is ready!"
+      break
+    fi
+    sleep 2
+    retry_count=$((retry_count + 1))
+    if [ $retry_count -ge $max_retries ]; then
+        echo "Error: MySQL did not become ready in time."
+        exit 1
+    fi
+done
+
 echo $docker_account_token | sudo docker login -u $docker_username --password-stdin
 
 cc_container_id=`sudo docker run -dp $serverPort:8080 --restart unless-stopped --network-alias ccservernetsso --network $database_network -v /var/run/docker.sock:/var/run/docker.sock -v /usr/local/share/ca-certificates:/usr/local/share/ca-certificates -v $samlpath:/usr/local/tomcat/saml -v $home_directory/commandcentersso/logs:/usr/local/tomcat/temp -v $home_directory/Lingoport_Data:/usr/local/tomcat/Lingoport_Data -v $home_directory/lingoport:/usr/local/tomcat/lingoport  $docker_image:$command_center_image_version`
