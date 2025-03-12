@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string translate="TOKEN_TRANSLATABLE" SID="TOKEN_KEY">TOKEN_VALUE</string>
+</resources>
