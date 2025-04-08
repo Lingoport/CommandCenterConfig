@@ -143,12 +143,12 @@ sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /u
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/Lingoport_Data
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/temp
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/logs
-sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/lingoport/lrm-server-11.1
+sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/lingoport/lrm-server-12.0
 
 
 sudo docker exec --user root $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/auto-update.xml"
-sudo docker exec --user root $cc_container_id java -jar /usr/local/tomcat/lib/Lingoport_Resource_Manager_Server-11.1-Installer.jar /usr/local/tomcat/auto-update.xml
-sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/lingoport/lrm-server-11.1
+sudo docker exec --user root $cc_container_id java -jar /usr/local/tomcat/lib/Lingoport_Resource_Manager_Server-12.0-Installer.jar /usr/local/tomcat/auto-update.xml
+sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/lingoport/lrm-server-12.0
 sudo docker exec  $cc_container_id git config --global user.email "lpdev@lingoport.com"
 sudo docker exec  $cc_container_id git config --global user.name "lpdev"
 sudo docker exec  $cc_container_id bash -c "echo 'grails.serverURL = $serverURL' >> /usr/local/tomcat/CommandCenterConfig.groovy"
@@ -160,8 +160,8 @@ sudo docker exec --user root $cc_container_id /usr/local/tomcat/scripts/updateli
 
 sleep 120s
 sudo docker exec  $cc_container_id cp /usr/local/tomcat/webapps/application.properties /usr/local/tomcat/webapps/command-center/WEB-INF/classes
-sudo docker exec $cc_container_id bash -c '[ -f /usr/local/tomcat/lingoport/lrm-server-11.1/lib/lc-public-api-sdk-24.0.5Lingoport.jar ] && cp /usr/local/tomcat/lingoport/lrm-server-11.1/lib/lc-public-api-sdk-24.0.5Lingoport.jar /usr/local/tomcat/webapps/command-center/WEB-INF/lib'
-sudo docker exec $cc_container_id sh -c "cp -r /usr/local/tomcat/commandcenter/config/* /usr/local/tomcat/lingoport/lrm-server-11.1/lib"
-sudo docker exec --user root $cc_container_id rm -f /usr/local/tomcat/lingoport/lrm-server-11.1/lib/aws-java-sdk-1.12.496.jar
+sudo docker exec $cc_container_id bash -c '[ -f /usr/local/tomcat/lingoport/lrm-server-12.0/lib/lc-public-api-sdk-24.0.5Lingoport.jar ] && cp /usr/local/tomcat/lingoport/lrm-server-12.0/lib/lc-public-api-sdk-24.0.5Lingoport.jar /usr/local/tomcat/webapps/command-center/WEB-INF/lib'
+sudo docker exec $cc_container_id sh -c "cp -r /usr/local/tomcat/commandcenter/config/* /usr/local/tomcat/lingoport/lrm-server-12.0/lib"
+sudo docker exec --user root $cc_container_id rm -f /usr/local/tomcat/lingoport/lrm-server-12.0/lib/aws-java-sdk-1.12.496.jar
 
 sudo docker restart  $cc_container_id
