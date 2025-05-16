@@ -128,7 +128,24 @@ fi
 
 old_db=`cat cc_mysql_id.txt`
 
+echo "Stopping old container: $old"
+
 sudo docker stop $old
+max_wait=30
+elapsed=0
+interval=5
+
+while sudo docker ps -q --filter "id=$old" | grep -q .; do
+    if [[ $elapsed -ge $max_wait ]]; then
+        echo "Error: Container $old did not stop within $max_wait seconds."
+        exit 1
+    fi
+    echo "Waiting for container $old to stop..."
+    sleep $interval
+    ((elapsed += interval))
+done
+
+echo "Container $old stopped successfully."
 
 cd $home_directory/commandcenter/config
 
