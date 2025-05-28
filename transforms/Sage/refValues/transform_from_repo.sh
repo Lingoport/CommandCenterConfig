@@ -9,18 +9,22 @@ if [[ -z "$CLIENT_SOURCE_DIR" ]] ; then
 fi
 cd "${CLIENT_SOURCE_DIR}"
 
-# Find the en_US directory locations, but not those under 'translations'
-# as they should not be 'recursively' be copied (after each run)
+#
+# 
 find . -name "respack*.json"  > "${PROJECT_TMP_DIR}/input_files.txt"
 
 echo "Files to transform:"
 cat "${PROJECT_TMP_DIR}/input_files.txt"
 
-# List the location where en_US appears as a directory
+# 
+#
+mkdir -p TMP
 
 cat "${PROJECT_TMP_DIR}/input_files.txt" | while read -r INPUT_FILE
 do
-  OUTPUT_FILE="TRAN_${INPUT_FILE}"
+  BASE=`basename ${INPUT_FILE}`
+  DIR=`dirname ${INPUT_FILE}`
+  OUTPUT_FILE="${DIR}/tran_${BASE}"
   echo "INPUT_FILE = ${INPUT_FILE}"
   echo "OUTPUT_FILE= ${OUTPUT_FILE}"
 
