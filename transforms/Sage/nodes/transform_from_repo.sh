@@ -18,10 +18,10 @@ cat "${PROJECT_TMP_DIR}/input_files.txt"
 
 # 
 #
-mkdir -p TMP
 
 cat "${PROJECT_TMP_DIR}/input_files.txt" | while read -r INPUT_FILE
 do
+  TMP_FILE=$(mktemp)
   BASE=`basename ${INPUT_FILE}`
   DIR=`dirname ${INPUT_FILE}`
   OUTPUT_FILE="${DIR}/tran_${BASE}"
@@ -30,11 +30,20 @@ do
 
   # Use jq to transform the JSON
   jq 'with_entries(
+    if (.key | contains("data_types__"))
+    then {key: ("_" + .key), value: .value}
+    else .
+    end
+  )' "$INPUT_FILE" > "$TMP_FILE"
+
+  jq 'with_entries(
     if (.key | contains("nodes__"))
     then {key: ("_" + .key), value: .value}
     else .
     end
-  )' "$INPUT_FILE" > "$OUTPUT_FILE"
+  )' "$TMP_FILE" > "$OUTPUT_FILE"
+
+  rm "$TMP_FILE"
 
 
   sed -i "s/\": null/\": \"\"/" "$OUTPUT_FILE"
