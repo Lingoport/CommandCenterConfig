@@ -44,6 +44,9 @@ do
       )
     }) | from_entries' "$INPUT_FILE" > "$OUTPUT_FILE"
 
+
+  #remove all the 'null' values
+  sed -i "s/\": null/\": \"\"/" "$OUTPUT_FILE"
 done
 
 
