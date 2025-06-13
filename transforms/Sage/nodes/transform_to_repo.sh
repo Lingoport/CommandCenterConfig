@@ -22,5 +22,10 @@ do
   # change the keys to remove the prefix "_tran-" 
   #
   sed -i "s/\"_tran-/\"/" "$TARGET_PATH"
+
+  # also add a couple more spaces at the beginning of each
+  # key/value pair to be more like the original file
+  sed -i "s/^  \"/    \"/" "$TARGET_PATH"
+
 done
 
