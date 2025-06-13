@@ -21,6 +21,6 @@ do
 
   # change the keys to remove the prefix "_tran-" 
   #
-  sed -i "s/\"_tran-\\" "$TARGET_PATH"
+  sed -i "s/\"_tran-//" "$TARGET_PATH"
 done
 
