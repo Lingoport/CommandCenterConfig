@@ -31,14 +31,14 @@ do
   # Use jq to transform the JSON
   jq 'with_entries(
     if (.key | contains("data_types__"))
-    then {key: ("_" + .key), value: .value}
+    then {key: ("_tran-" + .key), value: .value}
     else .
     end
   )' "$INPUT_FILE" > "$TMP_FILE"
 
   jq 'with_entries(
     if (.key | contains("nodes__"))
-    then {key: ("_" + .key), value: .value}
+    then {key: ("_tran-" + .key), value: .value}
     else .
     end
   )' "$TMP_FILE" > "$OUTPUT_FILE"
