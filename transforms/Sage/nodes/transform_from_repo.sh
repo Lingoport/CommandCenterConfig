@@ -47,6 +47,10 @@ do
 
 
   sed -i "s/\": null/\": \"\"/" "$OUTPUT_FILE"
+
+  # also add a couple more spaces at the beginning of each 
+  # key/value pair to be more like the original file
+  sed -i "s/^  \"/    \"/" "$OUTPUT_FILE"
 done
 
 
