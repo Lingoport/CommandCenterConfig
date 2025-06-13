@@ -16,7 +16,11 @@ do
   TARGET_PATH="${DIRNAME}/${TARGET_NAME}"
   echo "   Transform [$FILEPATH] -> [$TARGET_PATH]"
 
+  # get the target file ready
   cp "$FILEPATH" "$TARGET_PATH"
-  sed -i "s/\"tran_//" "$TARGET_PATH"
+
+  # change the keys to remove the prefix "_tran-" 
+  #
+  sed -i "s/\"_tran-\\" "$TARGET_PATH"
 done
 
