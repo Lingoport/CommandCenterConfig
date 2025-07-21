@@ -84,5 +84,7 @@ mv images.zip "$OLDPWD"
 cd "$OLDPWD"
 rm -r "$WORK_DIR"
 
-echo "✅ Done. Created images.zip"
+
+echo "✅ Done. Created ${OLDPWD}/images.zip"
+ls -l "${OLDPWD}/images.zip"
 
