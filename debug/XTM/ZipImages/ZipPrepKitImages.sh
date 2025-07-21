@@ -78,13 +78,13 @@ done
 zip -q images.zip *.png
 
 # Move zip back
-mv images.zip "$OLDPWD"
+mv images.zip "$PXML_DIR/"
 
 # Clean up
-cd "$OLDPWD"
+cd "$PXML_DIR"
 rm -r "$WORK_DIR"
 
 
-echo "✅ Done. Created ${OLDPWD}/images.zip"
-ls -l "${OLDPWD}/images.zip"
+echo "✅ Done. Created ${PXML_DIR}/images.zip"
+ls -l "${PXML_DIR}/images.zip"
 
