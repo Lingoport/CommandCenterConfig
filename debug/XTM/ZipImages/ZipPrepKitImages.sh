@@ -33,16 +33,10 @@
 #
 # Olivier Libouban (c) Lingoport 2025
 
-# Check usage
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <input_directory>"
-    exit 1
-fi
-
 echo "PXML_DIR = $PXML_DIR"
 if [ ! -d "$PXML_DIR" ]; then
     echo "${PXML_DIR} Directory does not exist"
-    exit
+    exit 1
 fi
 
 # Check for required tools
