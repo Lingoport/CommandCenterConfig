@@ -242,17 +242,17 @@ echo "$mapping_array" | jq -c '.[]' | while read -r item; do
 done
 
 mv data.properties "$TOP_DIRECTORY/$baseLocale/messages.properties"
-echo -e "Created messages.properties for base locale: $baseLocale, file path: \"$TOP_DIRECTORY/$baseLocale/messages.propertie\"\n"
+echo -e "Created messages.properties for base locale: $baseLocale, file path: \"$TOP_DIRECTORY/$baseLocale/messages.properties\"\n"
 
 
-# Create + move properties files for all locales to the 'keys' directory
+# Create + move properties files for all locales to their corresponding directories
 for dir in $TOP_DIRECTORY/*/
 do
     dir=${dir%*/} # Remove trailing backslash
     resourceLocale=$(basename "$dir") # Get locale from directory path
 
     # If the directory is the base locale or the keys locale, skip them
-    if echo "$dir" | grep -q -e "$baseLocale" -e "keys"; then
+    if echo "$resourceLocale" | grep -q -e "$baseLocale" -e "keys"; then
         continue
     fi
 
