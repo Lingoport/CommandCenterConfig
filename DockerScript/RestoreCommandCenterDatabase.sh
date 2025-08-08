@@ -9,7 +9,7 @@ back_date=$1
 
 # Check for help flag or no arguments
 if [[ "$1" == "-h" || "$1" == "--help" || -z "$1" ]]; then
-    echo "Usage: sudo $0 YYYY-MM-DD"
+    echo "Usage: sudo $0 YYYY-MM-DD_HHMMSS"
     echo "Restores the Command Center Server's Database to the state of the specified date."
     exit 0
 fi

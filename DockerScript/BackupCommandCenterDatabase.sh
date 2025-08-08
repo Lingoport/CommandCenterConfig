@@ -43,7 +43,7 @@ cd $home_directory/commandcenter/config || { echo "Failed to change directory"; 
 
 old_db=$(cat cc_mysql_id.txt)
 old=$(cat cc_container_id.txt)
-current_date=$(date -I)
+current_date=$(date +%F_%H%M%S)
 
 mkdir -p $home_directory/commandcenter/backup || { echo "Failed to create backup directory"; exit 1; }
 

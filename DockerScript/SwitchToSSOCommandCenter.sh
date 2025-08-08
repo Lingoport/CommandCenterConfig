@@ -122,7 +122,7 @@ old=`cat cc_container_id.txt`
 
 sudo docker stop $old
 
-current_date=`date -I`
+current_date=$(date +%F_%H%M%S)
 
 docker exec $old_db /usr/bin/mysqldump -u root --password=$database_root_password commandcenter > $home_directory/commandcenter/backup/cc_database_backup_$current_date.sql
 

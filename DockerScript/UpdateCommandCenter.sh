@@ -151,7 +151,7 @@ cd $home_directory/commandcenter/config
 
 old_db=`cat cc_mysql_id.txt`
 
-current_date=`date -I`
+current_date=$(date +%F_%H%M%S)
 
 # Perform database backup and report success for commandcenter database
 backup_file_cc="$home_directory/commandcenter/backup/commandcenter_backup_$current_date.sql"
