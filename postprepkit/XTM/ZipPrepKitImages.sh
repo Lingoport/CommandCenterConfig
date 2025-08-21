@@ -39,7 +39,9 @@ echo "  KIT_VERSION    = ${KIT_VERSION}"
 echo "  LRM_LOCALE     = ${LRM_LOCALE}"
 echo "  PREPKIT_STATUS = ${PREPKIT_STATUS}"
 
-PXML_DIR="/usr/local/tomcat/Lingoport_Data/L10nStreamlining/${LRM_GROUP}/projects/${LRM_PROJECT}/prepkits/PREP_KIT_${KIT_VERSION}/${LRM_LOCALE}"
+FIRST_LOCALE=${LRM_LOCALE%%,*}
+
+PXML_DIR="/usr/local/tomcat/Lingoport_Data/L10nStreamlining/${LRM_GROUP}/projects/${LRM_PROJECT}/prepkits/PREP_KIT_${KIT_VERSION}/${FIRST_LOCALE}"
 
 echo "      ===>  PXML_DIR = $PXML_DIR"
 
