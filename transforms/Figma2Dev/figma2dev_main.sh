@@ -112,7 +112,7 @@ echo -e "Processing Base Resource File: $TOP_DIRECTORY/$baseResourceFile\n"
 while IFS= read -r line; do
     # Get key + value from resource file
     key=$(echo "$line" | sed 's/^[^"]*"\([^"]*\)".*/\1/')
-    value=$(echo "$line" | sed 's/^[^\"]*\"[^\"]*\": "//; s/\"[^\"]*$//')
+    value=$(echo "$line" | sed 's/^[^\"]*\"[^\"]*\":\s*"//; s/\"[^\"]*$//')
 
     # Skip "{" and "}" characters
     if [[ "$key" == "{" || "$key" == "}" ]]; then
@@ -271,7 +271,7 @@ do
     while IFS= read -r line; do
         # Get key + value from resource file
         key=$(echo "$line" | sed 's/^[^"]*"\([^"]*\)".*/\1/')
-        value=$(echo "$line" | sed 's/^[^\"]*\"[^\"]*\": "//; s/\"[^\"]*$//')
+        value=$(echo "$line" | sed 's/^[^\"]*\"[^\"]*\":\s*"//; s/\"[^\"]*$//')
 
         # Skip "{" and "}" characters
         if [[ "$key" == "{" || "$key" == "}" ]]; then
