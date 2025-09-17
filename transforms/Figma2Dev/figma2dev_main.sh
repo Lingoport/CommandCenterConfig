@@ -93,7 +93,7 @@ echo -e "-----------------------------------\n"
 declare -A keysArray
 
 # Array to store mapping data:
-mapping_array="[]"
+mapping_array=""
 
 if [ -f "$TOP_DIRECTORY/keys/mapping.json" ]; then
   echo -e "Existing mapping file found at $TOP_DIRECTORY/keys/mapping.json.\n" # Debugging statement
@@ -108,6 +108,17 @@ echo -e "-----------------------------------\n"
 
 # Process the base English resource file and generate keys based on figma2dev_config.properties settings
 echo -e "Processing Base Resource File: $TOP_DIRECTORY/$baseResourceFile\n"
+keygen_start_time=$(date +%s)
+
+# Build a hash map from nodeID to mapping JSON object for faster lookup
+declare -A mapping_by_nodeid mapping_key mapping_value mapping_lastChanged
+for item in "${existing_mapping_array[@]}"; do
+    nodeID=$(jq --raw-output '.nodeID' <<< "$item")
+    mapping_by_nodeid["$nodeID"]="$item"
+    mapping_key["$nodeID"]=$(jq --raw-output '.key' <<< "$item")
+    mapping_value["$nodeID"]=$(jq --raw-output '.value' <<< "$item")
+    mapping_lastChanged["$nodeID"]=$(jq --raw-output '.lastChanged' <<< "$item")
+done
 
 while IFS= read -r line; do
     # Get key + value from resource file
@@ -123,38 +134,30 @@ while IFS= read -r line; do
         # If it does, just update the value in the mapper file if needed and use the existing generated key
         # If it doesn't, use the counter value from the figma2dev_config.properties to generate a new key
 
-    if grep -q "${key}" <<< "${existing_mapping_array[@]}"; then
+    if [[ -n "${mapping_by_nodeid[$key]+_}" ]]; then
+        item="${mapping_by_nodeid[$key]}"
         echo "- Node ID '$key' found in mapping array. A new key does not need to be generated, updating JSON value..." # Debugging statement
-        
-        for item in "${existing_mapping_array[@]}"; do
-            # Get generated key + original value/nodeID from mapping file
-            genKey=$(jq --raw-output '.key' <<< "$item")
-            originalValue=$(jq --raw-output '.value' <<< "$item")
-            originalNodeID=$(jq --raw-output '.nodeID' <<< "$item")
-            originalTimestamp=$(jq --raw-output '.lastChanged' <<< "$item")
 
-            if [ "$originalNodeID" == "$key" ]; then
-                keysArray[$key]=$genKey # Add existing generated key to array
+        # Use pre-parsed values instead of calling jq each time
+        genKey="${mapping_key[$key]}"
+        originalValue="${mapping_value[$key]}"
+        originalTimestamp="${mapping_lastChanged[$key]}"
 
-                # Debugging Statement:
-                if [ "$originalValue" == "$value" ]; then
-                    # Create a JSON object for mapping (use the same generated key as before) + Append the JSON object to the mapping array
-                    json_object=$(jq -n --arg key "$genKey" --arg value "$originalValue" --arg nodeID "$key" --arg timestamp "$originalTimestamp" \ '{key: $key, value: $value, nodeID: $nodeID, lastChanged: $timestamp}')
-                    mapping_array=$(jq -n --argjson array "$mapping_array" --argjson object "$json_object" \ '$array + [$object]')
-                    echo "   - JSON string value is the same for \"$key\", no need to update." # Debugging statement
-                else
-                    newTimeStamp=$(date +%s)  # Get current timestamp
+        keysArray[$key]=$genKey # Add existing generated key to array
 
-                    # Create a JSON object for mapping (use the same generated key as before, but new value + new timestamp) + Append the JSON object to the mapping array
-                    json_object=$(jq -n --arg key "$genKey" --arg value "$value" --arg nodeID "$key" --arg timestamp "$newTimeStamp" \ '{key: $key, value: $value, nodeID: $nodeID, lastChanged: $timestamp}')
-                    mapping_array=$(jq -n --argjson array "$mapping_array" --argjson object "$json_object" \ '$array + [$object]')
-                    echo "   - Updated original value: \"$originalValue\" to \"$value\" for \"$key\"." # Debugging statement
-                fi
+        # Debugging Statement:
+        if [ "$originalValue" == "$value" ]; then
+            # Append JSON object to the mapping array
+            mapping_array="${mapping_array}{\"key\":\"$genKey\",\"value\":\"$originalValue\",\"nodeID\":\"$key\",\"lastChanged\":\"$originalTimestamp\"},"
+            echo "   - JSON string value is the same for \"$key\", no need to update." # Debugging statement
+        else
+            newTimeStamp=$(date +%s)
+            # Append JSON object to the mapping array
+            mapping_array="${mapping_array}{\"key\":\"$genKey\",\"value\":\"$value\",\"nodeID\":\"$key\",\"lastChanged\":\"$newTimeStamp\"},"
+            echo "   - Updated original value: \"$originalValue\" to \"$value\" for \"$key\"." # Debugging statement
+        fi
 
-                echo ""
-                break
-            fi
-        done
+        echo ""
     else
         echo "- Node ID '$key' was not found in mapping array, generating new key." # Debugging statement
 
@@ -182,21 +185,24 @@ while IFS= read -r line; do
 
         timeStamp=$(date +%s) # Get current timestamp
 
-        # Create a JSON object for mapping
-        json_object=$(jq -n --arg key "$generatedKey" --arg value "$value" --arg nodeID "$key" --arg timeStamp "$timeStamp" \ '{key: $key, value: $value, nodeID: $nodeID, lastChanged: $timeStamp}')
-
-        # Append the JSON object to the array
-        mapping_array=$(jq -n --argjson array "$mapping_array" --argjson object "$json_object" \ '$array + [$object]')
+        # Append JSON object to the mapping array
+        mapping_array="${mapping_array}{\"key\":\"$generatedKey\",\"value\":\"$value\",\"nodeID\":\"$key\",\"lastChanged\":\"$timeStamp\"},"
 
         echo ""
     fi
 done < "$TOP_DIRECTORY/$baseResourceFile"
+mapping_array="[${mapping_array%,}]" # Remove trailing comma and wrap in array brackets
+
+keygen_end_time=$(date +%s)
+keygen_elapsed=$((keygen_end_time - keygen_start_time))
+echo "Key generation + value updates took: $keygen_elapsed seconds ($((keygen_elapsed / 60)) minutes)"
+echo -e "-----------------------------------\n"
 
 # Replace the keyCounterStart value in the properties file with the new counter value (if changed)
 if ([ "$suffix" == "counter" ] && [ $startingCounter != $keyCounterStart ]); then
     sed -i "s/^[#]*\s*keyCounterStart=.*/keyCounterStart=${keyCounterStart}/" $CONFIG_FILE
-    echo -e "-----------------------------------\n"
     echo -e "Updated string counter value from \"${startingCounter}\" to \"${keyCounterStart}\".\n"
+    echo -e "-----------------------------------\n"
 fi
 
 
@@ -207,8 +213,8 @@ fi
 # done
 
 
-echo "-----------------------------------"
 echo -e "Generating files...\n"
+filegen_start_time=$(date +%s)
 
 # Create + move the keys.json file over to the 'keys' directory as "translation.json" (to display keys in Figma file)
 echo "{" > keys.json
@@ -224,10 +230,9 @@ mv keys.json "$TOP_DIRECTORY/keys/translation.json"
 echo -e "Created translation.json for \"keys\" locale, file path: \"$TOP_DIRECTORY/keys/translation.json\"\n"
 
 
-# Create + move the mapping.json file over to the 'keys' directory
-echo "$mapping_array" >> mapping.json
+# <ove the mapping.json file over to the 'keys' directory
 mkdir -p "$1/keys"
-mv mapping.json "$TOP_DIRECTORY/keys/mapping.json"
+echo "$mapping_array" | jq '.' > "$TOP_DIRECTORY/keys/mapping.json" # Pretty-print the JSON array for easier reading
 echo -e "Created mapping.json, file path: \"$TOP_DIRECTORY/keys/mapping.json\"\n"
 
 
@@ -238,10 +243,8 @@ echo "$mapping_array" | jq -c '.[]' | while read -r item; do
     mappingKey=$(echo "$item" | jq -r '.key')
     mappingValue=$(echo "$item" | jq -r '.value')
 
-    echo "$mappingKey=$mappingValue" >> data.properties
+    echo "$mappingKey=$mappingValue" >> "$TOP_DIRECTORY/$baseLocale/messages.properties"
 done
-
-mv data.properties "$TOP_DIRECTORY/$baseLocale/messages.properties"
 echo -e "Created messages.properties for base locale: $baseLocale, file path: \"$TOP_DIRECTORY/$baseLocale/messages.properties\"\n"
 
 
@@ -284,14 +287,21 @@ do
             generatedKey="${keysArray[$key]}"
             # echo "Key '$key' exists, generated key: $generatedKey, resource value: $value" # Debugging statement
 
-            echo "$generatedKey=$value" >> data_$resourceLocale.properties
+            echo "$generatedKey=$value" >> "$TOP_DIRECTORY/$resourceLocale/messages.properties"
         fi
     done < "$resourceFile"
-
-    mv data_$resourceLocale.properties "$TOP_DIRECTORY/$resourceLocale/messages.properties"
     echo -e "Created messages.properties for locale: $resourceLocale, file path: \"$TOP_DIRECTORY/$resourceLocale/messages.properties\"\n"
 done
 
+filegen_end_time=$(date +%s)
+filegen_elapsed=$((filegen_end_time - filegen_start_time))
+echo "File generation took: $filegen_elapsed seconds ($((filegen_elapsed / 60)) minutes)"
+echo -e "-----------------------------------\n"
+
+script_end_time=$(date +%s)
+script_elapsed=$((script_end_time - script_start_time))
+echo "Full script execution time: $script_elapsed seconds ($((script_elapsed / 60)) minutes)"
+echo -e "-----------------------------------\n"
 
 # # Create + move the PXML file over to the 'keys' directory
 # echo '<?xml version="1.0" encoding="utf-8"?>' > data.pxml
