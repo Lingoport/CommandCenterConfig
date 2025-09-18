@@ -298,11 +298,6 @@ filegen_elapsed=$((filegen_end_time - filegen_start_time))
 echo "File generation took: $filegen_elapsed seconds ($((filegen_elapsed / 60)) minutes)"
 echo -e "-----------------------------------\n"
 
-script_end_time=$(date +%s)
-script_elapsed=$((script_end_time - script_start_time))
-echo "Full script execution time: $script_elapsed seconds ($((script_elapsed / 60)) minutes)"
-echo -e "-----------------------------------\n"
-
 # # Create + move the PXML file over to the 'keys' directory
 # echo '<?xml version="1.0" encoding="utf-8"?>' > data.pxml
 # echo '<resources>' >> data.pxml
