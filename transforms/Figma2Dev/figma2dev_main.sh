@@ -243,8 +243,9 @@ echo "$mapping_array" | jq -c '.[]' | while read -r item; do
     mappingKey=$(echo "$item" | jq -r '.key')
     mappingValue=$(echo "$item" | jq -r '.value')
 
-    echo "$mappingKey=$mappingValue" >> "$TOP_DIRECTORY/$baseLocale/messages.properties"
+    echo "$mappingKey=$mappingValue" >> data.properties
 done
+mv data.properties "$TOP_DIRECTORY/$baseLocale/messages.properties"
 echo -e "Created messages.properties for base locale: $baseLocale, file path: \"$TOP_DIRECTORY/$baseLocale/messages.properties\"\n"
 
 
@@ -287,9 +288,10 @@ do
             generatedKey="${keysArray[$key]}"
             # echo "Key '$key' exists, generated key: $generatedKey, resource value: $value" # Debugging statement
 
-            echo "$generatedKey=$value" >> "$TOP_DIRECTORY/$resourceLocale/messages.properties"
+            echo "$generatedKey=$value" >> data_$resourceLocale.properties
         fi
     done < "$resourceFile"
+    mv data_$resourceLocale.properties "$TOP_DIRECTORY/$resourceLocale/messages.properties"
     echo -e "Created messages.properties for locale: $resourceLocale, file path: \"$TOP_DIRECTORY/$resourceLocale/messages.properties\"\n"
 done
 
