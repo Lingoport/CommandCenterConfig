@@ -143,7 +143,7 @@ sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /u
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/Lingoport_Data
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/temp
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/logs
-sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/lingoport/lrm-server-14.0
+sudo docker exec --user root $cc_container_id mkdir -p /usr/local/tomcat/lingoport/lrm-server-14.0
 
 
 sudo docker exec --user root $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/auto-update.xml"
