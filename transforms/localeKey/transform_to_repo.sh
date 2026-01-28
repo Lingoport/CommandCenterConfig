@@ -11,7 +11,7 @@ echo "=============================================="
 while read jsonFile; do
 
   echo " locale = in $jsonFile"
-  DIRONE=`dirname "$FPATH"`
+  DIRONE=`dirname "$jsonFile"`
   LOCALENAME=`basename "$DIRONE"`
   sed -i "s/.*\"locale\"\:.*/  \"locale\"\: \"$LOCALENAME\",/ " "$jsonFile"
   grep "\"locale\"" "$jsonFile"
