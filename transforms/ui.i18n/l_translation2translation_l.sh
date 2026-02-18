@@ -15,7 +15,7 @@ echo  " ---------------------------"
 # Find all the files ending in the 'xml'
 JSONFILES="${PROJECT_TMP_DIR}/input_files.txt"
 
-find . -name "*_resourcemanagement.ui.i18n.json" -type f > "$JSONFILES"
+find . -name "*_*.ui.i18n.json" -type f > "$JSONFILES"
 
 echo "Files to transform: "
 cat "$JSONFILES"
@@ -26,9 +26,14 @@ cat "${JSONFILES}" | while read -r FILEPATH
 do
   FILENAME=`basename "$FILEPATH"`
   DIRNAME=`dirname "$FILEPATH"`
-  SUFFIX="_resourcemanagement.ui.i18n.json"
-  LOCALENAME=${FILENAME%$SUFFIX}
-  TARGET_NAME="resourcemanagement.ui.i18n_${LOCALENAME}.json"
+
+  # Extract locale and the rest of the filename
+  LOCALE=$(echo "$FILENAME" | cut -d'_' -f1)
+  REST=$(echo "$FILENAME" | cut -d'_' -f2-)
+
+   # Construct the new filename
+  TARGET_NAME="${REST%.json}_${LOCALE}.json"
+
   TARGET_PATH="${DIRNAME}/${TARGET_NAME}"
   echo "    Transform [$FILEPATH] -> [$TARGET_PATH]"
 
