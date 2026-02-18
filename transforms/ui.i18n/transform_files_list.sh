@@ -41,14 +41,11 @@ cat $1
 echo " --------------------------------------------"
 echo " for repository formatted files, not LRM OOTB ones"
 
-# trim the lines in the file
-#tr -d "[:blank:]" <  "$1" > "${1}.tmp"
-#mv "${1}.tmp" "$1"
-
 #  resourcemanagement.ui.i18n_<LOCALE>.json -> <LOCALE>_resourcemanagement.ui.i18n.json
-echo "   >>   resourcemanagement.ui.i18n_<LOCALE>.json -> <LOCALE>_resourcemanagement.ui.i18n.json"
+echo "   >>   <FILENAME>.ui.i18n_<LOCALE>.json -> <LOCALE>_<FILENAME>.ui.i18n.json"
 
-
+temp_file=$(mktemp)
+touch "$temp_file"
 
 #!/bin/bash
 
@@ -68,23 +65,14 @@ while IFS= read -r file; do
     new_file="${dirname}/${locale}_${rest}.ui.i18n.json"
 
     # Output the new file with path 
-    echo "$new_file"
+    echo "$new_file" >> "$temp_file"
 done < "$1"
 
+mv "$temp_file" "$1"
 
 
-
-#sed -i 's/\.json//' "$1"
-#sed -i 's/resourcemanagement\.ui\.i18n_//' "$1"
-
-# At this point, only the locale is left! so add back .translation-meta.json after.
-#sed -i 's/$/_resourcemanagement\.ui\.i18n.json/' "$1"
-
-echo "" > "$1"
-#echo " "
-echo " Is $1 empty?"
+" -> Modified input file"
 ls -l "$1"
-#ls -l "$1"
-#cat "$1"
+cat "$1"
 echo " --------------------------------------------"
 
