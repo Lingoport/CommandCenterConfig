@@ -53,7 +53,7 @@ echo "   >>   resourcemanagement.ui.i18n_<LOCALE>.json -> <LOCALE>_resourcemanag
 #!/bin/bash
 
 # Read each line from stdin or a file
-while IFS= read -r "$1"; do
+while IFS= read -r file; do
     # Extract the basename (filename only)
     filename=$(basename "$file")
 
@@ -66,7 +66,7 @@ while IFS= read -r "$1"; do
 
     # Output the new filename (or rename if you want)
     echo "$new_filename"
-done
+done < "$1"
 
 
 
