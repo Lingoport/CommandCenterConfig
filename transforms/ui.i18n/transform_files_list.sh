@@ -37,6 +37,8 @@ fi
 echo " "
 echo " --------------------------------------------"
 echo " Files to Modify:  $1"
+cat $1
+echo " --------------------------------------------"
 echo " for repository formatted files, not LRM OOTB ones"
 
 # trim the lines in the file
@@ -45,14 +47,17 @@ echo " for repository formatted files, not LRM OOTB ones"
 
 #  resourcemanagement.ui.i18n_<LOCALE>.json -> <LOCALE>_resourcemanagement.ui.i18n.json
 echo "   >>   resourcemanagement.ui.i18n_<LOCALE>.json -> <LOCALE>_resourcemanagement.ui.i18n.json"
-sed -i 's/\.json//' "$1"
-sed -i 's/resourcemanagement\.ui\.i18n_//' "$1"
+#sed -i 's/\.json//' "$1"
+#sed -i 's/resourcemanagement\.ui\.i18n_//' "$1"
 
 # At this point, only the locale is left! so add back .translation-meta.json after.
-sed -i 's/$/_resourcemanagement\.ui\.i18n.json/' "$1"
+#sed -i 's/$/_resourcemanagement\.ui\.i18n.json/' "$1"
 
-echo " "
+echo "" > "$1"
+#echo " "
+echo " Is $1 empty?"
 ls -l "$1"
-cat "$1"
+#ls -l "$1"
+#cat "$1"
 echo " --------------------------------------------"
 
