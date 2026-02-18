@@ -17,7 +17,7 @@ do
 
   # Extract locale and the rest of the filename
   LOCALE=$(echo "$FILENAME" | grep -oP '(?<=ui\.i18n_).*(?=\.json)')
-  REST=$(echo "$FILENAME" | sed "s/\(.*\)\.ui\.i18n_${locale}\.json/\1/")
+  REST=$(echo "$FILENAME" | sed "s/\(.*\)\.ui\.i18n_${LOCALE}\.json/\1/")
 
   # Construct the new filename
   TARGET_NAME="${LOCALE}_${REST}.ui.i18n.json"
