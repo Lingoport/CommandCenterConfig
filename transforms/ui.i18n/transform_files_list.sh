@@ -71,7 +71,7 @@ done < "$1"
 mv "$temp_file" "$1"
 
 
-" -> Modified input file"
+echo " -> Modified input file"
 ls -l "$1"
 cat "$1"
 echo " --------------------------------------------"
