@@ -14,13 +14,16 @@ cat "${JSONFILES}" | while read -r FILEPATH
 do
   FILENAME=`basename "$FILEPATH"`
   DIRNAME=`dirname "$FILEPATH"`
-  SUFFIX=".json"
-  ROOTNAME=${FILENAME%$SUFFIX}
-  LOCALENAME=${ROOTNAME#resourcemanagement.ui.i18n_*}
-  TARGET_NAME="${LOCALENAME}_resourcemanagement.ui.i18n.json"
+
+  # Extract locale and the rest of the filename
+  LOCALE=$(echo "$FILENAME" | grep -oP '(?<=ui\.i18n_).*(?=\.json)')
+  REST=$(echo "$FILENAME" | sed "s/\(.*\)\.ui\.i18n_${locale}\.json/\1/")
+
+  # Construct the new filename
+  TARGET_NAME="${LOCALE}_${REST}.ui.i18n.json"
   TARGET_PATH="${DIRNAME}/${TARGET_NAME}"
-  ## BUT NOT THE en_US FILE!!!
-  if [ "$LOCALENAME" == "en" ]; then
+  ## BUT NOT THE en FILE!!!
+  if [ "$LOCALE" == "en" ]; then
     echo "    Do not transform back ${FILEPATH}"
   
   else
