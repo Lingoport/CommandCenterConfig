@@ -53,7 +53,7 @@ echo "   >>   resourcemanagement.ui.i18n_<LOCALE>.json -> <LOCALE>_resourcemanag
 #!/bin/bash
 
 # Read each line from stdin or a file
-while IFS= read -r $1; do
+while IFS= read -r "$1"; do
     # Extract the basename (filename only)
     filename=$(basename "$file")
 
