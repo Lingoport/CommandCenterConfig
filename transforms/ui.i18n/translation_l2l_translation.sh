@@ -6,11 +6,14 @@
 #
 # Find all the files starting in resourcemanagement.ui.i18n
 #
-JSONFILES="${PROJECT_TMP_DIR}/input_files.txt"
+#
+echo "=============================================="
+echo "Transform to repository: ui.i18n"
+echo "$FULL_LIST_PATH"
+cat "$FULL_LIST_PATH"
+echo "=============================================="
 
-find . -name "resourcemanagement.ui.i18n_*.json" -type f > "${JSONFILES}"
-
-cat "${JSONFILES}" | while read -r FILEPATH
+cat "${FULL_LIST_PATH}" | while read -r FILEPATH
 do
   FILENAME=`basename "$FILEPATH"`
   DIRNAME=`dirname "$FILEPATH"`
