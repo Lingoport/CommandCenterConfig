@@ -47,6 +47,30 @@ echo " for repository formatted files, not LRM OOTB ones"
 
 #  resourcemanagement.ui.i18n_<LOCALE>.json -> <LOCALE>_resourcemanagement.ui.i18n.json
 echo "   >>   resourcemanagement.ui.i18n_<LOCALE>.json -> <LOCALE>_resourcemanagement.ui.i18n.json"
+
+
+
+#!/bin/bash
+
+# Read each line from stdin or a file
+while IFS= read -r $1; do
+    # Extract the basename (filename only)
+    filename=$(basename "$file")
+
+    # Extract locale and the rest of the filename
+    locale=$(echo "$filename" | grep -oP '(?<=ui\.i18n_).*(?=\.json)')
+    rest=$(echo "$filename" | sed "s/\(.*\)\.ui\.i18n_${locale}\.json/\1/")
+
+    # Construct the new filename
+    new_filename="${locale}_${rest}.ui.i18n.json"
+
+    # Output the new filename (or rename if you want)
+    echo "$new_filename"
+done
+
+
+
+
 #sed -i 's/\.json//' "$1"
 #sed -i 's/resourcemanagement\.ui\.i18n_//' "$1"
 
