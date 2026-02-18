@@ -57,15 +57,18 @@ while IFS= read -r file; do
     # Extract the basename (filename only)
     filename=$(basename "$file")
 
+    # Extract the dirname 
+    dirname=$(dirname "$file")
+
     # Extract locale and the rest of the filename
     locale=$(echo "$filename" | grep -oP '(?<=ui\.i18n_).*(?=\.json)')
     rest=$(echo "$filename" | sed "s/\(.*\)\.ui\.i18n_${locale}\.json/\1/")
 
     # Construct the new filename
-    new_filename="${locale}_${rest}.ui.i18n.json"
+    new_file="${dirname}/${locale}_${rest}.ui.i18n.json"
 
-    # Output the new filename (or rename if you want)
-    echo "$new_filename"
+    # Output the new file with path 
+    echo "$new_file"
 done < "$1"
 
 
