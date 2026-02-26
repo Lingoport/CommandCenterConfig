@@ -138,6 +138,7 @@ do
     # solver change
       if [[ "$LINE" == *"<solver"* ]]
       then
+	echo "SOLVER LINE FOUND! $LINE"
         NAME1=${LINE#*name=\"}
         SOLVER=${NAME1%%\"*}
         #NAME1=${LINE%\">*}
