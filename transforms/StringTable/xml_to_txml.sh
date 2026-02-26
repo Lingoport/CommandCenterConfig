@@ -141,18 +141,16 @@ do
 	echo "SOLVER LINE FOUND! $LINE"
         NAME1=${LINE#*name=\"}
         SOLVER=${NAME1%%\"*}
-        #NAME1=${LINE%\">*}
-        #SOLVER=${NAME1##*\"}
         echo "Create the ${SOLVER}_${ROOTNAME}.txml  file using xmlstarlet"
         TARGET_PATH="${DIRNAME}/${SOLVER}_${ROOTNAME}.txml"
-        xmlstarlet sel -t -c "/StringTable/ui[@name='${SOLVER}']" "${FILEPATH}" > "${TARGET_PATH}"
+        xmlstarlet sel -t -c "/StringTable/solver[@name='${SOLVER}']" "${FILEPATH}" > "${TARGET_PATH}"
 
         sed -i "s/id=\"/id=\"${SOLVER}/g" "${TARGET_PATH}"
         sed -i 's/\(<solver.*\)/<!-- \1 -->/'   "${TARGET_PATH}"
         sed -i 's/\(<\/solver.*\)/<!-- \1 -->\n/'   "${TARGET_PATH}"
 
         cat "${TARGET_PATH}" >> "${TARGETFILE}"
-        rm "${TARGET_PATH}"
+        #rm "${TARGET_PATH}"
       fi
     #done
     done
