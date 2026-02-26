@@ -15,7 +15,9 @@ echo  " ---------------------------"
 XMLFILES="${PROJECT_TMP_DIR}/input_files.txt"
 
 # the locale separator is underscore, _ 
-find . -name "*_*\.xml" -type f > "$XMLFILES"
+#find . -name "*_*\.xml" -type f > "$XMLFILES"
+find . -name "Solver_*\.xml" -type f > "$XMLFILES"
+find . -name "Plot_*\.xml" -type f >> "$XMLFILES"
 sed '/Portal_messages_..\.xml/d' "$XMLFILES"
 
 echo "Files to transform: "
