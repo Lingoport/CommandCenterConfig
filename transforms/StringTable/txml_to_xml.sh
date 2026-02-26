@@ -59,6 +59,7 @@ do
           "$LINE" == *"<context"* ||
           "$LINE" == *"<Portal"*  ||
           "$LINE" == *"<portal"*  ||
+          "$LINE" == *"<solver"*  ||
           "$LINE" == *"<ui"*
        ]]
       then
@@ -81,6 +82,7 @@ do
           "$LINE" == *"</context"* ||
           "$LINE" == *"</Portal"*  ||
           "$LINE" == *"</portal"*  ||
+          "$LINE" == *"</solver"*  ||
           "$LINE" == *"</ui"*
        ]]
       then
