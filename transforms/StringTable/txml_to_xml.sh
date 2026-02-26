@@ -14,7 +14,7 @@ echo  " ---------------------------"
 # Find all the files ending in the 'xml'
 TXMLFILES="$FULL_LIST_PATH"
 
-find . -name "*\.txml" -type f > "$TXMLFILES"
+#find . -name "*\.txml" -type f > "$TXMLFILES"
 sed '/Portal_messages_..\.xml/d' "$TXMLFILES"
 
 echo "Files to transform: "
