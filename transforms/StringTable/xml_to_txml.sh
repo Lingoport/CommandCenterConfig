@@ -150,7 +150,7 @@ do
         sed -i 's/\(<\/solver.*\)/<!-- \1 -->\n/'   "${TARGET_PATH}"
 
         cat "${TARGET_PATH}" >> "${TARGETFILE}"
-        #rm "${TARGET_PATH}"
+        rm "${TARGET_PATH}"
       fi
     #done
     done
