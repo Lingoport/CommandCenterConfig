@@ -30,7 +30,7 @@ echo "IMPORT_STATUS=${IMPORT_STATUS}"
 echo "TEST PWD"
 
 INCOMPLETE_FILE="/usr/local/tomcat/Lingoport_Data/L10nStreamlining/${LRM_GROUP}/projects/${LRM_PROJECT}/prepkits/PREP_KIT_${KIT_VERSION}/IncompletePrepKit.xml"
-TOP_LEVEL_DIRECTORY=$(xmlstarlet sel -t -v "/LRMIncompletePrepKit/@topLevelDirectory" ${INCOMPLETE_FILE}")
+TOP_LEVEL_DIRECTORY=$(xmlstarlet sel -t -v "/LRMIncompletePrepKit/@topLevelDirectory" "${INCOMPLETE_FILE}")
 echo "  TOP_LEVEL_DIRECTORY=${TOP_LEVEL_DIRECTORY}"
 
 
