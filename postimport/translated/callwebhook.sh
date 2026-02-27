@@ -27,6 +27,9 @@ echo "KIT_VERSION=${KIT_VERSION}"
 echo "LRM_LOCALE=${LRM_LOCALE}"
 echo "IMPORT_STATUS=${IMPORT_STATUS}"
 
+echo "PWD follows"
+pwd
+
 if [ "${IMPORT_STATUS}" = "success" ]
 then
   # extract from the importkits directory
