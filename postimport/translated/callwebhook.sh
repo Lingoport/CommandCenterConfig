@@ -42,7 +42,7 @@ if [ -d "${TRA_DIR}" ]; then
   FIRST_TIME=false
 fi
 
-if [ $FIRST_TIME ] 
+if [ $FIRST_TIME = true ] 
 then
   echo "First import"
 else
