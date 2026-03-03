@@ -33,7 +33,20 @@ INCOMPLETE_FILE="/usr/local/tomcat/Lingoport_Data/L10nStreamlining/${LRM_GROUP}/
 TOP_LEVEL_DIRECTORY=$(xmlstarlet sel -t -v "/LRMIncompletePrepKit/@topLevelDirectory" "${INCOMPLETE_FILE}")
 echo "  TOP_LEVEL_DIRECTORY=${TOP_LEVEL_DIRECTORY}"
 
+TRA_DIR="/usr/local/tomcat/Lingoport_Data/L10nStreamlining/${LRM_GROUP}/projects/${LRM_PROJECT}/importkits/TRANSLATED_KIT_${KIT_VERSION}/${LRM_LOCALE}"
 
+FIRST_TIME=true
+if [ -d "$TRA_DIR" ]; then
+  # Control will enter here if $DIRECTORY exists.
+  FIRST_TIME=false
+fi
+
+if [ $FIRST_TIME ] 
+then
+  echo "First import"
+else
+  echo "Re-import"
+fi
 
 if [ "${IMPORT_STATUS}" = "success" ]
 then
