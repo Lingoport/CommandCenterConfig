@@ -34,6 +34,7 @@ TOP_LEVEL_DIRECTORY=$(xmlstarlet sel -t -v "/LRMIncompletePrepKit/@topLevelDirec
 echo "  TOP_LEVEL_DIRECTORY=${TOP_LEVEL_DIRECTORY}"
 
 TRA_DIR="/usr/local/tomcat/Lingoport_Data/L10nStreamlining/${LRM_GROUP}/projects/${LRM_PROJECT}/importkits/TRANSLATED_KIT_${KIT_VERSION}/${LRM_LOCALE}"
+echo "TRA_DIR= $TRA_DIR"
 
 FIRST_TIME=true
 if [ -d "$TRA_DIR" ]; then
