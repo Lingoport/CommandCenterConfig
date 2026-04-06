@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- see  http://wiki.lingoport.com/index.php5?title=Globalyzer_Lite#The_.globalyzerrc_File -->
+<gzproject>
+  <login>
+    <use-ai-analyze>true</use-ai-analyze>
+    <ai-model>gpt-5-mini</ai-model>
+    <ai-account-token>sk-**********************************************************************Awc-5nDfkGHg_1HgA</ai-account-token>
+  </login>
+  <project-path>/Users/johndoe/runtime-New_configuration</project-path>
+  <report-path>globalyzer-lite-reports</report-path>
+  <scans>
+
+    <scan>
+      <checks>
+        <embedded-strings>false</embedded-strings>
+        <locale-sensitive-methods>true</locale-sensitive-methods>
+        <general-patterns>true</general-patterns>
+        <static-file-references>true</static-file-references>
+      </checks>
+      <scan-items/>
+
+    </scan>
+  </scans>
+</gzproject>
