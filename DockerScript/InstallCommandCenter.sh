@@ -171,6 +171,7 @@ sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /u
 sudo docker exec --user root $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/auto-install.xml"
 sudo docker exec --user root $cc_container_id java -jar /usr/local/tomcat/lib/Lingoport_Resource_Manager_Server-14.0-Installer.jar /usr/local/tomcat/auto-install.xml
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/lingoport/lrm-server-14.0
+sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/Lingoport_Data/L10nStreamlining
 
 sudo docker exec  $cc_container_id git config --global user.email "lpdev@lingoport.com"
 sudo docker exec  $cc_container_id git config --global user.name "lpdev"
