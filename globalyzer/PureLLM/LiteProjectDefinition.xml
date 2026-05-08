@@ -12,7 +12,7 @@
 
     <scan>
       <checks>
-        <embedded-strings>false</embedded-strings>
+        <embedded-strings>true</embedded-strings>
         <locale-sensitive-methods>true</locale-sensitive-methods>
         <general-patterns>true</general-patterns>
         <static-file-references>true</static-file-references>
