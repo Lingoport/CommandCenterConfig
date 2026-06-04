@@ -21,10 +21,10 @@ do
 
   TARGET_NAME="${ROOTNAME}_${LANGUAGE}.properties"
   TARGET_PATH="${DIRNAME}/${TARGET_NAME}"
-  echo "    Transform [$FILENAME] -> [$TARGET_NAME]"
+  echo "    Transform [$FILEPATH] -> [$TARGET_PATH]"
 
   rm $TARGET_PATH 2> /dev/null
-  cp $FILEPATH $TARGETPATH
+  cp $FILEPATH $TARGET_PATH
 
   sed -i 's/^[/#[/' $TARGET_PATH
   sed -i 's/^;/;[/' $TARGET_PATH
