@@ -57,7 +57,7 @@ while IFS= read -r line; do
     new_filename="${language}_${base}.isl"
 
     echo "${dir}/${new_filename}"
-done < "$1" > "$TMPFILE
+done < "$1" > "$TMPFILE"
 
 cp $TMPFILE "$1"
 rm $TMPFILE
