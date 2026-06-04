@@ -1,9 +1,9 @@
 #!/bin/bash
-# Specific transformation for strings*.txt files
-# 
+# Specific transformation for filename_<Language>.properties files
+#
 # The following environment variable needs to be set:
 # TRANSFORM_DIR
 
-# 1: .txt to .properties
-echo " Transform .txt files to .properties with $TRANSFORM_DIR/txt2prop.sh"
-. $TRANSFORM_DIR/txt2prop.sh
+# 1: Transform properties into .txt
+echo " .properties to .isl tranform with $TRANSFORM_DIR/locale2front.sh"
+. $TRANSFORM_DIR/locale2front.sh
