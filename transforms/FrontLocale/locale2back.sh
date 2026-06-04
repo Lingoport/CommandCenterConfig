@@ -27,6 +27,6 @@ do
   cp $FILEPATH $TARGET_PATH
 
   sed -i 's/^[/\#[/' $TARGET_PATH
-  sed -i 's/^;/\#[/' $TARGET_PATH
+  sed -i 's/^;/\#;/' $TARGET_PATH
 
 done 
