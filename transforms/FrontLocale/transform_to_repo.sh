@@ -5,5 +5,5 @@
 # TRANSFORM_DIR
 
 # 1: Transform properties into .txt
-echo " .properties to .isl tranform with $TRANSFORM_DIR/locale2back.sh"
-. $TRANSFORM_DIR/locale2back.sh
+echo " .properties to .isl tranform with $TRANSFORM_DIR/locale2front.sh"
+. $TRANSFORM_DIR/locale2front.sh
