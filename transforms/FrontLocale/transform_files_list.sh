@@ -39,15 +39,25 @@ echo " --------------------------------------------"
 echo " Files to Modify:  $1"
 echo " for repository formatted files, not LRM OOTB ones"
 
-# strings<locale>.properties -> strings<locale>.txt
-echo "   >>  strings<locale>.properties to strings<locale>.txt"
-sed -i 's/\.properties/.txt/' "$1"
-sed -i 's/strings_/strings-/' "$1"
-sed -i 's/strings-zh_Hans/strings-zh-Hans/' "$1"
-sed -i 's/strings-zh_Hant/strings-zh-Hant/' "$1"
-sed -i 's/_/-/g' "$1"
+TMPFILE=$(mktemp /tmp/ISL-XXXXX)
 
-echo " " 
-ls -l "$1"
-cat "$1"
-echo " --------------------------------------------"
+while IFS= read -r line; do
+    # Separate directory path from filename
+    dir="${line%/*}"
+    filename="${line##*/}"
+
+    # Extract base name (before last underscore)
+    base="${filename%_*}"
+
+    # Extract language and strip extension
+    remainder="${filename##*_}"
+    language="${remainder%.properties}"
+
+    # Reconstruct as isl format
+    new_filename="${language}_${base}.isl"
+
+    echo "${dir}/${new_filename}"
+done < "$1" > "$TMPFILE
+
+cp $TMPFILE "$1"
+rm $TMPFILE
