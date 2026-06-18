@@ -19,6 +19,11 @@ GROUP="${1:-${GROUP:-billbkinney}}"
 PROJECT="${2:-${PROJECT:-Skynet_main}}"
 KIT="${3:-${KIT:-9}}"
 
+echo "GROUP=${GROUP}"
+echo "PROJECT=${PROJECT}"
+echo "KIT=${KIT}"
+echo "========================================"
+
 BASE_DIR="${HOME}/Lingoport_Data/L10nStreamlining/${GROUP}/projects/${PROJECT}/prepkits/PREP_KIT_${KIT}"
 
 if [[ ! -d "$BASE_DIR" ]]; then
