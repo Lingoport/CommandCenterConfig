@@ -1,0 +1,78 @@
+{
+  "common": {
+    "retention": {
+      "manualHold": "Manual hold",
+      "purged": "Purged",
+      "standard": "Standard",
+      "standardTime": "Standard {{time}}",
+      "today": "Today"
+    },
+    "tags": {
+      "unassigned": "Unassigned"
+    },
+    "labels": {
+      "external": "External"
+    },
+    "datePickerRange": {
+      "capture": {
+        "labelFrom": "Capture from",
+        "labelTo": "Capture to"
+      },
+      "purge": {
+        "labelFrom": "Purge date from",
+        "labelTo": "Purge date to"
+      },
+      "labels": {
+        "from": "From:",
+        "to": "To:"
+      },
+      "buttons": {
+        "apply": "Apply",
+        "reset": "Reset"
+      }
+    },
+    "dateRange": {
+      "allDates": "All dates",
+      "from": "From",
+      "to": "To",
+      "reset": "Reset",
+      "confirm": "Search",
+      "captureDate": {
+        "last24hours": "Last 24 hours",
+        "last7days": "Last 7 days",
+        "last30days": "Last 30 days",
+        "today": "Today",
+        "thisWeek": "This week",
+        "thisMonth": "This month",
+        "thisYear": "This year"
+      },
+      "purgeDate": {
+        "in3days": "Purge in 3 days",
+        "in1week": "Purge in a week",
+        "in2weeks": "Purge in 2 weeks",
+        "in1month": "Purge in a month"
+      }
+    },
+    "errors": {
+      "somethingWentWrong": {
+        "reload": "Oops! Something went wrong on the server. Please reload the page and try again",
+        "noInternetAccess": "Oops! Something went wrong on the server. You don't have internet access",
+        "noAccessToResource": "Oops! Something went wrong on the server. You don't have access to the resource",
+        "resourceNotExist": "Oops! Something went wrong on the server. Resource does not exist"
+      },
+      "cantSaveRefresh": {
+        "actionButton": "Refresh",
+        "message": "Change cannot be saved. Please refresh the page and retry."
+      },
+      "agencyConfigError": "Something went wrong. Please reload the page..."
+    },
+    "deleteAsset": {
+      "successMessage": "Evidence file(s) deleted.",
+      "errorMessage": "Error occurred during operation, Please try later. Error code: {{errorCode}}"
+    },
+    "purgeAsset": {
+      "requestSent": "Purge request submitted.",
+      "purgeRequested": "Purge requested"
+    }
+  }
+}
