@@ -179,6 +179,15 @@ sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /u
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/logs
 sudo docker exec --user root $cc_container_id mkdir -p /usr/local/tomcat/lingoport/lrm-server-14.2
 
+# auto-update.xml (unlike auto-install.xml) does not run the "Deploy" pack, so newly-added
+# scoring prompt templates never get copied to Lingoport_Data on an update install. Copy them
+# from the freshly-deployed WAR (which always bundles the current templates) instead, and
+# overwrite any existing copy - there's no prompt customization feature yet, so keeping the
+# deployed prompts always in sync with the shipped version makes debugging predictable.
+sudo docker exec --user root $cc_container_id mkdir -p /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts
+sudo docker exec --user root $cc_container_id bash -c "cp /usr/local/tomcat/webapps/command-center/WEB-INF/lib/deploy/templates/dir_structure/global/config/prompts/scoringPrompts*.json /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts/"
+sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts
+
 sudo docker exec --user root $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/auto-update.xml"
 sudo docker exec --user root $cc_container_id java -jar /usr/local/tomcat/lib/Lingoport_Resource_Manager_Server-14.2-Installer.jar /usr/local/tomcat/auto-update.xml
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/lingoport/lrm-server-14.2
