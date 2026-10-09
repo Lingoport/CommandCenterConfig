@@ -66,7 +66,7 @@ command -v curl > /dev/null || fail "curl is not installed. Install it first (su
 # defaults and checks
 #
 container_name=${container_name:-localyzer-mcp}
-docker_image=${docker_image:-lingoport/localyzer-mcp}
+docker_image=${docker_image:-lingoport/lingoport-mcp}
 auth_modes=${auth_modes:-token}
 cc_auth_style=${cc_auth_style:-legacy}
 network_mode=${network_mode:-bridge}
