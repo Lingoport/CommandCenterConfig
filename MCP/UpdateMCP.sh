@@ -127,3 +127,4 @@ echo "The new version did not answer on port $serverPort within 30 seconds. Last
 docker logs --tail 30 "$container_name"
 docker inspect --format '{{.Id}}' "$previous" > "$mcp_dir/mcp_container_id.txt" 2> /dev/null
 rollback "Update to $image failed."
+

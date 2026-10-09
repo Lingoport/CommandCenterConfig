@@ -170,7 +170,8 @@ chown root:10001 "$config_dir" "$config_file" && chmod 750 "$config_dir" && chmo
 #
 # start the container
 #
-run_args=(-d --name "$container_name" --restart unless-stopped
+# Run as uid/gid 10001: the owner of data/ and the group of config/ (see above).
+run_args=(-d --name "$container_name" --restart unless-stopped --user 10001:10001
           -v "$config_dir:/config:ro" -v "$data_dir:/data")
 if [[ "$network_mode" == "host" ]]; then
     run_args+=(--network host -e MCP_HTTP_HOST=127.0.0.1 -e "MCP_HTTP_PORT=$serverPort")
