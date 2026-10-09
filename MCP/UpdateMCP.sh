@@ -41,7 +41,7 @@ command -v docker > /dev/null || fail "Docker is not installed."
 command -v curl > /dev/null || fail "curl is not installed. Install it first (sudo dnf install curl)."
 
 container_name=${container_name:-localyzer-mcp}
-docker_image=${docker_image:-lingoport/localyzer-mcp}
+docker_image=${docker_image:-lingoport/lingoport-mcp}
 network_mode=${network_mode:-bridge}
 previous=$container_name-previous
 
@@ -88,6 +88,7 @@ docker update --restart=no "$previous" > /dev/null
 #
 # start the new container with the same settings and data
 #
+# Run as uid/gid 10001: the owner of data/ and the group of config/ (see above).
 run_args=(-d --name "$container_name" --restart unless-stopped --user 10001:10001
           -v "$config_dir:/config:ro" -v "$data_dir:/data")
 if [[ "$network_mode" == "host" ]]; then
@@ -127,4 +128,3 @@ echo "The new version did not answer on port $serverPort within 30 seconds. Last
 docker logs --tail 30 "$container_name"
 docker inspect --format '{{.Id}}' "$previous" > "$mcp_dir/mcp_container_id.txt" 2> /dev/null
 rollback "Update to $image failed."
-
