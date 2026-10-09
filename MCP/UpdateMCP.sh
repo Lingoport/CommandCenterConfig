@@ -88,7 +88,7 @@ docker update --restart=no "$previous" > /dev/null
 #
 # start the new container with the same settings and data
 #
-run_args=(-d --name "$container_name" --restart unless-stopped
+run_args=(-d --name "$container_name" --restart unless-stopped --user 10001:10001
           -v "$config_dir:/config:ro" -v "$data_dir:/data")
 if [[ "$network_mode" == "host" ]]; then
     run_args+=(--network host -e MCP_HTTP_HOST=127.0.0.1 -e "MCP_HTTP_PORT=$serverPort")
