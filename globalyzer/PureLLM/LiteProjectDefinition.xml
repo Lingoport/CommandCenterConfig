@@ -3,7 +3,8 @@
 <gzproject>
   <login>
     <use-ai-analyze>true</use-ai-analyze>
-    <ai-model>gpt-5-mini</ai-model>
+    <ai-model>a-gpt-model</ai-model>
+    <base-url></base-url>
     <ai-account-token>sk-**********************************************************************Awc-5nDfkGHg_1HgA</ai-account-token>
   </login>
   <project-path>/Users/johndoe/runtime-New_configuration</project-path>
