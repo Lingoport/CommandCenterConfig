@@ -198,7 +198,9 @@ sleep 120s
 # deployed prompts always in sync with the shipped version makes debugging predictable.
 # TODO: after the Turkey release, change "cp" to "cp -n" so user-customized prompts are not overwritten.
 sudo docker exec --user root $cc_container_id mkdir -p /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts
-sudo docker exec --user root $cc_container_id bash -c "cp /usr/local/tomcat/webapps/command-center/WEB-INF/lib/deploy/templates/dir_structure/global/config/prompts/scoringPrompts*.json /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts/"
+# LRM 14.2 replaced the scoringPrompts*.json files with scoringPrompts*.txt; remove the obsolete .json files.
+sudo docker exec --user root $cc_container_id bash -c "rm -f /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts/scoringPrompts*.json"
+sudo docker exec --user root $cc_container_id bash -c "cp /usr/local/tomcat/webapps/command-center/WEB-INF/lib/deploy/templates/dir_structure/global/config/prompts/scoringPrompts*.txt /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts/"
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts
 sudo docker exec  $cc_container_id cp /usr/local/tomcat/webapps/application.properties /usr/local/tomcat/webapps/command-center/WEB-INF/classes
 sudo docker exec $cc_container_id bash -c '[ -f /usr/local/tomcat/lingoport/lrm-server-14.2/lib/lc-public-api-sdk-24.0.5Lingoport.jar ] && cp /usr/local/tomcat/lingoport/lrm-server-14.2/lib/lc-public-api-sdk-24.0.5Lingoport.jar /usr/local/tomcat/webapps/command-center/WEB-INF/lib'

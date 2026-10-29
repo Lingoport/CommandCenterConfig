@@ -151,7 +151,9 @@ sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /u
 # overwrite any existing copy - there's no prompt customization feature yet, so keeping the
 # deployed prompts always in sync with the shipped version makes debugging predictable.
 sudo docker exec --user root $cc_container_id mkdir -p /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts
-sudo docker exec --user root $cc_container_id bash -c "cp /usr/local/tomcat/webapps/command-center/WEB-INF/lib/deploy/templates/dir_structure/global/config/prompts/scoringPrompts*.json /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts/"
+# LRM 14.2 replaced the scoringPrompts*.json files with scoringPrompts*.txt; remove the obsolete .json files.
+sudo docker exec --user root $cc_container_id bash -c "rm -f /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts/scoringPrompts*.json"
+sudo docker exec --user root $cc_container_id bash -c "cp /usr/local/tomcat/webapps/command-center/WEB-INF/lib/deploy/templates/dir_structure/global/config/prompts/scoringPrompts*.txt /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts/"
 sudo docker exec --user root $cc_container_id chown -R tomcatuser:tomcatgroup /usr/local/tomcat/Lingoport_Data/L10nStreamlining/config/prompts
 
 sudo docker exec --user root $cc_container_id bash -c "sed -i 's/mysecretpw/$database_root_password/g' /usr/local/tomcat/auto-update.xml"
