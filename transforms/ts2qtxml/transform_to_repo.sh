@@ -1,0 +1,133 @@
+#!/bin/bash
+#
+# ts2qtxml : transform_to_repo.sh
+#
+# LRM format -> repository format
+#
+# Translated or pseudo-localized .qtxml files:
+#
+#   <context>
+#     <message id="ID_ABOUT">
+#       <source>About</source>
+#       <translation>À propos</translation>
+#     </message>
+#
+# are written back as Qt .ts files, with the ID moved back into a <name>
+# element right before its <message>:
+#
+#   <context>
+#     <name>ID_ABOUT</name>
+#     <message>
+#       <source>About</source>
+#       <translation>À propos</translation>
+#     </message>
+#
+# and the <TS language="..."> attribute set to the locale found at the end
+# of the file name (e.g. strings_fr_FR.qtxml -> language="fr_FR").
+#
+# Environment variables set by Command Center:
+#   CLIENT_SOURCE_DIR  top-level workspace directory for the project
+#   TRANSFORM_DIR      this transform's directory
+#   PROJECT_TMP_DIR    a temporary directory
+#   FULL_LIST_PATH     file listing the .qtxml files to transform back
+#                      ($1 is used if FULL_LIST_PATH is not set)
+#
+# Optional environment variable:
+#   TS2QTXML_INDENT    indentation of the written .ts files (default: 4,
+#                      matching lupdate output). Set to 0 to skip reformatting.
+#
+# Requires: xmlstarlet
+
+ts2qtxml_to_repo() (
+  echo " ------------------------------------------------"
+  echo " ts2qtxml: .qtxml -> Qt .ts"
+  echo " ------------------------------------------------"
+
+  if ! command -v xmlstarlet >/dev/null 2>&1; then
+    echo " ERROR: xmlstarlet is required by the ts2qtxml transform"
+    return 1
+  fi
+
+  local LIST="${FULL_LIST_PATH:-$1}"
+  if [ -z "${LIST}" ] || [ ! -f "${LIST}" ]; then
+    echo " ERROR: no file list (FULL_LIST_PATH or \$1): '${LIST}'"
+    return 1
+  fi
+
+  if [ -n "${CLIENT_SOURCE_DIR}" ]; then
+    cd "${CLIENT_SOURCE_DIR}" || { echo " ERROR: cannot cd to ${CLIENT_SOURCE_DIR}"; return 1; }
+  fi
+  echo " Working directory: $(pwd)"
+  echo " Files to transform (${LIST}):"
+  cat "${LIST}"
+  echo ""
+
+  local INDENT="${TS2QTXML_INDENT:-4}"
+  # Locale at the end of the file name: _fr, _fr_FR, -pt-BR, _zh_Hant_TW, _es_419 ...
+  local LOCALE_RE='[_.-]([a-z]{2,3}([_-][A-Z][a-z]{3})?([_-]([A-Z]{2}|[0-9]{3}))?)\.qtxml$'
+
+  local TRANSFORMED=0 FAILED=0
+  local FILEPATH TARGET TMP_TARGET LOCALE
+
+  while IFS= read -r FILEPATH || [ -n "${FILEPATH}" ]; do
+    FILEPATH="${FILEPATH%$'\r'}"
+    [ -z "${FILEPATH}" ] && continue
+    case "${FILEPATH}" in
+      *.qtxml) ;;
+      *) echo "   skip (not .qtxml): ${FILEPATH}"; continue ;;
+    esac
+    if [ ! -f "${FILEPATH}" ]; then
+      echo "   ERROR file not found: ${FILEPATH}"
+      FAILED=$((FAILED + 1))
+      continue
+    fi
+
+    TARGET="${FILEPATH%.qtxml}.ts"
+    TMP_TARGET="${TARGET}.tmp"
+
+    LOCALE=""
+    if [[ "$(basename "${FILEPATH}")" =~ ${LOCALE_RE} ]]; then
+      LOCALE="${BASH_REMATCH[1]//-/_}"
+    fi
+
+    # Move message/@id back into a <name> element before each <message>
+    local -a EDIT=(
+      -i '/TS/context/message' -t elem -n name -v ''
+      -u '/TS/context/name' -x 'string(following-sibling::message[1]/@id)'
+      -d '/TS/context/message/@id'
+    )
+    if [ -n "${LOCALE}" ]; then
+      EDIT+=( -u '/TS/@language' -v "${LOCALE}" )
+    else
+      echo "   WARNING no locale found in file name, <TS language> left as is: ${FILEPATH}"
+    fi
+
+    if xmlstarlet ed "${EDIT[@]}" "${FILEPATH}" > "${TMP_TARGET}"; then
+      if [ "${INDENT}" != "0" ]; then
+        # Re-indent like lupdate, and write empty <source>/<translation>
+        # as open/close pairs rather than self-closing tags
+        if xmlstarlet fo -s "${INDENT}" "${TMP_TARGET}" \
+             | sed -E 's#<(source|translation)( [^>]*)?/>#<\1\2></\1>#g' > "${TMP_TARGET}.fo"; then
+          mv "${TMP_TARGET}.fo" "${TMP_TARGET}"
+        else
+          rm -f "${TMP_TARGET}.fo"
+          echo "   WARNING could not reformat, keeping unformatted output: ${TARGET}"
+        fi
+      fi
+      mv "${TMP_TARGET}" "${TARGET}"
+      echo "   ${FILEPATH} -> ${TARGET}${LOCALE:+ (language=${LOCALE})}"
+      TRANSFORMED=$((TRANSFORMED + 1))
+    else
+      rm -f "${TMP_TARGET}"
+      echo "   ERROR transforming ${FILEPATH}"
+      FAILED=$((FAILED + 1))
+    fi
+  done < "${LIST}"
+
+  echo " ts2qtxml: ${TRANSFORMED} transformed back, ${FAILED} failed"
+  [ "${FAILED}" -eq 0 ]
+)
+
+ts2qtxml_to_repo "$@"
+RC=$?
+return ${RC} 2>/dev/null || exit ${RC}
