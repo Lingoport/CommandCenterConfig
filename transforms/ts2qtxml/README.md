@@ -1,14 +1,14 @@
-## Transform Qt .ts files with one `<name>` per `<message>` into .qtxml files ##
+## Transform Qt .ts files with a `<name>` before each `<message>` into .qtxml files ##
 
 ### Repository file format ###
 Qt Linguist `.ts` files where the string ID is held in a `<name>` element placed
-right before each `<message>`, all within a `<context>`:
+right before its `<message>`, with one `<context>` around each entry:
 
-* installer_en_US.ts
+* InstallerManager_en_US.ts
 
 <pre>
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
+<!DOCTYPE TS >
 <TS version="2.1" language="en_US" sourcelanguage="en_US">
     <context>
         <name>ID_ABOUT</name>
@@ -16,6 +16,8 @@ right before each `<message>`, all within a `<context>`:
             <source>About</source>
             <translation>About</translation>
         </message>
+    </context>
+    <context>
         <name>ID_ACTIVATE_ONCLOUD_LICENSE</name>
         <message>
             <source>Activate OnCloud license</source>
@@ -24,6 +26,13 @@ right before each `<message>`, all within a `<context>`:
     </context>
 </TS>
 </pre>
+
+Several `<name>`/`<message>` pairs within a single `<context>` are also accepted.
+
+The source-locale file has `language` equal to `sourcelanguage`, and its
+`<translation>` holds the source text. Target-locale files (`language="ja_JP"`, ...)
+may miss entries, or hold `<translation type="unfinished" />` for strings not yet
+translated.
 
 This layout cannot be described by an xmlParser.xml directly: the key (`<name>`)
 and the value (`<translation>`) do not share a parent, and describing the
@@ -66,6 +75,18 @@ It is parsed with `xmlParsers/qtxml/xmlParser.xml`:
 </context>
 </pre>
 
+### Unfinished entries ###
+In target-locale files, entries with `<translation type="unfinished">` are left out
+of the `.qtxml` file: the `<name>`, the `<message>` and the `<context>` left empty.
+Localyzer then sees them as missing, exactly like entries absent from the file, and
+they are sent for translation. For instance, with the en_US file holding 9 entries
+and the ja_JP file holding 8, one of them unfinished, the ja_JP `.qtxml` holds 7 entries.
+
+The source-locale file (`language` = `sourcelanguage`) is never filtered, so no source
+string is lost; a warning is printed if it contains unfinished entries.
+Set `TS2QTXML_DROP_UNFINISHED=0` to keep unfinished entries.
+
+### Back to the repository ###
 `transform_to_repo.sh` reverses this for translated and pseudo-localized files:
 
 * the `id` goes back into a `<name>` element right before its `<message>`
@@ -82,8 +103,8 @@ It is parsed with `xmlParsers/qtxml/xmlParser.xml`:
 
 * skips files whose root element is not `<TS>` (TypeScript files, for instance)
 * skips, with a warning, Qt TS files that do not follow the
-  one-`<name>`-per-`<message>` layout (a standard Qt file with one `<name>` per
-  context, for instance) or whose messages already carry an `id`
+  one-`<name>`-per-`<message>` layout (a Qt file with several `<message>` under a
+  single context `<name>`, for instance) or whose messages already carry an `id`
 * warns about duplicate IDs, which Localyzer will report as duplicate keys
 
 To narrow the files, set `TS2QTXML_FIND_NAME` (a `find -name` pattern, default `*.ts`).
@@ -95,6 +116,7 @@ To narrow the files, set `TS2QTXML_FIND_NAME` (a `find -name` pattern, default `
 | Variable | Default | Effect |
 |---|---|---|
 | `TS2QTXML_FIND_NAME` | `*.ts` | `find -name` pattern for repository files |
+| `TS2QTXML_DROP_UNFINISHED` | `1` | drop unfinished entries from target-locale `.qtxml` files; `0` keeps them |
 | `TS2QTXML_INDENT` | `4` | indentation of the `.ts` files written back; `0` keeps xmlstarlet's output unformatted |
 
 ### Known limitations ###

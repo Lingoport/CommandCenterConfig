@@ -5,7 +5,7 @@
 # Repository format -> LRM format
 #
 # Qt Linguist .ts files in which every <message> is preceded by a <name>
-# sibling holding the string ID:
+# holding the string ID, usually one <context> per entry:
 #
 #   <context>
 #     <name>ID_ABOUT</name>
@@ -13,7 +13,9 @@
 #       <source>About</source>
 #       <translation>About</translation>
 #     </message>
-#     ...
+#   </context>
+#
+# (several <name>/<message> pairs in one <context> are also accepted)
 #
 # are written next to the original as .qtxml files where the ID becomes an
 # attribute of <message> (Qt's own ID-based message form):
@@ -23,17 +25,27 @@
 #       <source>About</source>
 #       <translation>About</translation>
 #     </message>
+#   </context>
 #
 # The qtxml xmlParser.xml (xmlParsers/qtxml/xmlParser.xml) then reads
 # message/@id as TOKEN_KEY and translation as TOKEN_VALUE.
+#
+# Unfinished entries: in target-locale files (<TS language> differs from
+# <TS sourcelanguage>), entries whose <translation type="unfinished"> are
+# left out of the .qtxml, together with their <name> and with any <context>
+# left empty. Localyzer then sees them as missing, like entries absent from
+# the file, and sends them for translation. The source-locale file is never
+# filtered, so no source string is lost.
 #
 # Environment variables set by Command Center:
 #   CLIENT_SOURCE_DIR  top-level workspace directory for the project
 #   TRANSFORM_DIR      this transform's directory
 #   PROJECT_TMP_DIR    a temporary directory
 #
-# Optional environment variable:
-#   TS2QTXML_FIND_NAME  find -name pattern for repository files (default: *.ts)
+# Optional environment variables:
+#   TS2QTXML_FIND_NAME         find -name pattern for repository files (default: *.ts)
+#   TS2QTXML_DROP_UNFINISHED   1 (default) drops unfinished entries from
+#                              target-locale files; 0 keeps them
 #
 # Requires: xmlstarlet
 #
@@ -62,6 +74,8 @@ ts2qtxml_from_repo() (
   local TMP_DIR="${PROJECT_TMP_DIR:-/tmp}"
   local INPUT_LIST="${TMP_DIR}/ts2qtxml_input_files.txt"
   local PATTERN="${TS2QTXML_FIND_NAME:-*.ts}"
+  local DROP_UNFINISHED="${TS2QTXML_DROP_UNFINISHED:-1}"
+  local LANG_ATTR SRC_LANG_ATTR UNFINISHED DROP_NOTE
 
   find . \( -path ./.git -o -name node_modules \) -prune -o \
        -type f -name "${PATTERN}" -print > "${INPUT_LIST}"
@@ -104,13 +118,38 @@ ts2qtxml_from_repo() (
     TARGET="${FILEPATH%.ts}.qtxml"
     TMP_TARGET="${TARGET}.tmp"
 
+    # Unfinished entries are dropped from target-locale files only
+    LANG_ATTR=$(xmlstarlet sel -t -v '/TS/@language' "${FILEPATH}")
+    SRC_LANG_ATTR=$(xmlstarlet sel -t -v '/TS/@sourcelanguage' "${FILEPATH}")
+    UNFINISHED=$(xmlstarlet sel -t -v 'count(/TS/context/message[translation/@type="unfinished"])' "${FILEPATH}")
+    local -a DROP=()
+    DROP_NOTE=""
+    if [ "${UNFINISHED}" != "0" ]; then
+      if [ "${DROP_UNFINISHED}" != "1" ]; then
+        DROP_NOTE=" (${UNFINISHED} unfinished kept: TS2QTXML_DROP_UNFINISHED=${DROP_UNFINISHED})"
+      elif [ -z "${LANG_ATTR}" ] || [ "${LANG_ATTR}" = "${SRC_LANG_ATTR}" ]; then
+        DROP_NOTE=" (${UNFINISHED} unfinished kept: source-locale file, language='${LANG_ATTR}')"
+        echo "   WARNING ${UNFINISHED} unfinished entr(y/ies) in source-locale file ${FILEPATH}"
+      else
+        # Order matters: the <name> is found through its <message>, and
+        # contexts are removed once empty
+        DROP=(
+          -d '/TS/context/name[following-sibling::message[1]/translation/@type="unfinished"]'
+          -d '/TS/context/message[translation/@type="unfinished"]'
+          -d '/TS/context[not(message)]'
+        )
+        DROP_NOTE=" (${UNFINISHED} unfinished dropped)"
+      fi
+    fi
+
     if xmlstarlet ed \
+         "${DROP[@]}" \
          -i '/TS/context/message' -t attr -n id -v '' \
          -u '/TS/context/message/@id' -x 'string(../preceding-sibling::name[1])' \
          -d '/TS/context/name' \
          "${FILEPATH}" > "${TMP_TARGET}"; then
       mv "${TMP_TARGET}" "${TARGET}"
-      echo "   ${FILEPATH} -> ${TARGET}"
+      echo "   ${FILEPATH} -> ${TARGET}${DROP_NOTE}"
       TRANSFORMED=$((TRANSFORMED + 1))
     else
       rm -f "${TMP_TARGET}"
