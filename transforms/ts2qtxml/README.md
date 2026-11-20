@@ -40,26 +40,23 @@ structure would take 5 elements (the limit is 4).
 See https://wiki.lingoport.com/LRM_XML_Support
 
 ### Transformed (LRM) file format ###
-`transform_from_repo.sh` writes a `.qtxml` file next to each `.ts` file, with
-the ID moved onto the `<message>` as an `id` attribute (Qt's own ID-based
-message form):
+`transform_from_repo.sh` writes a `.qtxml` file next to each `.ts` file. The
+`<context>` elements are removed: each `<message>` sits directly under `<TS>`,
+with its ID as an `id` attribute (Qt's own ID-based message form):
 
-* installer_en_US.qtxml
+* InstallerManager_en_US.qtxml
 
 <pre>
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
 <TS version="2.1" language="en_US" sourcelanguage="en_US">
-  <context>
-    <message id="ID_ABOUT">
-      <source>About</source>
-      <translation>About</translation>
-    </message>
-    <message id="ID_ACTIVATE_ONCLOUD_LICENSE">
-      <source>Activate OnCloud license</source>
-      <translation>Activate OnCloud license</translation>
-    </message>
-  </context>
+  <message id="ID_ABOUT">
+    <source>About</source>
+    <translation>About</translation>
+  </message>
+  <message id="ID_ACTIVATE_ONCLOUD_LICENSE">
+    <source>Activate OnCloud license</source>
+    <translation>Activate OnCloud license</translation>
+  </message>
 </TS>
 </pre>
 
@@ -67,18 +64,20 @@ It is parsed with `xmlParsers/qtxml/xmlParser.xml`:
 
 <pre>
 <?xml version="1.0" encoding="utf-8"?>
-<context>
+<TS>
   <message id="TOKEN_KEY">
     <source></source>
     <translation>TOKEN_VALUE</translation>
   </message>
-</context>
+</TS>
 </pre>
+
+The conversions are done with XSLT (`xmlstarlet tr`): `ts2qtxml.xsl` from the
+repository and `qtxml2ts.xsl` back to it, both in this directory.
 
 ### Unfinished entries ###
 In target-locale files, entries with `<translation type="unfinished">` are left out
-of the `.qtxml` file: the `<name>`, the `<message>` and the `<context>` left empty.
-Localyzer then sees them as missing, exactly like entries absent from the file, and
+of the `.qtxml` file. Localyzer then sees them as missing, exactly like entries absent from the file, and
 they are sent for translation. For instance, with the en_US file holding 9 entries
 and the ja_JP file holding 8, one of them unfinished, the ja_JP `.qtxml` holds 7 entries.
 
@@ -87,13 +86,16 @@ string is lost; a warning is printed if it contains unfinished entries.
 Set `TS2QTXML_DROP_UNFINISHED=0` to keep unfinished entries.
 
 ### Back to the repository ###
-`transform_to_repo.sh` reverses this for translated and pseudo-localized files:
+`transform_to_repo.sh` reverses this for translated and pseudo-localized files,
+writing them in the source file layout:
 
-* the `id` goes back into a `<name>` element right before its `<message>`
+* each `<message>` gets its own `<context>`, with the `id` back into a `<name>`
+  element right before the `<message>`
+* `<!DOCTYPE TS >` is written after the XML declaration, as in the source files
 * `<TS language="...">` is set from the locale at the end of the file name
   (`installer_fr_FR.qtxml` -> `language="fr_FR"`, `misc_pt-BR.qtxml` -> `language="pt_BR"`)
 * `<source>` is left as is (English), as Qt expects
-* the file is re-indented with 4 spaces, like `lupdate` output
+* the file is re-indented with 4 spaces, as in the source files
 
 `transform_files_list.sh` renames `.qtxml` to `.ts` in the file lists.
 
@@ -117,12 +119,16 @@ To narrow the files, set `TS2QTXML_FIND_NAME` (a `find -name` pattern, default `
 |---|---|---|
 | `TS2QTXML_FIND_NAME` | `*.ts` | `find -name` pattern for repository files |
 | `TS2QTXML_DROP_UNFINISHED` | `1` | drop unfinished entries from target-locale `.qtxml` files; `0` keeps them |
-| `TS2QTXML_INDENT` | `4` | indentation of the `.ts` files written back; `0` keeps xmlstarlet's output unformatted |
+| `TS2QTXML_INDENT` | `4` | indentation of the `.ts` files written back; `0` keeps the XSLT output (2 spaces) |
+| `TS2QTXML_DOCTYPE` | `<!DOCTYPE TS >` | DOCTYPE line of the `.ts` files written back; empty for none |
 
 ### Known limitations ###
 * `<TS>` attributes written on several lines in the original file end up on one line.
-* An element placed between a `<name>` and its `<message>` (a `<comment>`, for instance)
-  ends up before the `<name>` when transformed back.
+* Files written back always have one `<context>` per entry, even if the repository
+  file grouped several `<name>`/`<message>` pairs in one `<context>`.
+* Elements of a `<context>` other than `<name>` and `<message>` (a context `<comment>`,
+  for instance) are not kept. Elements inside a `<message>` are kept.
+* Tabs used for indentation in the repository files are written back as spaces.
 * Empty `<source>`/`<translation>` elements are written as open/close pairs
   (`<translation type="unfinished"></translation>`), like `lupdate`.
 
@@ -130,7 +136,8 @@ To narrow the files, set `TS2QTXML_FIND_NAME` (a `find -name` pattern, default `
 In Command Center, as an Administrator:
 * Enable Maintenance Mode, then in Settings > System Files:
   * add this transform (`transforms/ts2qtxml`)
-  * add the parser (`xmlParsers/qtxml/xmlParser.xml`)
+  * add the parser (`xmlParsers/qtxml/xmlParser.xml`); if it was added before,
+    use Edit to pull the version with `<TS>` as root
 
 In the Localyzer project:
 * set the resource file format to custom XML with the `.qtxml` extension, using the qtxml xmlParser.xml
